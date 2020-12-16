@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $data */
 
@@ -7,7 +6,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-use yii\widgets\Menu;
 use yii\helpers\Url;
 use \app\components\MenuFilter;
 
@@ -44,7 +42,6 @@ $this->title = 'Список резюме';
                         </div>
                     </div>
                 </div>
-                <?php echo $sort; ?>
                 <?php foreach ($data as $item) : ?>
 
                     <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
@@ -60,7 +57,7 @@ $this->title = 'Список резюме';
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
                                 <span class="mr16 paragraph"><?= $item->age ?> лет</span>
-                                <span class="mr16 paragraph"><?= $item->place_residence ?></span>
+                                <span class="mr16 paragraph"><?= $item->city_id ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>
@@ -88,18 +85,42 @@ $this->title = 'Список резюме';
                     <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
                 </div>
 
-                <?= MenuFilter::widget() ?>
+                <?php
+                echo MenuFilter::widget(
+                    [
+                        'items' =>
+                            [
+                                [
+                                    'label' => 'Все', 'url' => ['/'],
+//                                    'template' => '<a href="{url}" class="signin-modal__switch-btn">{label}</a>',
+                                    'options' => ['tag' => false]
+                                ],
+                                [
+                                    'label' => 'Мужчины', 'url' => ['/search/resume', 'gender' => 'male'],
+                                    'options' => ['tag' => false]
+                                ],
+                                [
+                                    'label' => 'Женщины', 'url' => ['/search/resume', 'gender' => 'female'],
+                                    'options' => ['tag' => false]
+                                ]
+                            ],
+                        'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
+                    ]
+                );
+                ?>
 
                 <div class="vakancy-page-filter-block__row mb24">
                     <div class="paragraph cadet-blue">Город</div>
                     <div class="citizenship-select">
-                        <select class="nselect-1">
-                            <option value="01">Кемерово</option>
-                            <option value="02">Новосибирск</option>
-                            <option value="03">Иркутск</option>
-                            <option value="04">Красноярск</option>
-                            <option value="05">Барнаул</option>
-                        </select>
+                        <?php
+                        echo Html::beginForm(['search/resume'], 'get');
+                        echo Html::dropDownList('city', null,
+                            ['Кемерово' => 'Кемерово', 'Новосибирск' => 'Новосибирск', 'Иркутск' => 'Иркутск', 'Красноярск' => 'Красноярск', 'Барнаул' => 'Барнаул'],
+                            ['class' => 'nselect-1', 'onchange' => 'this.form.submit()',
+                                'prompt' => ['text' => 'Выберите город', 'options'=> ['disabled' => true, 'selected' => true]]]
+                        );
+                        echo Html::endForm();
+                        ?>
                     </div>
                 </div>
                 <div class="vakancy-page-filter-block__row mb24">

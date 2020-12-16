@@ -2,21 +2,24 @@
 
 namespace app\controllers;
 
-use phpDocumentor\Reflection\Types\Null_;
 use Yii;
 use app\models\Data;
 use yii\data\Pagination;
 use yii\web\Controller;
+use app\models\City;
 
 class SiteController extends Controller
 {
 
     public function actionIndex()
     {
-        $sort = Yii::$app->request->get('param');
+        //$sort = Yii::$app->request->get('gender');
+        //$city = City::findAll($sort);
+        $city = Yii::$app->request->get('city');
+        $sort = City::findAll('city');
 
         if ($sort != NULL) {
-            $data = Data::find()->where(['gender' => $sort]);
+            $data = Data::find()->where(['city_id' => $sort]);
         } else {
             $data = Data::find();
         }
@@ -24,7 +27,7 @@ class SiteController extends Controller
         $count = $data->count();
 
         $pagination = new Pagination([
-            'defaultPageSize' => 1,
+            'defaultPageSize' => 4,
             'totalCount' => $count
         ]);
 

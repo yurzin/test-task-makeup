@@ -1292,6 +1292,14 @@ input[type="file"] {
     justify-content: space-between;
 }
 
+.signin-modal__switch-btns-wrap > a:active {
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(76, 128, 166, 0.19);
+    border-radius: 4px;
+    font-weight: 600;
+    color: #262a36;
+}
+
 .signin-modal__switch-btn {
     width: 50%;
     font-style: normal;
