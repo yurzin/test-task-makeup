@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $data */
+/* @var $get */
 
 /* @var $pagination */
 
@@ -42,6 +43,7 @@ $this->title = 'Список резюме';
                         </div>
                     </div>
                 </div>
+
                 <?php foreach ($data as $item) : ?>
 
                     <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">

@@ -4,22 +4,22 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Data;
+use app\models\City;
 use yii\data\Pagination;
 use yii\web\Controller;
-use app\models\City;
 
 class SiteController extends Controller
 {
 
     public function actionIndex()
     {
+        $get = Yii::$app->request->get();
+        $k = key($get);
+        $j = $get[$k];
         //$sort = Yii::$app->request->get('gender');
-        //$city = City::findAll($sort);
-        $city = Yii::$app->request->get('city');
-        $sort = City::findAll('city');
 
-        if ($sort != NULL) {
-            $data = Data::find()->where(['city_id' => $sort]);
+        if ($get != NULL) {
+            $data = Data::find()->where([$k => $j]);
         } else {
             $data = Data::find();
         }
@@ -32,11 +32,20 @@ class SiteController extends Controller
         ]);
 
         $data = $data->offset($pagination->offset)->limit($pagination->limit)->all();
-        return $this->render('index', compact('data', 'pagination'));
+        return $this->render('index', compact('data', 'pagination', 'get'));
+    }
+
+    public function actionCity()
+    {
+        $city_sort = Yii::$app->request->get('city');
+
+        $city = City::find()->with('data')->where('id=1')->all();
+
+        return $this->render('city', compact('city'));
     }
 
     public function actionMyresume()
     {
-        return $this->render('myresume');
+        return $this->render('myresume' );
     }
 }
