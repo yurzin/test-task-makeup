@@ -1,8 +1,6 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $data */
-/* @var $get */
-
 /* @var $pagination */
 
 use yii\helpers\Html;
@@ -85,7 +83,7 @@ $this->title = 'Список резюме';
                     <div class="heading">Фильтр</div>
                     <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
                 </div>
-                <?php var_dump($array) ?>
+
                 <?php
                 echo MenuFilter::widget(
                     [

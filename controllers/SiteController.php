@@ -15,16 +15,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $get = Yii::$app->request->get();
-        $array = count($get);
 
-        /*foreach ($get as $item) {
-            $item
-        }*/
-//      $city = ArrayHelper::getValue($get, 'city', '');
-//      $gender = ArrayHelper::getValue($get, 'gender', '');
-
-        if ( $get != NULL /*and $key != 'page'*/) {
-            $data = Data::find()->where([]);
+        if ( $get != NULL and $get['page'] === NULL) {
+            $data = Data::find()->andFilterWhere([
+                'city' => $get['city'] ,
+                'gender' => $get['gender']
+            ]);
         } else {
             $data = Data::find();
         }
@@ -37,12 +33,11 @@ class SiteController extends Controller
         ]);
 
         $data = $data->offset($pagination->offset)->limit($pagination->limit)->all();
-        return $this->render('index', compact('data', 'pagination', 'count', 'array'));
+        return $this->render('index', compact('data', 'pagination', 'count'));
     }
 
     public function actionCity()
     {
-
         return $this->render('city', compact('city'));
     }
 
