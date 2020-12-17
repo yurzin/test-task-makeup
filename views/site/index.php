@@ -6,8 +6,8 @@
 /* @var $pagination */
 
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 use \app\components\MenuFilter;
 
 $this->title = 'Список резюме';
@@ -19,7 +19,7 @@ $this->title = 'Список резюме';
         <div class="row">
             <div class="col-lg-9 desctop-992-pr-16">
                 <div class="d-flex align-items-center flex-wrap mb8">
-                    <span class="paragraph mr16">Найдено 3 резюме</span>
+                    <span class="paragraph mr16">Найдено <?= $count ?> резюме</span>
                     <div class="vakancy-page-header-dropdowns">
                         <div class="vakancy-page-wrap show mr16">
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -43,10 +43,10 @@ $this->title = 'Список резюме';
                         </div>
                     </div>
                 </div>
-
                 <?php foreach ($data as $item) : ?>
-
-                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
+                    <div onclick="location.href='view-resume/<?= $item->id ?>'"
+                         class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16"
+                         style="cursor: pointer">
                         <div class="company-list-search__block-left">
                             <div class="resume-list__block-img mb8">
                                 <img src="<?= $item->photo ?>" alt="profile">
@@ -59,7 +59,7 @@ $this->title = 'Список резюме';
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
                                 <span class="mr16 paragraph"><?= $item->age ?> лет</span>
-                                <span class="mr16 paragraph"><?= $item->city_id ?></span>
+                                <span class="mr16 paragraph"><?= $item->city ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>
@@ -68,7 +68,6 @@ $this->title = 'Список резюме';
                             <p class="paragraph mb16 mobile-mb32"><?= $item->last_work ?></p>
                         </div>
                     </div>
-
                 <?php endforeach ?>
 
                 <?= LinkPager::widget(
@@ -86,27 +85,16 @@ $this->title = 'Список резюме';
                     <div class="heading">Фильтр</div>
                     <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
                 </div>
-
+                <?php var_dump($array) ?>
                 <?php
                 echo MenuFilter::widget(
                     [
                         'items' =>
                             [
-                                [
-                                    'label' => 'Все', 'url' => ['/'],
-//                                    'template' => '<a href="{url}" class="signin-modal__switch-btn">{label}</a>',
-                                    'options' => ['tag' => false]
-                                ],
-                                [
-                                    'label' => 'Мужчины', 'url' => ['/search/resume', 'gender' => 'male'],
-                                    'options' => ['tag' => false]
-                                ],
-                                [
-                                    'label' => 'Женщины', 'url' => ['/search/resume', 'gender' => 'female'],
-                                    'options' => ['tag' => false]
-                                ]
-                            ],
-                        'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
+                                ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
+                                ['label' => 'Мужчины', 'url' => Url::toRoute([Url::current(['/search/resume' => null, '/search/resume', 'gender' => 'male'])]), 'options' => ['tag' => false]],
+                                ['label' => 'Женщины', 'url' => Url::toRoute([Url::current(['/search/resume' => null, '/search/resume', 'gender' => 'female'])]), 'options' => ['tag' => false]]
+                            ], 'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
                     ]
                 );
                 ?>
@@ -115,11 +103,11 @@ $this->title = 'Список резюме';
                     <div class="paragraph cadet-blue">Город</div>
                     <div class="citizenship-select">
                         <?php
-                        echo Html::beginForm(['search/resume'], 'get');
+                        echo Html::beginForm(Url::toRoute([Url::current(['/search/resume' => null, 'city' => null, '/search/resume'])]), 'get');
                         echo Html::dropDownList('city', null,
                             ['Кемерово' => 'Кемерово', 'Новосибирск' => 'Новосибирск', 'Иркутск' => 'Иркутск', 'Красноярск' => 'Красноярск', 'Барнаул' => 'Барнаул'],
                             ['class' => 'nselect-1', 'onchange' => 'this.form.submit()',
-                                'prompt' => ['text' => 'Выберите город', 'options'=> ['disabled' => true, 'selected' => true]]]
+                                'prompt' => ['text' => 'Выберите город', 'options' => ['disabled' => true, 'selected' => true]]]
                         );
                         echo Html::endForm();
                         ?>

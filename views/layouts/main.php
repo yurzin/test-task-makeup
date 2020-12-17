@@ -37,8 +37,8 @@ AppAsset::register($this);
                         echo Menu::widget(
                             [
                                 'items' => [
-                                    ['label' => 'Резюме', 'url' => ['/site/index'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']],
-                                    ['label' => 'Мои резюме', 'url' => ['/site/myresume'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']]
+                                    ['label' => 'Резюме', 'url' => ['site/index'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']],
+                                    ['label' => 'Мои резюме', 'url' => ['site/myresume'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']]
                                 ],
                                 'options' => ['class' => 'navigation-nav']
                             ]

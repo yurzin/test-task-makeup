@@ -47,9 +47,11 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'resume-list' => 'site/index',
+                '/' => 'site/index',
                 'search/resume' => 'site/index',
                 'my-resume' => 'site/myresume',
+                'view-resume/<id:\d+>' => 'site/viewresume',
+                'search/view-resume/<id:\d+>' => 'site/viewresume',
             ],
         ],
     ],

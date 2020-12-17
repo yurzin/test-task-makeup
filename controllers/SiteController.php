@@ -6,6 +6,7 @@ use Yii;
 use app\models\Data;
 use app\models\City;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -14,12 +15,16 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $get = Yii::$app->request->get();
-        $k = key($get);
-        $j = $get[$k];
-        //$sort = Yii::$app->request->get('gender');
+        $array = count($get);
 
-        if ($get != NULL) {
-            $data = Data::find()->where([$k => $j]);
+        /*foreach ($get as $item) {
+            $item
+        }*/
+//      $city = ArrayHelper::getValue($get, 'city', '');
+//      $gender = ArrayHelper::getValue($get, 'gender', '');
+
+        if ( $get != NULL /*and $key != 'page'*/) {
+            $data = Data::find()->where([]);
         } else {
             $data = Data::find();
         }
@@ -32,14 +37,11 @@ class SiteController extends Controller
         ]);
 
         $data = $data->offset($pagination->offset)->limit($pagination->limit)->all();
-        return $this->render('index', compact('data', 'pagination', 'get'));
+        return $this->render('index', compact('data', 'pagination', 'count', 'array'));
     }
 
     public function actionCity()
     {
-        $city_sort = Yii::$app->request->get('city');
-
-        $city = City::find()->with('data')->where('id=1')->all();
 
         return $this->render('city', compact('city'));
     }
@@ -47,5 +49,14 @@ class SiteController extends Controller
     public function actionMyresume()
     {
         return $this->render('myresume' );
+    }
+
+    public function actionViewresume()
+    {
+        $get = Yii::$app->request->get();
+        $key = key($get);
+        $value = $get[$key];
+        $data = Data::findOne($value);
+        return $this->render('viewresume', compact('data', 'get'));
     }
 }
