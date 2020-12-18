@@ -10,7 +10,13 @@ $this->title = 'Резюме ' . $data->name;
 
     <div class="content p-rel">
         <div class="container">
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mt8 mb32"><a href="<?= Yii::$app->urlManager->createUrl('site/index') ?>"><img src="/images/blue-left-arrow.svg" alt="arrow"> Резюме в
+                            Кемерово</a>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-5 mobile-mb32">
                     <div class="profile-foto resume-profile-foto"><img src="<?= $data->photo ?>" alt="profile-foto">

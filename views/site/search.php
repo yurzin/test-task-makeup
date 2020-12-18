@@ -3,33 +3,12 @@
 /* @var $data */
 /* @var $pagination */
 
-use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\LinkPager;
-use yii\widgets\ActiveForm;
-use app\models\SearchForm;
-use \app\components\MenuFilter;
 
-$model = new SearchForm();
-
-$this->title = 'Список резюме';
+$this->title = 'Список найденых резюме';
 ?>
 <div class="content">
     <div class="container">
-        <div class="header-search">
-            <div class="container">
-                <div class="header-search__wrap">
-                    <?php
-                    echo Html::beginForm(Url::toRoute('/search/resume'), 'get',  ['class' => 'header-search__form']);
-                    echo Html::a( Html::img('../../images/dark-search.svg', ['class' => 'dark-search-icon header-search__icon']));
-                    echo Html::input('text', 'search', null, ['class' => 'header-search__input', 'placeholder' => 'Поиск по резюме и навыкам']);
-                    echo Html::submitButton('Найти', ['class' => 'blue-btn header-search__btn']);
-                    ?>
-                    <?php echo Html::endForm();?>
-
-                </div>
-            </div>
-        </div>
         <h1 class="main-title mt24 mb16">PHP разработчики в Кемерово</h1>
         <button class="vacancy-filter-btn">Фильтр</button>
         <div class="row">
@@ -96,39 +75,6 @@ $this->title = 'Список резюме';
                 ?>
 
             </div>
-            <div class="col-lg-3 desctop-992-pl-16 d-flex flex-column vakancy-page-filter-block vakancy-page-filter-block-dnone">
-                <div class="vakancy-page-filter-block__row mobile-flex-992 mb24 d-flex justify-content-between align-items-center">
-                    <div class="heading">Фильтр</div>
-                    <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
-                </div>
-
-                <?php
-                echo MenuFilter::widget(
-                    [
-                        'items' =>
-                            [
-                                ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
-                                ['label' => 'Мужчины', 'url' => Url::toRoute([Url::current(['/search/resume' => null, '/search/resume', 'gender' => 'male'])]), 'options' => ['tag' => false]],
-                                ['label' => 'Женщины', 'url' => Url::toRoute([Url::current(['/search/resume' => null, '/search/resume', 'gender' => 'female'])]), 'options' => ['tag' => false]]
-                            ], 'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
-                    ]
-                );
-                ?>
-
-                <div class="vakancy-page-filter-block__row mb24">
-                    <div class="paragraph cadet-blue">Город</div>
-                    <div class="citizenship-select">
-                        <?php
-                        echo Html::beginForm(Url::toRoute([Url::current(['/search/resume' => null, 'city' => null, '/search/resume'])]), 'get');
-                        echo Html::dropDownList('city', null,
-                            ['Кемерово' => 'Кемерово', 'Новосибирск' => 'Новосибирск', 'Иркутск' => 'Иркутск', 'Красноярск' => 'Красноярск', 'Барнаул' => 'Барнаул'],
-                            ['class' => 'nselect-1', 'onchange' => 'this.form.submit()',
-                                'prompt' => ['text' => 'Выберите город', 'options' => ['disabled' => true, 'selected' => true]]]
-                        );
-                        echo Html::endForm();
-                        ?>
-                    </div>
-                </div>
                 <div class="vakancy-page-filter-block__row mb24">
                     <div class="paragraph cadet-blue">Зарплата</div>
                     <div class="p-rel">
@@ -244,7 +190,7 @@ $this->title = 'Список резюме';
                     </div>
                 </div>
                 <div
-                        class="vakancy-page-filter-block__row vakancy-page-filter-block__show-vakancy-btns mb24 d-flex flex-wrap align-items-center mobile-jus-cont-center">
+                    class="vakancy-page-filter-block__row vakancy-page-filter-block__show-vakancy-btns mb24 d-flex flex-wrap align-items-center mobile-jus-cont-center">
                     <a class="link-orange-btn orange-btn mr24 mobile-mb12" href="#">Показать <span>1 230</span>
                         вакансии</a>
                     <a href="#">Сбросить все</a>

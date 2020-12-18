@@ -7,9 +7,11 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
+use yii\web\Application;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -33,17 +35,17 @@ AppAsset::register($this);
                 </a>
                 <div class="header__login header__login-mobile">
                 </div>
-                    <?php
-                        echo Menu::widget(
-                            [
-                                'items' => [
-                                    ['label' => 'Резюме', 'url' => ['site/index'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']],
-                                    ['label' => 'Мои резюме', 'url' => ['site/myresume'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']]
-                                ],
-                                'options' => ['class' => 'navigation-nav']
-                            ]
-                        );
-                    ?>
+                <?php
+                echo Menu::widget(
+                    [
+                        'items' => [
+                            ['label' => 'Резюме', 'url' => ['site/index'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']],
+                            ['label' => 'Мои резюме', 'url' => ['site/myresume'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']]
+                        ],
+                        'options' => ['class' => 'navigation-nav']
+                    ]
+                );
+                ?>
                 <div class="navigation-menu__mobile">
                     <ul class="navigation-menu__mobile-nav">
                         <div class="navigation-menu__mobile-nav-top">
@@ -64,18 +66,7 @@ AppAsset::register($this);
             </nav>
         </div>
     </header>
-    <div class="header-search">
-        <div class="container">
-            <div class="header-search__wrap">
-                <form class="header-search__form">
-                    <a href="#"><img src="../../images/dark-search.svg" alt="search"
-                                     class="dark-search-icon header-search__icon"></a>
-                    <input class="header-search__input" type="text" placeholder="Поиск по резюме и навыкам">
-                    <button type="button" class="blue-btn header-search__btn">Найти</button>
-                </form>
-            </div>
-        </div>
-    </div>
+
     <div class="container">
         <?= $content ?>
     </div>
