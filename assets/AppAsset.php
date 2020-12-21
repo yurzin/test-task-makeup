@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
         'css/main.css',
-//        'css/tagsinput.css',
+        'css/tagsinput.css',
         'https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap',
         'css/jquery.nselect.css',
         'css/bootstrap-datepicker.css'

@@ -9,7 +9,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -49,9 +49,14 @@ $config = [
             'rules' => [
                 '/' => 'site/index',
                 'search/resume' => 'site/index',
+                'sort' => 'site/index',
+                'filter' => 'site/index',
+                'resume' => 'site/resume',
                 'my-resume' => 'site/myresume',
                 'view-resume/<id:\d+>' => 'site/viewresume',
+                'resume-list/<id:\d+>' => 'site/index',
                 'search/view-resume/<id:\d+>' => 'site/viewresume',
+                'search' => 'site/search',
             ],
         ],
     ],

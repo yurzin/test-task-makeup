@@ -5,13 +5,8 @@
 /* @var $count */
 /* @var $sort */
 /* @var $city */
-/* @var $salary */
-/* @var $filter */
-/* @var $final */
-
 /* @var $pagination */
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
@@ -105,70 +100,84 @@ $this->title = 'Список резюме';
                     <div class="heading">Фильтр</div>
                     <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
                 </div>
-                <?php ActiveForm::begin(['action' => '/filter', 'method' => 'get']); ?>
-                <?php
-                echo MenuFilter::widget(
-                    ['items' =>
-                        [
-                            ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
-                            ['label' => 'Мужчины', 'url' => Url::toRoute([Url::current(['filter' => null, 'filter', 'gender' => 'male'])]), 'options' => ['tag' => false]],
-                            ['label' => 'Женщины', 'url' => Url::toRoute([Url::current(['filter' => null, 'filter', 'gender' => 'female'])]), 'options' => ['tag' => false]]
-                        ], 'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
-                    ],
-                );
-                ?>
-                <?php ActiveForm::end() ?>
 
-                <div class="vakancy-page-filter-block__row mb2">
+                <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'city' => null, '/filter/resume'])]), 'method' => 'get']); ?>
+                <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
+                <?= Html::a('Все', ['/'], ['class' => 'signin-modal__switch-btn active']) ?>
+                <?= Html::a('Мужчины', ['filter/resume', 'gender' => 'male'], ['class' => 'signin-modal__switch-btn ']) ?>
+                <?= Html::a('Женщины', ['filter/resume', 'gender' => 'female'], ['class' => 'signin-modal__switch-btn ']) ?>
+                </div>
+                <div class="vakancy-page-filter-block__row mb24">
                     <div class="paragraph cadet-blue">Город</div>
                     <div class="citizenship-select">
-                        <?php $form = ActiveForm::begin(['action' => 'filter', 'method' => 'get']); ?>
-                        <?php
-                    foreach ($city as $item => $value){
-                        $final[$value] = $value;
-                    }
-                    echo $form->field($filter, 'city', [])->dropDownList($final,
-                        ['prompt' => 'Выберите город', 'label' => false,
-                            'class' => 'nselect-1', 'data-name' => 'filter', '0' => ['Selected' => true],
-                            ['data-val' => 'label', 'class' => '']
-                        ])->label(false); ?>
+                        <?= Html::dropDownList('city', $city,
+                            ['Кемерово' => 'Кемерово', 'Новосибирск' => 'Новосибирск', 'Иркутск' => 'Иркутск', 'Красноярск' => 'Красноярск', 'Барнаул' => 'Барнаул'],
+                            ['onchange' => 'this.form.submit()', 'prompt' => 'Выберите город', 'selected' => 'selected']);
+                        ?>
+                    </div>
                 </div>
-                </div>
-                <div class="vakancy-page-filter-block__row mb2">
-                <div class="paragraph cadet-blue">Зарплата</div>
-                    <div class="citizenship-select">
-                <?= $form->field($filter, 'salary')->textInput(['value' => $salary, 'class' => 'dor-input w100'])->label(false); ?>
-                </div>
-                </div>
-                    <div class="vakancy-page-filter-block__row mb24">
-                        <div class="paragraph cadet-blue">Специализация</div>
-                        <div class="citizenship-select">
-                <?php    echo $form->field($filter, 'city', [])->dropDownList($final,
-                    ['prompt' => 'Выберите город', 'label' => false,
-                    'class' => 'nselect-1', 'data-name' => 'filter', '0' => ['Selected' => true],
-                    ['data-val' => 'label', 'class' => '']
-                    ])->label(false); ?>
-
-                            <div class="vakancy-page-filter-block__row mb24">
-                                <div class="paragraph cadet-blue">Возраст</div>
-                                <div class="d-flex">
-                                    <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter' => null, 'age_from' => null, 'filter'])]), 'method' => 'get']); ?>
-                                    <?= Html::textInput('age_from', '', ['onblur' => 'this.form.submit()', 'class' => 'dor-input w100', 'placeholder' => 'От']); ?>
-                                    <?php ActiveForm::end() ?>
-                                    <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter' => null, 'age_to' => null, 'filter'])]), 'method' => 'get']); ?>
-                                    <?= Html::textInput('age_to', '', ['onenter' => 'this.form.submit()', 'class' => 'dor-input w100', 'placeholder' => 'До']); ?>
-                                    <?php ActiveForm::end() ?>
-                                </div>
-                            </div>
-
                 <?= Html::submitButton('Показать вакансии', ['class' => 'link-orange-btn orange-btn mr24 mobile-mb12']) ?>
+
+                <?php ActiveForm::end() ?>
+
+                <?php
+               /* echo MenuFilter::widget(
+                    [
+                        'items' =>
+                            [
+                                ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
+                                ['label' => 'Мужчины', 'url' => Url::toRoute([Url::current(['filter/resume' => null, 'filter/resume', 'gender' => 'male'])]), 'options' => ['tag' => false]],
+                                ['label' => 'Женщины', 'url' => Url::toRoute([Url::current(['filter/resume' => null, 'filter/resume', 'gender' => 'female'])]), 'options' => ['tag' => false]]
+                            ], 'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
+                    ]
+                );*/
+                ?>
+<!--                <div class="vakancy-page-filter-block__row mb24">
+                    <div class="paragraph cadet-blue">Город</div>
+                    <div class="citizenship-select">
+-->                        <?php /*ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'city' => null, '/filter/resume'])]), 'method' => 'get']); */?>
+                       <!-- --><?/*= Html::dropDownList('city', $city,
+                            ['Кемерово' => 'Кемерово', 'Новосибирск' => 'Новосибирск', 'Иркутск' => 'Иркутск', 'Красноярск' => 'Красноярск', 'Барнаул' => 'Барнаул'],
+                            ['onchange' => 'this.form.submit()', 'prompt' => 'Выберите город', 'selected' => 'selected']);
+                        */?>
+                        <?php /*ActiveForm::end()*/ ?>
+<!--                    </div>
                 </div>
+-->                <div class="vakancy-page-filter-block__row mb24">
+                    <div class="paragraph cadet-blue">Зарплата</div>
+                    <div class="citizenship-select">
+                        <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'salary' => null, '/filter/resume'])]), 'method' => 'get']); ?>
+                        <?= Html::textInput('salary', '', ['onenter' => 'this.form.submit()', 'class' => 'dor-input w100']); ?>
+                        <?php ActiveForm::end() ?>
+                    </div>
                 </div>
-                <?php ActiveForm::end(); ?>
+                <div class="vakancy-page-filter-block__row mb24">
+                    <div class="paragraph cadet-blue">Специализация</div>
+                    <div class="citizenship-select">
+                        <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'specialization' => null, '/filter/resume'])]), 'method' => 'get']); ?>
+                        <?= Html::dropDownList('specialization', false,
+                            ['Администратор баз данных', 'Аналитик', 'Арт-директор', 'Инженер', 'Компьютерная безопасность'],
+                            ['onchange' => 'this.form.submit()', 'prompt' => 'Выберите профессию', 'selected' => true]);
+                        ?>
+                        <?php ActiveForm::end() ?>
+                    </div>
+                </div>
+
+                <div class="vakancy-page-filter-block__row mb24">
+                    <div class="paragraph cadet-blue">Возраст</div>
+                    <div class="d-flex">
+                        <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'age_from' => null, '/filter/resume'])]), 'method' => 'get']); ?>
+                        <?= Html::textInput('age_from', '', ['onblur' => 'this.form.submit()', 'class' => 'dor-input w100', 'placeholder' => 'От']); ?>
+                        <?php ActiveForm::end() ?>
+                        <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'age_to' => null, '/filter/resume'])]), 'method' => 'get']); ?>
+                        <?= Html::textInput('age_to', '', ['onenter' => 'this.form.submit()', 'class' => 'dor-input w100', 'placeholder' => 'До']); ?>
+                        <?php ActiveForm::end() ?>
+                    </div>
+                </div>
 
                 <div class="vakancy-page-filter-block__row mb24">
                     <div class="paragraph cadet-blue">Опыт работы</div>
-                    <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter' => null, 'experience' => null, 'filter'])]), 'method' => 'get']); ?>
+                    <?php ActiveForm::begin(['action' => Url::toRoute([Url::current(['filter/resume' => null, 'experience' => null, '/filter/resume'])]), 'method' => 'get']); ?>
                     <?= Html::checkboxList('experience', false, ['Без опыта', 'От 1 года до 3 лет', 'От 3 лет до 6 лет', 'Более 6 лет'],
                         ['itemOptions' =>
                             ['labelOptions' => ['class' => 'form-check-label', 'onchange' => 'this.form.submit()', Url::to(['/', 'param' => '1'])],
@@ -261,7 +270,11 @@ $this->title = 'Список резюме';
                         </div>
                     </div>
                 </div>
-
+                <div class="vakancy-page-filter-block__row vakancy-page-filter-block__show-vakancy-btns mb24 d-flex flex-wrap align-items-center mobile-jus-cont-center">
+                    <a class="link-orange-btn orange-btn mr24 mobile-mb12" href="#">Показать <span>1 230</span>
+                        вакансии</a>
+                    <a href="#">Сбросить все</a>
+                </div>
             </div>
         </div>
     </div>

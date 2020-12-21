@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+/* @var $count */
 /* @var $data */
 /* @var $pagination */
 
@@ -26,15 +27,13 @@ $this->title = 'Список найденых резюме';
                         <div class="vakancy-page-wrap show">
                             <a class="vakancy-page-btn vakancy-btn dropdown-toggle" href="#" role="button"
                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">
-                                По новизне
-                                <i class="fas fa-angle-down arrowDown"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">По новизне</a>
-                                <a class="dropdown-item" href="#">По возрастанию зарплаты</a>
-                                <a class="dropdown-item" href="#">По убыванию зарплаты</a>
-                            </div>
+                               aria-expanded="false"> По новизне <i class="fas fa-angle-down arrowDown"></i>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <?php
+                                    echo $sort->link('date', ['class' => 'dropdown-item', 'label' => 'По дате']);
+                                    echo $sort->link('salary', ['class' => 'dropdown-item', 'label' => 'По зарплате']);
+                                    ?>
+                                </div>
                         </div>
                     </div>
                 </div>
