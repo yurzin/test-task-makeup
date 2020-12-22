@@ -32,7 +32,7 @@ $model = new Filter();
         <div class="paragraph cadet-blue">Город</div>
         <div class="citizenship-select">
             <?php $form = ActiveForm::begin(['action' => 'filter', 'method' => 'get']); ?>
-            <?= $form->field($model, 'id_city', ['options' => ['tag' => false]])->dropDownList($city,
+            <?= $form->field($model, 'city', ['options' => ['tag' => false]])->dropDownList($city,
                 ['prompt' => 'Выберите город', 'label' => false,
                     'class' => 'nselect-1', '0' => ['Selected' => true], ['data-val' => 'label']
                 ])->label(false); ?>
