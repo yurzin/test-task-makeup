@@ -22,10 +22,10 @@ class Resume extends ActiveRecord
             'age' => 'Возраст',
             'gender' => 'Пол',
             'date_birth' => 'Дата рождения',
-            'city' => 'Город',
+            'id_city' => 'Город',
             'phone' => 'Телефон',
             'email' => 'e-mail',
-            'specialization' => 'Специализация',
+            'id_specialization' => 'Специализация',
             'experience' => 'Опыт',
             'salary' => 'Зарплата',
             'last_work' => 'Последнее место работы',
@@ -36,7 +36,7 @@ class Resume extends ActiveRecord
     public function rules()
     {
         return [
-            [['last_name', 'name', 'patronymic', 'age', 'gender', 'date_birth', 'city', 'phone', 'email', 'specialization', 'experience', 'salary', 'last_work'], 'required'],
+            [['last_name', 'name', 'patronymic', 'age', 'gender', 'date_birth', 'id_city', 'phone', 'email', 'id_specialization', 'experience', 'salary', 'last_work'], 'required'],
             ['email', 'email'],
 //            ['date_birth', 'date'],
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],

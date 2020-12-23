@@ -9,6 +9,7 @@
 /* @var $filter */
 /* @var $final */
 /* @var $get */
+/* @var $id_sity */
 /* @var $specialization */
 /* @var $message */
 /* @var $pagination */
@@ -17,16 +18,10 @@ use \app\components\SidebarWidget;
 use yii\widgets\LinkPager;
 
 $this->title = 'Список найденых резюме';
-
 ?>
 <div class="content">
     <div class="container">
-        <h1 class="main-title mt24 mb16">
-            <?php if ($message === null) {
-                echo 'PHP разработчики в Кемерово';
-            } else echo $message;
-            ?>
-        </h1>
+        <h1 class="main-title mt24 mb16"> PHP разработчики в Кемерово </h1>
         <button class="vacancy-filter-btn">Фильтр</button>
         <div class="row">
             <div class="col-lg-9 desctop-992-pr-16">
@@ -90,13 +85,6 @@ $this->title = 'Список найденых резюме';
                         'options' => ['class' => 'dor-pagination mb128'],
                     ]);
                 ?>
-            </div>
-            <div class="col-lg-3 desctop-992-pl-16 d-flex flex-column vakancy-page-filter-block vakancy-page-filter-block-dnone">
-                <div class="vakancy-page-filter-block__row mobile-flex-992 mb24 d-flex justify-content-between align-items-center">
-                    <div class="heading">Фильтр</div>
-                    <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
-                </div>
-                <?= SidebarWidget::widget(['city' => $city, 'specialization' => $specialization]) ?>
             </div>
         </div>
     </div>

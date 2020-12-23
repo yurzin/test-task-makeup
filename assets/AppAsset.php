@@ -25,17 +25,20 @@ class AppAsset extends AssetBundle
         'css/tagsinput.css',
         'https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap',
         'css/jquery.nselect.css',
-        'css/bootstrap-datepicker.css'
+        'css/bootstrap-datepicker.css',
+        'https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css'
+
     ];
     public $js = [
         'https://kit.fontawesome.com/a4e584b747.js',
-        'https://code.jquery.com/jquery-3.2.1.slim.min.js',
+//        'https://code.jquery.com/jquery-3.2.1.slim.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
         'js/main.js',
         'js/jquery.nselect.min.js',
         'js/bootstrap-datepicker.js',
-        'js/bootstrap-datepicker.ru.min.js'
+        'js/bootstrap-datepicker.ru.min.js',
+        'https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

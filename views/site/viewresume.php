@@ -23,7 +23,7 @@ $this->title = 'Резюме ' . $data->name;
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
-                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $data->specialization ?>
+                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $item['specialization']['specialization'] ?>
                     </div>
                     <div class="paragraph-lead mb16">
                         <span class="mr24"><?= $data->salary ?> ₽</span>
@@ -60,7 +60,7 @@ $this->title = 'Резюме ' . $data->name;
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Город проживания
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $data->city ?></div>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $data['city']['city'] ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">

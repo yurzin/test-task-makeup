@@ -59,12 +59,12 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-right">
                             <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= $item->date ?></div>
-                            <h3 class="mini-title mobile-off"><?= $item->id_specialization ?></h3>
+                            <h3 class="mini-title mobile-off"><?= $item['specialization']['specialization'] ?></h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
                                 <span class="mr16 paragraph"><?= $item->age ?> лет</span>
-                                <span class="mr16 paragraph"><?= $item->id_city ?></span>
+                                <span class="mr16 paragraph"><?= $item['city']['city']  ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>

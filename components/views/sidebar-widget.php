@@ -13,10 +13,9 @@ use yii\widgets\ActiveForm;
 $model = new Filter();
 ?>
 
-<?php ActiveForm::begin(['action' => 'filter', 'method' => 'get']); ?>
+
     <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
-        <?php
-        echo MenuFilter::widget(
+        <?php echo MenuFilter::widget(
             ['items' =>
                 [
                     ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
@@ -27,14 +26,13 @@ $model = new Filter();
         );
         ?>
     </div>
-<?php ActiveForm::end() ?>
+
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Город</div>
         <div class="citizenship-select">
             <?php $form = ActiveForm::begin(['action' => 'filter', 'method' => 'get']); ?>
             <?= $form->field($model, 'city', ['options' => ['tag' => false]])->dropDownList($city,
-                ['prompt' => 'Выберите город', 'label' => false,
-                    'class' => 'nselect-1', '0' => ['Selected' => true], ['data-val' => 'label']
+                ['prompt' => 'Выберите город', 'label' => false, 'class' => 'nselect-1', '0' => ['Selected' => true], ['data-val' => 'label']
                 ])->label(false); ?>
         </div>
     </div>
@@ -47,10 +45,11 @@ $model = new Filter();
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Специализация</div>
         <div class="citizenship-select">
-            <?= $form->field($model, 'specialization', ['options' => ['tag' => false]])->dropDownList($specialization,
+            <?= $form->field($model, 'specialization')->dropDownList($specialization,
                 ['prompt' => 'Выберите специализацию', 'label' => false,
-                    'class' => 'nselect-1', '0' => ['Selected' => true], ['data-val' => 'label']
-                ])->label(false); ?>
+                    /*'class' => 'nselect-1',*/ '0' => ['Selected' => true], ['data-val' => 'label']
+                ])->label(false);
+            ?>
         </div>
     </div>
     <div class="vakancy-page-filter-block__row mb1">

@@ -13,6 +13,6 @@ class Data extends ActiveRecord
 
     public function getSpecialization()
     {
-        return $this->hasOne(Specialization::class, ['id' => 'id_city']);
+        return $this->hasOne(Specialization::class, ['id' => 'id_specialization']);
     }
 }

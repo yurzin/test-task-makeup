@@ -2,9 +2,10 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
+use yii\base\Model;
+//use yii\db\ActiveRecord;
 
-class Filter extends ActiveRecord
+class Filter extends Model
 {
 
     public function formName() {
@@ -23,9 +24,9 @@ class Filter extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_city' => 'Город',
+            'city' => 'Город',
             'salary' => 'Зарплата',
-            'id_specialization' => 'Специализация',
+            'specialization' => 'Специализация',
             'employment_type' => 'Тип занятости',
             'experience' => 'Опыт работы',
             'schedule' => 'График работы',
@@ -37,7 +38,7 @@ class Filter extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_city', 'salary', 'id_specialization', 'age_from', 'age_to', 'experience', 'employment_type', 'schedule'], 'string'],
+            [['city', 'salary', 'specialization', 'age_from', 'age_to', 'experience', 'employment_type', 'schedule'], 'string'],
         ];
     }
 }

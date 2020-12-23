@@ -74,8 +74,6 @@ class SiteController extends Controller
         ]);
 
         $data = Data::find()->orwhere(['like', 'last_name', $search])->orwhere(['like', 'last_work', $search]);
-//            ->orwhere(['like', 'city', $search])
-//            ->orwhere(['like', 'specialization', $search]);
 
         $count = $data->count();
 
@@ -99,14 +97,20 @@ class SiteController extends Controller
         $get = Yii::$app->request->get();
         $filter = new Filter();
 
-        if ($filter->load(Yii::$app->request->get())) {
+        if ($get['city'] !== '') {
             $id_city = ArrayHelper::getValue($get, 'city');
-            $salary = ArrayHelper::getValue($get, 'salary');
-            $id_specialization = ArrayHelper::getValue($get, 'specialization');
-            $age_from = intval(ArrayHelper::getValue($get, 'age_from'));
-            $age_to = ArrayHelper::getValue($get, 'age_to', 100);
-            $gender = ArrayHelper::getValue($get, 'gender');
+            $id_city = intval($id_city) + 1;
         }
+
+        if ($get['specialization'] !== '') {
+            $id_specialization = ArrayHelper::getValue($get, 'specialization');
+            $id_specialization = intval($id_specialization + 1);
+        }
+
+        $salary = ArrayHelper::getValue($get, 'salary');
+        $age_from = intval(ArrayHelper::getValue($get, 'age_from'));
+        $age_to = ArrayHelper::getValue($get, 'age_to', 100);
+        $gender = ArrayHelper::getValue($get, 'gender');
 
         $sort = new Sort([
             'defaultOrder' => [
@@ -121,36 +125,33 @@ class SiteController extends Controller
         ]);
 
         $data = Data::find()
-                ->andFilterWhere([
-                    'id_city' => $id_city,
-                    'gender' => $gender,
-                    'salary' => $salary,
-                    'id_specialization' => $id_specialization
-                ])
-                ->andFilterCompare('age', ">$age_from")
-                ->andFilterCompare('age', "<$age_to");
+            ->andFilterWhere([
+                'id_city' => $id_city,
+                'gender' => $gender,
+                'salary' => $salary,
+                'id_specialization' => $id_specialization
+            ])
+            ->andFilterCompare('age', ">$age_from")
+            ->andFilterCompare('age', "<$age_to");
 
         $count = $data->count();
 
         $pagination = new Pagination([
             'defaultPageSize' => 4,
             'totalCount' => $count,
-            'route' => 'resume-list'
+            'route' => 'filter'
         ]);
-
-        $city = City::find()->select(['id', 'city'])->asArray()->all();
-        $specialization = Specialization::find()->select(['id', 'specialization'])->asArray()->all();
-
-        $city = array_values(array_unique(ArrayHelper::map($city, 'id', 'city')));
-        $specialization = array_values(array_unique(ArrayHelper::map($specialization, 'id', 'specialization')));
 
         $data = $data->with('city')->with('specialization')->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
 
-        return $this->render('filter', compact('data', 'pagination', 'count', 'man', 'woman', 'sort', 'city', 'salary', 'filter', 'specialization'));
+        return $this->render('filter', compact('data', 'pagination', 'get', 'count', 'sort', 'city', 'salary', 'filter', 'specialization'));
     }
 
     public function actionResume()
     {
+        $city = City::find()->select(['city'])->asArray()->all();
+        $specialization = Specialization::find()->select(['specialization'])->asArray()->all();
+
         $model = new Resume();
         if ($model->load(Yii::$app->request->post())) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
@@ -168,6 +169,6 @@ class SiteController extends Controller
                 );
             }
         }
-        return $this->render('resume', compact('model'));
+        return $this->render('resume', compact('model', 'city', 'specialization', 'post'));
     }
 }
