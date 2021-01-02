@@ -108,8 +108,12 @@ class SiteController extends Controller
 
     public function actionResume()
     {
-        $city = Resume::find()->select(['city'])->asArray()->all();
-        $specialization = Resume::find()->select(['specialization'])->asArray()->all();
+        $city = ArrayHelper::map(Resume::find()->select(['city'])->asArray()->all(), 'city', 'city');
+        $specialization = ArrayHelper::map(
+            Resume::find()->select(['specialization'])->asArray()->all(),
+            'specialization',
+            'specialization'
+        );
 
         $model = new AddResume();
         if ($model->load(Yii::$app->request->post())) {

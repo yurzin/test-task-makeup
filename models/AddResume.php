@@ -16,20 +16,22 @@ class AddResume extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'last_name' => 'Фамилия',
+            'lastName' => 'Фамилия',
             'name' => 'Имя',
             'patronymic' => 'Отчество',
-            'age' => 'Возраст',
             'gender' => 'Пол',
-            'date_birth' => 'Дата рождения',
+            'dateBirth' => 'Дата рождения',
             'city' => 'Город',
             'phone' => 'Телефон',
             'email' => 'e-mail',
             'specialization' => 'Специализация',
-            'experience' => 'Опыт',
+            'experience' => 'Опыт работы',
+            'employment' => 'Занятость',
+            'schedule' => 'График работы',
             'salary' => 'Зарплата',
-            'last_work' => 'Последнее место работы',
-            'photo' => 'Путь до файла'
+            'lastWork' => 'Последнее место работы',
+            'photo' => 'Путь до файла',
+            'about' => 'О себе'
         ];
     }
 
@@ -38,26 +40,26 @@ class AddResume extends ActiveRecord
         return [
             [
                 [
-                    'last_name',
+                    'lastName',
                     'name',
                     'patronymic',
-                    'age',
                     'gender',
-//                    'date_birth',
+                    'dateBirth',
                     'city',
                     'phone',
-                    'email',
+                    //'email',
                     'specialization',
                     'experience',
                     'salary',
-                    'last_work'
-                ],
-                'required'
+                    'employment',
+                    'lastWork'
+                ], 'string'
             ],
             ['email', 'email'],
-            ['date_birth', 'date'],
+//            ['dateBirth', 'date'],
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
-            [['photo'], 'string']
+            [['photo'], 'string'],
+            ['about', 'string']
         ];
     }
 

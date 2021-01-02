@@ -86,10 +86,10 @@ $model = new FormFilter();
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Возраст</div>
         <div class="d-flex">
-            <?= $form->field($model, 'age_from', ['options' => ['tag' => false]])->textInput(
+            <?= $form->field($model, 'ageFrom', ['options' => ['tag' => false]])->textInput(
                 ['class' => 'dor-input w100', 'placeholder' => 'От']
             )->label(false); ?>
-            <?= $form->field($model, 'age_to', ['errorOptions' => ['tag' => false]])->textInput(
+            <?= $form->field($model, 'ageTo', ['errorOptions' => ['tag' => false]])->textInput(
                 ['class' => 'dor-input w100', 'placeholder' => 'До']
             )->label(false); ?>
         </div>
@@ -119,7 +119,7 @@ $model = new FormFilter();
         <div class="paragraph cadet-blue">Тип занятости</div>
         <div class="profile-info">
             <div class="form-check d-flex">
-                <?= $form->field($model, 'employment_type', ['options' => ['tag' => false]])
+                <?= $form->field($model, 'employment', ['options' => ['tag' => false]])
                     ->checkboxList(
                         ['Полная занятость', 'Частичная занятость', 'Проектная работа', 'Стажировка', 'Волонтёрство'],
                         [

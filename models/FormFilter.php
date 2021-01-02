@@ -6,7 +6,6 @@ use yii\base\Model;
 
 class FormFilter extends Model
 {
-
     public function formName()
     {
         return '';
@@ -14,10 +13,10 @@ class FormFilter extends Model
 
     public $salary;
     public $city;
-    public $age_from;
-    public $age_to;
+    public $ageFrom;
+    public $ageTo;
     public $specialization;
-    public $employment_type;
+    public $employment;
     public $schedule;
     public $experience;
 
@@ -27,11 +26,11 @@ class FormFilter extends Model
             'city' => 'Город',
             'salary' => 'Зарплата',
             'specialization' => 'Специализация',
-            'employment_type' => 'Тип занятости',
+            'employment' => 'Тип занятости',
             'experience' => 'Опыт работы',
             'schedule' => 'График работы',
-            'age_from' => 'Возраст от',
-            'age_to' => 'Возраст до',
+            'ageFrom' => 'Возраст от',
+            'ageTo' => 'Возраст до',
         ];
     }
 
@@ -39,7 +38,7 @@ class FormFilter extends Model
     {
         return [
             [
-                ['city', 'salary', 'specialization', 'age_from', 'age_to', 'experience', 'employment_type', 'schedule'],
+                ['city', 'salary', 'specialization', 'ageFrom', 'ageTo', 'experience', 'employment', 'schedule'],
                 'string'
             ],
         ];

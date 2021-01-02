@@ -35,10 +35,9 @@ endif; ?>
                         ['class' => 'btn btn-primary']
                     ) ?>
                     <?= $form->field($model, 'photo')->hiddenInput()->label(false); ?>
-                    <?= $form->field($model, 'last_name')->textInput(['class' => 'form-control-lg']); ?>
+                    <?= $form->field($model, 'lastName')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'name')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'patronymic')->textInput(['class' => 'form-control-lg']); ?>
-                    <?= $form->field($model, 'age')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'gender')->dropDownList(
                         ['Мужщина', 'Женщина'],
                         [
@@ -48,7 +47,7 @@ endif; ?>
                             ['data-val' => 'label']
                         ]
                     ); ?>
-                    <?= $form->field($model, 'date_birth')->textInput(
+                    <?= $form->field($model, 'dateBirth')->textInput(
                         ['type' => 'date', 'class' => 'form-control-lg']
                     ); ?>
                     <?= $form->field($model, 'city')->dropDownList(
@@ -125,7 +124,8 @@ endif; ?>
                             ['data-val' => 'label']
                         ]
                     ); ?>
-                    <?= $form->field($model, 'last_work')->textInput(['class' => 'form-control-lg']); ?>
+                    <?= $form->field($model, 'lastWork')->textInput(['class' => 'form-control-lg']); ?>
+                    <?= $form->field($model, 'about')->textarea(['rows' => '6', 'class' => 'form-control-lg']); ?>
                     <?= Html::submitButton(
                         'Добавить резюме',
                         ['class' => 'link-orange-btn orange-btn my-vacancies-add-btn']
