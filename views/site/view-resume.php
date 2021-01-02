@@ -1,8 +1,8 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $data */
+/* @var $resume */
 
-$this->title = 'Резюме ' . $data->name;
+$this->title = 'Резюме ' . $resume->name;
 
 ?>
 
@@ -19,15 +19,15 @@ $this->title = 'Резюме ' . $data->name;
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-5 mobile-mb32">
-                    <div class="profile-foto resume-profile-foto"><img src="<?= $data->photo ?>" alt="profile-foto">
+                    <div class="profile-foto resume-profile-foto"><img src="<?= $resume->photo ?>" alt="profile-foto">
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
-                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $item['specialization']['specialization'] ?>
+                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $resume->specialization ?>
                     </div>
                     <div class="paragraph-lead mb16">
-                        <span class="mr24"><?= $data->salary ?> ₽</span>
-                        <span>Опыт работы <?= $data->experience ?></span>
+                        <span class="mr24"><?= $resume->salary ?> ₽</span>
+                        <span>Опыт работы <?= $resume->experience ?></span>
                     </div>
                     <div class="profile-info company-profile-info resume-view__info-blick">
                         <div class="profile-info__block company-profile-info__block mb8">
@@ -35,14 +35,14 @@ $this->title = 'Резюме ' . $data->name;
                             </div>
                             <div class="profile-info__block-right company-profile-info__block-right">
                                 <?php
-                                echo $data->name ." ". $data->last_name ." ". $data->patronymic
+                                echo $resume->name ." ". $resume->last_name ." ". $resume->patronymic
                                 ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Возраст
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $data->age ?>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->age ?>
                                 года
                             </div>
                         </div>
@@ -60,7 +60,7 @@ $this->title = 'Резюме ' . $data->name;
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Город проживания
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $data['city']['city'] ?></div>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->city ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">

@@ -7,7 +7,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Menu;
-use yii\web\Application;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -40,7 +39,7 @@ AppAsset::register($this);
                     [
                         'items' => [
                             ['label' => 'Резюме', 'url' => ['site/index'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']],
-                            ['label' => 'Мои резюме', 'url' => ['site/myresume'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']]
+                            ['label' => 'Мои резюме', 'url' => ['site/my-resume'], 'options' => ['class' => 'nav-item', 'activeCssClass' => 'nav-item active']]
                         ],
                         'options' => ['class' => 'navigation-nav']
                     ]

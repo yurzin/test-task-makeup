@@ -20,7 +20,7 @@ ActiveForm::begin(['action' => '/filter', 'method' => 'get']); ?>
                 ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
                 ['label' => 'Мужчины', 'url' => Url::toRoute([Url::current(['filter' => null, 'filter', 'gender' => 'male'])]), 'options' => ['tag' => false]],
                 ['label' => 'Женщины', 'url' => Url::toRoute([Url::current(['filter' => null, 'filter', 'gender' => 'female'])]), 'options' => ['tag' => false]]
-            ], 'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16']
+            ], 'options' => ['tag' => 'div', 'class' => 'signin-modal__switch-btns-wrap filter-list__switch-btns-wrap mb16']
         ],
     );
     ?>

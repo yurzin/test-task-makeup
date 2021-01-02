@@ -58,8 +58,8 @@ CREATE TABLE `data` (
   `name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `patronymic` varchar(10) NOT NULL,
-  `id_city` int(100) NOT NULL,
-  `id_specialization` int(100) NOT NULL,
+  `city_id` int(100) NOT NULL,
+  `specialization_id` int(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `experience` varchar(10) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `data` (
 -- Дамп данных таблицы `data`
 --
 
-INSERT INTO `data` (`id`, `photo`, `date`, `name`, `last_name`, `patronymic`, `id_city`, `id_specialization`, `phone`, `email`, `experience`, `salary`, `last_work`, `age`, `gender`, `date_birth`) VALUES
+INSERT INTO `data` (`id`, `photo`, `date`, `name`, `last_name`, `patronymic`, `city_id`, `specialization_id`, `phone`, `email`, `experience`, `salary`, `last_work`, `age`, `gender`, `date_birth`) VALUES
 (1, '../../images/profile-foto-7.jpg', '2020-12-12 23:08:52', 'Сидорова', 'Сидора', 'Сидоровна', 1, 1, '', '', '10 лет', 50000, 'ООО «ТЕПЛОВОЕ ОБОРУДОВАНИЕ»\r\n\r\n', 25, 'female', '2020-12-19'),
 (2, '../../images/profile-foto-11.jpg', '2020-12-12 23:08:52', 'Петров', 'Петр', 'Петрович', 2, 2, '', '', '10', 500000, 'ООО «ТЕПЛОВОЕ ОБОРУДОВАНИЕ»', 33, 'male', '2020-12-19'),
 (3, '../../images/profile-foto-2.jpg', '2020-12-12 23:08:52', 'Сидорова', 'Сидора', 'Сидоровна', 3, 3, '', '', '10 лет', 50000, 'ООО «ТЕПЛОВОЕ ОБОРУДОВАНИЕ»\r\n\r\n', 25, 'female', '2020-12-19'),
@@ -159,8 +159,8 @@ ALTER TABLE `city`
 --
 ALTER TABLE `data`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_city` (`id_city`),
-  ADD KEY `id_specialization` (`id_specialization`);
+  ADD KEY `city_id` (`city_id`),
+  ADD KEY `specialization_id` (`specialization_id`);
 
 --
 -- Индексы таблицы `specialization`
@@ -198,13 +198,13 @@ ALTER TABLE `specialization`
 -- Ограничения внешнего ключа таблицы `city`
 --
 ALTER TABLE `city`
-  ADD CONSTRAINT `city_ibfk_1` FOREIGN KEY (`id`) REFERENCES `data` (`id_city`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `city_ibfk_1` FOREIGN KEY (`id`) REFERENCES `data` (`city_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `data`
 --
 ALTER TABLE `data`
-  ADD CONSTRAINT `data_ibfk_1` FOREIGN KEY (`id_specialization`) REFERENCES `specialization` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `data_ibfk_1` FOREIGN KEY (`specialization_id`) REFERENCES `specialization` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

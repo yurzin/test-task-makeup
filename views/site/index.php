@@ -1,12 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $data */
+
+/* @var $resume */
 /* @var $count */
 /* @var $sort */
-/* @var $filter */
 /* @var $city */
 /* @var $specialization */
+
 /* @var $pagination */
 
 use \app\components\SidebarWidget;
@@ -21,11 +22,23 @@ $this->title = 'Список резюме';
         <div class="header-search">
             <div class="container">
                 <div class="header-search__wrap">
-                    <?php echo Html::beginForm(Url::toRoute('/search'), 'get', ['class' => 'header-search__form']); ?>
-                    <?php echo Html::a(Html::img('../../images/dark-search.svg', ['class' => 'dark-search-icon header-search__icon'])); ?>
-                    <?php echo Html::input('text', 'query', null, ['class' => 'header-search__input', 'placeholder' => 'Поиск по резюме и навыкам']); ?>
-                    <?php echo Html::submitButton('Найти', ['class' => 'blue-btn header-search__btn']); ?>
-                    <?php echo Html::endForm(); ?>
+                    <?php
+                    echo Html::beginForm(Url::toRoute('/search'), 'get', ['class' => 'header-search__form']); ?>
+                    <?php
+                    echo Html::a(
+                        Html::img('../../images/dark-search.svg', ['class' => 'dark-search-icon header-search__icon'])
+                    ); ?>
+                    <?php
+                    echo Html::input(
+                        'text',
+                        'query',
+                        null,
+                        ['class' => 'header-search__input', 'placeholder' => 'Поиск по резюме и навыкам']
+                    ); ?>
+                    <?php
+                    echo Html::submitButton('Найти', ['class' => 'blue-btn header-search__btn']); ?>
+                    <?php
+                    echo Html::endForm(); ?>
                 </div>
             </div>
         </div>
@@ -60,7 +73,8 @@ $this->title = 'Список резюме';
                     </div>
                 </div>
 
-                <?php foreach ($data as $item) : ?>
+                <?php
+                foreach ($resume as $item) : ?>
                     <div onclick="location.href='/view-resume/<?= $item->id ?>'"
                          class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16"
                          style="cursor: pointer">
@@ -71,12 +85,12 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-right">
                             <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= $item->date ?></div>
-                            <h3 class="mini-title mobile-off"><?= $item['specialization']['specialization'] ?></h3>
+                            <h3 class="mini-title mobile-off"><?= $item->specialization ?></h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
                                 <span class="mr16 paragraph"><?= $item->age ?> лет</span>
-                                <span class="mr16 paragraph"><?= $item['city']['city'] ?></span>
+                                <span class="mr16 paragraph"><?= $item->city ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>
@@ -85,14 +99,18 @@ $this->title = 'Список резюме';
                             <p class="paragraph mb16 mobile-mb32"><?= $item->last_work ?></p>
                         </div>
                     </div>
-                <?php endforeach ?>
+                <?php
+                endforeach ?>
                 <?= LinkPager::widget(
                     [
                         'pagination' => $pagination,
-                        'prevPageLabel' => '< Назад', 'nextPageLabel' => 'Далее >',
-                        'prevPageCssClass' => 'page-link-prev', 'nextPageCssClass' => 'page-link-next',
+                        'prevPageLabel' => '< Назад',
+                        'nextPageLabel' => 'Далее >',
+                        'prevPageCssClass' => 'page-link-prev',
+                        'nextPageCssClass' => 'page-link-next',
                         'options' => ['class' => 'dor-pagination mb128'],
-                    ]);
+                    ]
+                );
                 ?>
             </div>
             <div class="col-lg-3 desctop-992-pl-16 d-flex flex-column vakancy-page-filter-block vakancy-page-filter-block-dnone">
@@ -104,7 +122,4 @@ $this->title = 'Список резюме';
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 </div>

@@ -3,12 +3,12 @@
 namespace app\models;
 
 use yii\base\Model;
-//use yii\db\ActiveRecord;
 
-class Filter extends Model
+class FormFilter extends Model
 {
 
-    public function formName() {
+    public function formName()
+    {
         return '';
     }
 
@@ -38,7 +38,10 @@ class Filter extends Model
     public function rules()
     {
         return [
-            [['city', 'salary', 'specialization', 'age_from', 'age_to', 'experience', 'employment_type', 'schedule'], 'string'],
+            [
+                ['city', 'salary', 'specialization', 'age_from', 'age_to', 'experience', 'employment_type', 'schedule'],
+                'string'
+            ],
         ];
     }
 }
