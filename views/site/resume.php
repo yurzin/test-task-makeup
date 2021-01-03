@@ -6,6 +6,7 @@
 /* @var $specialization */
 
 use yii\helpers\Html;
+use yii\web\View;
 use \yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 
@@ -30,16 +31,27 @@ endif; ?>
                 <div class="form-group m-2 form-control-lg">
                     <?php
                     $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-                    <?= $form->field($model, 'imageFile')->fileInput(['class' => 'sr-only'])->label(
-                        'Выберите фото',
-                        ['class' => 'btn btn-primary']
-                    ) ?>
-                    <?= $form->field($model, 'photo')->hiddenInput()->label(false); ?>
+                    <div class="resume-list__block-img mb8"><img id="previewPhoto" src="../../images/default.jpg" alt="Ваше фото"></div>
+                    <?= $form
+                        ->field($model, 'imageFile')
+                        ->fileInput(
+                            [
+                                'class' => 'sr-only',
+                                'onchange' => new \yii\web\JsExpression('loadPreview()')
+                            ]
+                        )
+                        ->label(
+                            'Выберите фото',
+                            [
+                                'class' => 'btn btn-primary'
+                            ]
+                        ) ?>
+
                     <?= $form->field($model, 'lastName')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'name')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'patronymic')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'gender')->dropDownList(
-                        ['Мужщина', 'Женщина'],
+                        ['Мужщина' => 'Мужщина', 'Женщина' => 'Женщина'],
                         [
                             'label' => false,
                             'class' => 'nselect-1',
@@ -47,7 +59,7 @@ endif; ?>
                             ['data-val' => 'label']
                         ]
                     ); ?>
-                    <?= $form->field($model, 'dateBirth')->textInput(
+                    <?= $form->field($model, 'birthDate')->textInput(
                         ['type' => 'date', 'class' => 'form-control-lg']
                     ); ?>
                     <?= $form->field($model, 'city')->dropDownList(
@@ -87,11 +99,11 @@ endif; ?>
                     ); ?>
                     <?= $form->field($model, 'employment')->dropDownList(
                         [
-                            'Полная занятость',
-                            'Частичная занятость',
-                            'Проектная/Временная работа',
-                            'Волонтёрство',
-                            'Стажировка'
+                            'Полная занятость' => 'Полная занятость',
+                            'Частичная занятость' => 'Частичная занятость',
+                            'Проектная/Временная работа' => 'Проектная/Временная работа',
+                            'Волонтёрство' => 'Волонтёрство',
+                            'Стажировка' => 'Стажировка'
                         ],
                         [
                             'label' => false,
@@ -102,11 +114,11 @@ endif; ?>
                     ); ?>
                     <?= $form->field($model, 'schedule')->dropDownList(
                         [
-                            'Полный день',
-                            'Сменный график',
-                            'Гибкий график',
-                            'Удалённая работа',
-                            'Вахтовый метод'
+                            'Полный день' => 'Полный день',
+                            'Сменный график' => 'Сменный график',
+                            'Гибкий график' => 'Гибкий график',
+                            'Удалённая работа' => 'Удалённая работа',
+                            'Вахтовый метод' => 'Вахтовый метод'
                         ],
                         [
                             'label' => false,
@@ -116,7 +128,7 @@ endif; ?>
                         ]
                     ); ?>
                     <?= $form->field($model, 'experience')->dropDownList(
-                        ['Нет опыта работы', 'Есть опыт работы'],
+                        ['Нет опыта работы' => 'Нет опыта работы', 'Есть опыт работы' => 'Есть опыт работы'],
                         [
                             'label' => false,
                             'class' => 'nselect-1',
@@ -137,3 +149,9 @@ endif; ?>
         </div>
     </div>
 </div>
+<script>
+    const loadPreview = () => {
+        const selectedFile = document.getElementById('addresume-imagefile').files[0];
+        document.getElementById('previewPhoto').src = URL.createObjectURL(selectedFile);
+    }
+</script>

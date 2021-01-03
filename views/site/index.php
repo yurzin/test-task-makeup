@@ -89,7 +89,7 @@ $this->title = 'Список резюме';
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
-                                <span class="mr16 paragraph"><?= $item->dateBirth ?> лет</span>
+                                <span class="mr16 paragraph"><?= $item->birthDate ?> лет</span>
                                 <span class="mr16 paragraph"><?= $item->city ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>

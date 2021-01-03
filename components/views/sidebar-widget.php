@@ -75,7 +75,7 @@ $model = new FormFilter();
                 [
                     'prompt' => 'Выберите специализацию',
                     'label' => false,
-                    //'class' => 'nselect-1',
+                    'class' => 'nselect-1',
                     '0' => ['Selected' => true],
                     ['data-val' => 'label']
                 ]

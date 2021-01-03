@@ -16,7 +16,7 @@
         <div class="d-flex align-items-center flex-wrap mb8">
             <span class="mr16 paragraph"><?= $model->salary ?> ₽ </span>
             <span class="mr16 paragraph"><?= $model->experience ?></span>
-            <span class="mr16 paragraph"><?= $model->age ?></span>
+            <span class="mr16 paragraph"><?= $model->birthDate ?></span>
             <span class="mr16 paragraph"><?= $model->city ?></span>
         </div>
         <p class="paragraph tbold mobile-off">Последнее место работы</p>

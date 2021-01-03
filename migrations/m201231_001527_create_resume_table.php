@@ -21,7 +21,7 @@ class m201231_001527_create_resume_table extends Migration
                 'name' => $this->string(100),
                 'lastName' => $this->string(100),
                 'patronymic' => $this->string(100),
-                'dateBirth' => $this->date(),
+                'birthDate' => $this->date(),
                 'gender' => $this->string(100),
                 'city' => $this->string(100),
                 'email' => $this->string(100),
@@ -36,6 +36,7 @@ class m201231_001527_create_resume_table extends Migration
             ]
         );
     }
+
     /**
      * {@inheritdoc}
      */

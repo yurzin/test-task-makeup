@@ -8,6 +8,10 @@ use yii\data\ActiveDataProvider;
 
 class SelectionResume extends Resume
 {
+
+    public $ageFrom;
+    public $ageTo;
+
     public static function tableName()
     {
         return 'resume';
@@ -21,9 +25,10 @@ class SelectionResume extends Resume
     public function rules()
     {
         return [
-            [['city'], 'string'],
-            [['specialization'], 'string'],
-            [['age'], 'integer']
+            ['city', 'string'],
+            ['specialization', 'string'],
+            ['ageFrom', 'integer'],
+            ['ageTo', 'integer']
         ];
     }
 
@@ -51,7 +56,8 @@ class SelectionResume extends Resume
 
         $query->andFilterWhere(['city' => $this->city]);
         $query->andFilterWhere(['specialization' => $this->specialization]);
-        $query->andFilterWhere(['age' => $this->age]);
+        $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birthDate, curdate())', $this->ageFrom]);
+        $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birthDate, curdate())', $this->ageTo]);
 
         return $dataProvider;
     }

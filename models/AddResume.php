@@ -20,7 +20,7 @@ class AddResume extends ActiveRecord
             'name' => 'Имя',
             'patronymic' => 'Отчество',
             'gender' => 'Пол',
-            'dateBirth' => 'Дата рождения',
+            'birthDate' => 'Дата рождения',
             'city' => 'Город',
             'phone' => 'Телефон',
             'email' => 'e-mail',
@@ -44,20 +44,18 @@ class AddResume extends ActiveRecord
                     'name',
                     'patronymic',
                     'gender',
-                    'dateBirth',
+                    'birthDate',
                     'city',
                     'phone',
-                    //'email',
                     'specialization',
                     'experience',
                     'salary',
                     'employment',
                     'lastWork'
-                ], 'string'
+                ], 'string' /*'required'*/
             ],
             ['email', 'email'],
-//            ['dateBirth', 'date'],
-            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['photo'], 'string'],
             ['about', 'string']
         ];

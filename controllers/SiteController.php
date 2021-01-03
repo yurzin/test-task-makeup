@@ -39,7 +39,7 @@ class SiteController extends Controller
             [
                 'defaultPageSize' => 4,
                 'totalCount' => $count,
-                'route' => 'filter-list'
+                'route' => 'resume-list'
             ]
         );
 
@@ -116,15 +116,17 @@ class SiteController extends Controller
         );
 
         $model = new AddResume();
+
         if ($model->load(Yii::$app->request->post())) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $model->photo = '../../images/' . $model->imageFile->baseName . '.' . $model->imageFile->extension;
+            $path = '../../images/' . $model->imageFile->baseName . '.' . $model->imageFile->extension;
+            $model->photo = $path;
             if ($model->save() && $model->upload()) {
                 Yii::$app->session->setFlash(
                     'success',
                     true
                 );
-                return $this->refresh();
+                return $this->redirect('my-resume');
             } else {
                 Yii::$app->session->setFlash(
                     'success',
@@ -132,6 +134,6 @@ class SiteController extends Controller
                 );
             }
         }
-        return $this->render('resume', compact('model', 'city', 'specialization', 'post'));
+        return $this->render('resume', compact('model', 'city', 'specialization', 'path'));
     }
 }

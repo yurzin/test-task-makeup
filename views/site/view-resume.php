@@ -35,14 +35,14 @@ $this->title = 'Резюме ' . $resume->name;
                             </div>
                             <div class="profile-info__block-right company-profile-info__block-right">
                                 <?php
-                                echo $resume->name ." ". $resume->last_name ." ". $resume->patronymic
+                                echo $resume->name ." ". $resume->lastName ." ". $resume->patronymic
                                 ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Возраст
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->age ?>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->dateBirth ?>
                                 года
                             </div>
                         </div>
