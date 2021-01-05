@@ -37,7 +37,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                 [
                     'prompt' => 'Выберите город',
                     'label' => false,
-                    //'class' => 'nselect-1',
+                    'class' => 'nselect-1',
                     '0' => ['Selected' => true],
                     ['data-val' => 'label'],
 /*                    'onchange' => 'this.form.submit()'*/
@@ -61,10 +61,9 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                 [
                     'prompt' => 'Выберите специализацию',
                     'label' => false,
-                    //'class' => 'nselect-1',
+                    'class' => 'nselect-1',
                     '0' => ['Selected' => true],
                     ['data-val' => 'label'],
-                    /*'onchange' => 'this.form.submit()'*/
                 ]
             )->label(false);
             ?>

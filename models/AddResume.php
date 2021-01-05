@@ -52,7 +52,7 @@ class AddResume extends ActiveRecord
                     'salary',
                     'employment',
                     'lastWork'
-                ], 'string' /*'required'*/
+                ], 'required'
             ],
             ['email', 'email'],
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],

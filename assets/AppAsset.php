@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
         'https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap',
         'css/jquery.nselect.css',
         'css/bootstrap-datepicker.css',
-        'https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css'
+        //'https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css'
 
     ];
     public $js = [
