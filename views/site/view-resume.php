@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+
 /* @var $resume */
 
 $this->title = 'Резюме ' . $resume->name;
@@ -12,8 +13,8 @@ $this->title = 'Резюме ' . $resume->name;
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="mt8 mb32"><a href="<?= Yii::$app->urlManager->createUrl('site/index') ?>"><img src="/images/blue-left-arrow.svg" alt="arrow"> Резюме в
-                            Кемерово</a>
+                    <div class="mt8 mb32"><a href="<?= Yii::$app->urlManager->createUrl('site/index') ?>"><img
+                                    src="/images/blue-left-arrow.svg" alt="arrow"> Резюме в Кемерово</a>
                     </div>
                 </div>
             </div>
@@ -35,15 +36,19 @@ $this->title = 'Резюме ' . $resume->name;
                             </div>
                             <div class="profile-info__block-right company-profile-info__block-right">
                                 <?php
-                                echo $resume->name ." ". $resume->lastName ." ". $resume->patronymic
+                                echo $resume->lastName . " " . $resume->name . " " . $resume->patronymic
                                 ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Возраст
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->dateBirth ?>
-                                года
+                            <div class="profile-info__block-right company-profile-info__block-right">
+                                <?= Yii::$app->i18n->format(
+                                    '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
+                                    ['n' => $resume->age],
+                                    'ru_RU'
+                                ); ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">

@@ -3,58 +3,44 @@
 
 /* @var $city */
 /* @var $salary */
-
 /* @var $specialization */
 
 use app\models\FormFilter;
-use app\components\MenuFilter;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 $model = new FormFilter();
+
 ?>
+<?php
+$form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); ?>
 
     <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
-        <?php
-        echo MenuFilter::widget(
-            [
-                'items' =>
-                    [
-                        ['label' => 'Все', 'url' => Url::toRoute('/'), 'options' => ['tag' => false]],
-                        [
-                            'label' => 'Мужчины',
-                            'url' => Url::toRoute([Url::current(['selection-resume' => null, '/selection-resume', 'gender' => 'male'])]),
-                            'options' => ['tag' => false]
-                        ],
-                        [
-                            'label' => 'Женщины',
-                            'url' => Url::toRoute([Url::current(['selection-resume' => null, '/selection-resume', 'gender' => 'female'])]),
-                            'options' => ['tag' => false]
-                        ]
-                    ],
-                'options' => [
-                    'tag' => 'div',
-                    'class' => 'signin-modal__switch-btns-wrap filter-list__switch-btns-wrap mb16'
-                ]
-            ],
-        );
-        ?>
+        <?= Html::a('Все', ['/selection-resume', 'gender' => 'all'], ['class' => 'signin-modal__switch-btn']) ?>
+        <?= Html::a(
+            'Мужчины',
+            ['/selection-resume', 'gender' => 'male'],
+            ['class' => 'signin-modal__switch-btn']
+        ) ?>
+        <?= Html::a(
+            'Женщины',
+            ['/selection-resume', 'gender' => 'female'],
+            ['class' => 'signin-modal__switch-btn', 'on']
+        ) ?>
     </div>
 
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Город</div>
         <div class="citizenship-select">
-            <?php
-            $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); ?>
             <?= $form->field($model, 'city', ['options' => ['tag' => false]])->dropDownList(
                 $city,
                 [
                     'prompt' => 'Выберите город',
                     'label' => false,
-                    'class' => 'nselect-1',
+                    //'class' => 'nselect-1',
                     '0' => ['Selected' => true],
-                    ['data-val' => 'label']
+                    ['data-val' => 'label'],
+/*                    'onchange' => 'this.form.submit()'*/
                 ]
             )->label(false); ?>
         </div>
@@ -63,7 +49,7 @@ $model = new FormFilter();
         <div class="paragraph cadet-blue">Зарплата</div>
         <div class="citizenship-select">
             <?= $form->field($model, 'salary', ['options' => ['tag' => false]])->textInput(
-                ['value' => $salary, 'class' => 'dor-input w100']
+                ['value' => $salary, 'class' => 'dor-input w100'/*, 'onchange' => 'this.form.submit()'*/]
             )->label(false); ?>
         </div>
     </div>
@@ -75,9 +61,10 @@ $model = new FormFilter();
                 [
                     'prompt' => 'Выберите специализацию',
                     'label' => false,
-                    'class' => 'nselect-1',
+                    //'class' => 'nselect-1',
                     '0' => ['Selected' => true],
-                    ['data-val' => 'label']
+                    ['data-val' => 'label'],
+                    /*'onchange' => 'this.form.submit()'*/
                 ]
             )->label(false);
             ?>
@@ -87,10 +74,10 @@ $model = new FormFilter();
         <div class="paragraph cadet-blue">Возраст</div>
         <div class="d-flex">
             <?= $form->field($model, 'ageFrom', ['options' => ['tag' => false]])->textInput(
-                ['class' => 'dor-input w100', 'placeholder' => 'От']
+                ['class' => 'dor-input w100', 'placeholder' => 'От', /*'onchange' => 'this.form.submit()'*/]
             )->label(false); ?>
             <?= $form->field($model, 'ageTo', ['errorOptions' => ['tag' => false]])->textInput(
-                ['class' => 'dor-input w100', 'placeholder' => 'До']
+                ['class' => 'dor-input w100', 'placeholder' => 'До', /*'onchange' => 'this.form.submit()'*/]
             )->label(false); ?>
         </div>
     </div>
@@ -98,19 +85,17 @@ $model = new FormFilter();
         <div class="paragraph cadet-blue">Опыт работы</div>
         <div class="profile-info">
             <div class="form-check d-flex">
-                <?= $form->field($model, 'experience', ['options' => ['tag' => false]])
-                    ->checkboxList(
-                        ['Без опыта', 'От 1 года до 3 лет', 'От 3 лет до 6 лет', 'Более 6 лет'],
-                        [
-                            'item' => function ($index, $label, $name, $checked, $value) {
-                                $checkedLabel = $checked ? 'checked' : '';
-                                $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
-                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$inputId $checkedLabel>"
-                                    . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
-                            },
-                            ['class' => 'profile-info']
-                        ]
-                    )
+                <?= $form->field($model, 'experience', ['options' => ['tag' => false ]])->checkboxList(
+                    [1 => 'Без опыта', 2 => 'От 1 года до 3 лет', 3 => 'От 3 лет до 6 лет', 4 => 'Более 6 лет'],
+                    [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            $checked = $checked ? 'checked' : '';
+                            $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
+                            return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='experience' value=$value id=$inputId $checked>"
+                                . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
+                        }, ['class' => 'profile-info']
+                    ]
+                )
                     ->label(false); ?>
             </div>
         </div>
@@ -126,7 +111,7 @@ $model = new FormFilter();
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checkedLabel = $checked ? 'checked' : '';
                                 $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 5);
-                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$inputId $checkedLabel>"
+                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='employment' value=$value id=$inputId $checkedLabel>"
                                     . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
                             },
                             ['class' => 'profile-info']
@@ -146,7 +131,7 @@ $model = new FormFilter();
                         'item' => function ($index, $label, $name, $checked, $value) {
                             $checkedLabel = $checked ? 'checked' : '';
                             $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 10);
-                            return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$inputId $checkedLabel>"
+                            return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='schedule' value=$value id=$inputId $checkedLabel>"
                                 . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
                         },
                         ['class' => 'profile-info']

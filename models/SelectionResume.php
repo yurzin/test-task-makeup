@@ -2,15 +2,15 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 class SelectionResume extends Resume
 {
-
     public $ageFrom;
     public $ageTo;
+    public $age;
+    public $experience;
 
     public static function tableName()
     {
@@ -26,7 +26,11 @@ class SelectionResume extends Resume
     {
         return [
             ['city', 'string'],
+            ['gender', 'string'],
             ['specialization', 'string'],
+            ['experience', 'string'],
+            ['employment', 'string'],
+            ['salary', 'integer'],
             ['ageFrom', 'integer'],
             ['ageTo', 'integer']
         ];
@@ -39,13 +43,20 @@ class SelectionResume extends Resume
 
     public function search($params)
     {
-        $query = Resume::find();
+
+        $query = self::find()
+            ->select(
+                [
+                    '{{resume}}.*',
+                    'TIMESTAMPDIFF(YEAR, birthDate, curdate()) AS age'
+                ]
+            );
 
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
                 'pagination' => [
-                    'pageSize' => 3,
+                    'pageSize' => 4,
                 ],
             ]
         );
@@ -55,6 +66,10 @@ class SelectionResume extends Resume
         }
 
         $query->andFilterWhere(['city' => $this->city]);
+        $query->andFilterWhere(['salary' => $this->salary]);
+        $query->andFilterWhere(['gender' => $this->gender]);
+        $query->andFilterWhere(['experience' => $this->experience]);
+        $query->andFilterWhere(['employment' => $this->employment]);
         $query->andFilterWhere(['specialization' => $this->specialization]);
         $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birthDate, curdate())', $this->ageFrom]);
         $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birthDate, curdate())', $this->ageTo]);

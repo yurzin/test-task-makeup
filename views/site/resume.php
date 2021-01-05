@@ -51,7 +51,7 @@ endif; ?>
                     <?= $form->field($model, 'name')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'patronymic')->textInput(['class' => 'form-control-lg']); ?>
                     <?= $form->field($model, 'gender')->dropDownList(
-                        ['Мужщина' => 'Мужщина', 'Женщина' => 'Женщина'],
+                        ['male' => 'Мужщина', 'female' => 'Женщина'],
                         [
                             'label' => false,
                             'class' => 'nselect-1',

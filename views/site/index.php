@@ -7,15 +7,25 @@
 /* @var $sort */
 /* @var $city */
 /* @var $specialization */
-
 /* @var $pagination */
 
 use \app\components\SidebarWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
+use yii\widgets\Pjax;
 
 $this->title = 'Список резюме';
+
+if (!empty($_GET)) {
+    $new_get = array_filter($_GET);
+    if (count($new_get) < count($_GET)) {
+        $request_uri = parse_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        header('Location: ' . $request_uri . '?' . http_build_query($new_get));
+        exit;
+    }
+}
+
 ?>
 <div class="content">
     <div class="container">
@@ -74,6 +84,8 @@ $this->title = 'Список резюме';
                 </div>
 
                 <?php
+                Pjax::begin();
+
                 foreach ($resume as $item) : ?>
                     <div onclick="location.href='/view-resume/<?= $item->id ?>'"
                          class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16"
@@ -89,7 +101,11 @@ $this->title = 'Список резюме';
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
-                                <span class="mr16 paragraph"><?= $item->birthDate ?> лет</span>
+                                <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
+                                        '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
+                                        ['n' => $item->age],
+                                        'ru_RU'
+                                    ); ?></span>
                                 <span class="mr16 paragraph"><?= $item->city ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
@@ -111,6 +127,7 @@ $this->title = 'Список резюме';
                         'options' => ['class' => 'dor-pagination mb128'],
                     ]
                 );
+                Pjax::end();
                 ?>
             </div>
             <div class="col-lg-3 desctop-992-pl-16 d-flex flex-column vakancy-page-filter-block vakancy-page-filter-block-dnone">

@@ -9,15 +9,12 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use app\models\Resume;
-use app\models\FormFilter;
 use app\models\AddResume;
 
 class SiteController extends Controller
 {
     public function actionIndex()
     {
-        $filter = new FormFilter();
-
         $sort = new Sort(
             [
                 'defaultOrder' => [
@@ -32,7 +29,7 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = Resume::find();
+        $resume = Resume::getAllResume();
         $count = $resume->count();
 
         $pagination = new Pagination(
@@ -44,21 +41,15 @@ class SiteController extends Controller
         );
 
         $city = ArrayHelper::map(Resume::find()->select(['city'])->asArray()->all(), 'city', 'city');
-        $specialization = ArrayHelper::map(
-            Resume::find()->select(['specialization'])->asArray()->all(),
+        $specialization = ArrayHelper::map(Resume::find()->select(['specialization'])->asArray()->all(),
             'specialization',
             'specialization'
         );
 
-        /*$filter = $filter->with('city')->with('specialization')->offset($pagination->offset)->limit(
-            $pagination->limit
-        )->orderBy($sort->orders)->all();*/
-
         $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
 
-        return $this->render(
-            'index',
-            compact('resume', 'pagination', 'count', 'sort', 'filter', 'city', 'specialization')
+        return $this->render('index',
+            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization')
         );
     }
 
@@ -102,7 +93,7 @@ class SiteController extends Controller
 
     public function actionViewResume($id)
     {
-        $resume = Resume::findOne($id);
+        $resume = Resume::getOneResume($id);
         return $this->render('view-resume', compact('resume'));
     }
 
