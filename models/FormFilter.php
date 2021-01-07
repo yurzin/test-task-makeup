@@ -12,7 +12,7 @@ class FormFilter extends Model
     }
 
     public $salary;
-    public $city;
+    public $city_id;
     public $ageFrom;
     public $ageTo;
     public $specialization;
@@ -23,7 +23,7 @@ class FormFilter extends Model
     public function attributeLabels()
     {
         return [
-            'city' => 'Город',
+            'city_id' => 'Город',
             'salary' => 'Зарплата',
             'specialization' => 'Специализация',
             'employment' => 'Тип занятости',
@@ -38,7 +38,7 @@ class FormFilter extends Model
     {
         return [
             [
-                ['city', 'salary', 'specialization', 'ageFrom', 'ageTo', 'experience', 'employment', 'schedule'],
+                ['city_id', 'salary', 'specialization', 'ageFrom', 'ageTo', 'experience', 'employment', 'schedule'],
                 'string'
             ],
         ];

@@ -14,28 +14,36 @@ class Resume extends ActiveRecord
 
     public static function getAllResume()
     {
-        $resume = self::find()
+        return self::find()
             ->select(
                 [
                     '{{resume}}.*',
-                    'TIMESTAMPDIFF(YEAR, birthDate, curdate()) AS age'
+                    'TIMESTAMPDIFF(YEAR, birth_date, curdate()) AS age'
                 ]
             );
-        return $resume;
     }
 
     public static function getOneResume($id)
     {
-        $resume = self::find()
+        return self::find()
             ->where(['id' => $id])
             ->select(
                 [
                     '{{resume}}.*',
-                    'TIMESTAMPDIFF(YEAR, birthDate, curdate()) AS age'
+                    'TIMESTAMPDIFF(YEAR, birth_date, curdate()) AS age'
                 ]
             )
             ->one();
-        return $resume;
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
+    }
+
+    public function getSpecialization()
+    {
+        return $this->hasOne(Specialization::class, ['id' => 'specialization_id']);
     }
 
 }

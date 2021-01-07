@@ -17,15 +17,6 @@ use yii\widgets\Pjax;
 
 $this->title = 'Список резюме';
 
-if (!empty($_GET)) {
-    $new_get = array_filter($_GET);
-    if (count($new_get) < count($_GET)) {
-        $request_uri = parse_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        header('Location: ' . $request_uri . '?' . http_build_query($new_get));
-        exit;
-    }
-}
-
 ?>
 <div class="content">
     <div class="container">
@@ -97,7 +88,7 @@ if (!empty($_GET)) {
                         </div>
                         <div class="company-list-search__block-right">
                             <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= $item->date ?></div>
-                            <h3 class="mini-title mobile-off"><?= $item->specialization ?></h3>
+                            <h3 class="mini-title mobile-off"><?= $item['specialization']['specialization'] ?></h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
@@ -106,13 +97,13 @@ if (!empty($_GET)) {
                                         ['n' => $item->age],
                                         'ru_RU'
                                     ); ?></span>
-                                <span class="mr16 paragraph"><?= $item->city ?></span>
+                                <span class="mr16 paragraph"><?= $item['city']['city']?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>
                         <div class="company-list-search__block-middle">
                             <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32"><?= $item->lastWork ?></p>
+                            <p class="paragraph mb16 mobile-mb32"><?= $item->last_work ?></p>
                         </div>
                     </div>
                 <?php

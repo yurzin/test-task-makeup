@@ -25,9 +25,9 @@ class SelectionResume extends Resume
     public function rules()
     {
         return [
-            ['city', 'string'],
+            ['city_id', 'integer'],
             ['gender', 'string'],
-            ['specialization', 'string'],
+            ['specialization_id', 'integer'],
             ['experience', 'string'],
             ['employment', 'string'],
             ['salary', 'integer'],
@@ -43,14 +43,7 @@ class SelectionResume extends Resume
 
     public function search($params)
     {
-
-        $query = self::find()
-            ->select(
-                [
-                    '{{resume}}.*',
-                    'TIMESTAMPDIFF(YEAR, birthDate, curdate()) AS age'
-                ]
-            );
+        $query = self::getAllResume();
 
         $dataProvider = new ActiveDataProvider(
             [
@@ -64,15 +57,14 @@ class SelectionResume extends Resume
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
-
-        $query->andFilterWhere(['city' => $this->city]);
+        $query->andFilterWhere(['city_id' => $this->city_id]);
         $query->andFilterWhere(['salary' => $this->salary]);
         $query->andFilterWhere(['gender' => $this->gender]);
         $query->andFilterWhere(['experience' => $this->experience]);
         $query->andFilterWhere(['employment' => $this->employment]);
-        $query->andFilterWhere(['specialization' => $this->specialization]);
-        $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birthDate, curdate())', $this->ageFrom]);
-        $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birthDate, curdate())', $this->ageTo]);
+        $query->andFilterWhere(['specialization_id' => $this->specialization]);
+        $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageFrom]);
+        $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageTo]);
 
         return $dataProvider;
     }

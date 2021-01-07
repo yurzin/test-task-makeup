@@ -8,8 +8,10 @@ use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\UploadedFile;
+use app\models\City;
 use app\models\Resume;
 use app\models\AddResume;
+use app\models\Specialization;
 
 class SiteController extends Controller
 {
@@ -40,15 +42,14 @@ class SiteController extends Controller
             ]
         );
 
-        $city = ArrayHelper::map(Resume::find()->select(['city'])->asArray()->all(), 'city', 'city');
-        $specialization = ArrayHelper::map(Resume::find()->select(['specialization'])->asArray()->all(),
-            'specialization',
-            'specialization'
-        );
+        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'city');
+
+        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
 
         $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
 
-        return $this->render('index',
+        return $this->render(
+            'index',
             compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization')
         );
     }

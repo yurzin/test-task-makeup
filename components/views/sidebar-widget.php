@@ -32,7 +32,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Город</div>
         <div class="citizenship-select">
-            <?= $form->field($model, 'city', ['options' => ['tag' => false]])->dropDownList(
+            <?= $form->field($model, 'city_id', ['options' => ['tag' => false]])->dropDownList(
                 $city,
                 [
                     'prompt' => 'Выберите город',
@@ -40,7 +40,6 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                     'class' => 'nselect-1',
                     '0' => ['Selected' => true],
                     ['data-val' => 'label'],
-/*                    'onchange' => 'this.form.submit()'*/
                 ]
             )->label(false); ?>
         </div>

@@ -14,7 +14,7 @@
     </div>
     <div class="company-list-search__block-right">
         <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено</div>
-        <h3 class="mini-title mobile-off"><?= $model->specialization ?></h3>
+        <h3 class="mini-title mobile-off"><?= $model->specialization->specialization ?></h3>
         <div class="d-flex align-items-center flex-wrap mb8">
             <span class="mr16 paragraph"><?= $model->salary ?> ₽ </span>
             <span class="mr16 paragraph"><?= $model->experience ?></span>
@@ -23,11 +23,11 @@
                     ['n' => $model->age],
                     'ru_RU'
                 ); ?></span>
-            <span class="mr16 paragraph"><?= $model->city ?></span>
+            <span class="mr16 paragraph"><?= $model->city->city ?></span>
         </div>
         <p class="paragraph tbold mobile-off">Последнее место работы</p>
     </div>
     <div class="company-list-search__block-middle">
-        <p class="paragraph mb16 mobile-mb32"><?= $model->lastWork ?></p>
+        <p class="paragraph mb16 mobile-mb32"><?= $model->last_work ?></p>
     </div>
 </div>

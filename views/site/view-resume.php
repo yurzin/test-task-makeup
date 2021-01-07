@@ -24,7 +24,7 @@ $this->title = 'Резюме ' . $resume->name;
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
-                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $resume->specialization ?>
+                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $resume['specialization']['specialization'] ?>
                     </div>
                     <div class="paragraph-lead mb16">
                         <span class="mr24"><?= $resume->salary ?> ₽</span>
@@ -36,7 +36,7 @@ $this->title = 'Резюме ' . $resume->name;
                             </div>
                             <div class="profile-info__block-right company-profile-info__block-right">
                                 <?php
-                                echo $resume->lastName . " " . $resume->name . " " . $resume->patronymic
+                                echo $resume->last_name . " " . $resume->name . " " . $resume->patronymic
                                 ?>
                             </div>
                         </div>
@@ -65,7 +65,7 @@ $this->title = 'Резюме ' . $resume->name;
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Город проживания
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->city ?></div>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume['city']['city'] ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">

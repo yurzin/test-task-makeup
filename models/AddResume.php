@@ -16,11 +16,11 @@ class AddResume extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'lastName' => 'Фамилия',
+            'last_name' => 'Фамилия',
             'name' => 'Имя',
             'patronymic' => 'Отчество',
             'gender' => 'Пол',
-            'birthDate' => 'Дата рождения',
+            'birth_date' => 'Дата рождения',
             'city' => 'Город',
             'phone' => 'Телефон',
             'email' => 'e-mail',
@@ -29,7 +29,7 @@ class AddResume extends ActiveRecord
             'employment' => 'Занятость',
             'schedule' => 'График работы',
             'salary' => 'Зарплата',
-            'lastWork' => 'Последнее место работы',
+            'last_work' => 'Последнее место работы',
             'photo' => 'Путь до файла',
             'about' => 'О себе'
         ];
@@ -40,18 +40,18 @@ class AddResume extends ActiveRecord
         return [
             [
                 [
-                    'lastName',
+                    'last_name',
                     'name',
                     'patronymic',
                     'gender',
-                    'birthDate',
+                    'birth_date',
                     'city',
                     'phone',
                     'specialization',
                     'experience',
                     'salary',
                     'employment',
-                    'lastWork'
+                    'last_wrk'
                 ], 'required'
             ],
             ['email', 'email'],

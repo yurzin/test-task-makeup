@@ -2,7 +2,6 @@
 
 /* @var $this yii\web\View */
 
-use app\components\SidebarWidget;
 use yii\widgets\ListView;
 
 /* @var $dataProvider */
