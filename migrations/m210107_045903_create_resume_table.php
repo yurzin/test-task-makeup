@@ -28,8 +28,8 @@ class m210107_045903_create_resume_table extends Migration
                 'phone' => $this->string(100),
                 'specialization_id' => $this->integer(100),
                 'salary' => $this->integer(100),
-                'employment' => $this->string(),
-                'schedule' => $this->string(),
+                'employment' => $this->string(100),
+                'schedule' => $this->string(100),
                 'experience' => $this->string(100),
                 'last_work' => $this->string(100),
                 'about' => $this->string(255)

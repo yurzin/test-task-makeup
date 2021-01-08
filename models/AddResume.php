@@ -45,18 +45,19 @@ class AddResume extends ActiveRecord
                     'patronymic',
                     'gender',
                     'birth_date',
-                    'city',
+                    'city_id',
                     'phone',
-                    'specialization',
+                    'specialization_id',
                     'experience',
                     'salary',
                     'employment',
-                    'last_wrk'
-                ], 'required'
+                    'schedule',
+                    'photo',
+                    'last_work',
+                ], 'string'
             ],
             ['email', 'email'],
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-            [['photo'], 'string'],
             ['about', 'string']
         ];
     }

@@ -100,14 +100,13 @@ class SiteController extends Controller
 
     public function actionResume()
     {
-        $city = ArrayHelper::map(Resume::find()->select(['city'])->asArray()->all(), 'city', 'city');
-        $specialization = ArrayHelper::map(
-            Resume::find()->select(['specialization'])->asArray()->all(),
-            'specialization',
-            'specialization'
-        );
+        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'city');
+
+        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
 
         $model = new AddResume();
+
+        $model->gender = 1;
 
         if ($model->load(Yii::$app->request->post())) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
