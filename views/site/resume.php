@@ -28,8 +28,7 @@ endif; ?>
         <div class="row">
             <div class="col-lg-12">
                 <div class="mt8 mb40"><a href="my-resume"><img src="images/blue-left-arrow.svg" alt="arrow"> Вернуться
-                        без
-                        сохранения</a>
+                        без сохранения</a>
                 </div>
             </div>
         </div>
@@ -265,13 +264,13 @@ endif; ?>
                         ],
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
-                                $checkedLabel = $checked ? 'checked' : '';
+                                $checked = $checked ? 'checked' : '';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
-                                return "<div class='form-check d-flex'><input class='form-check-input' value=$value id=$id $checkedLabel type='checkbox' >" . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
+                                return "<div class='form-check d-flex'><input class='form-check-input' name=$name value=$value id=$id $checked type='checkbox' >"
+                                    . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
                             }
                         ]
-                    )
-                        ->label(false); ?>
+                    )->label(false); ?>
                 </div>
             </div>
             <div class="row mb32">
@@ -279,7 +278,7 @@ endif; ?>
                     <div class="paragraph">График работы</div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-11">
-                    <?
+                    <?php
                     $model->schedule = '1';
                     echo $form->field(
                         $model,
@@ -295,9 +294,9 @@ endif; ?>
                         ],
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
-                                $checkedLabel = $checked ? 'checked' : '';
+                                $checked = $checked ? 'checked' : '';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 6);
-                                return "<div class='form-check d-flex'><input class='form-check-input' value=$value id=$id $checkedLabel type='checkbox' >"
+                                return "<div class='form-check d-flex'><input class='form-check-input' name=$name value=$value id=$id $checked type='checkbox' >"
                                     . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
                             }
                         ]
@@ -333,44 +332,149 @@ endif; ?>
                         ]
                     )->label(false); ?>
             </div>
+            <div id="more" style="display:none">
+                <div class="row mb24">
+                    <div class="col-lg-2 col-md-3 dflex-acenter">
+                        <div class="paragraph">Начало работы</div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-11">
+                        <div class="d-flex justify-content-between">
+                            <div class="citizenship-select w100 mr16">
+                                <?= $form->field($model, 'month')
+                                    ->dropDownList(
+                                        [
+                                            'Январь' => 'Январь',
+                                            'Февраль' => 'Февраль',
+                                            'Март' => 'Март',
+                                            'Апрель' => 'Апрель',
+                                            'Май' => 'Май',
+                                            'Июнь' => 'Июнь',
+                                            'Июль' => 'Июль',
+                                            'Август' => 'Август',
+                                            'Сентябрь' => 'Сентябрь',
+                                            'Октябрь' => 'Октябрь',
+                                            'Ноябрь' => 'Ноябрь',
+                                            'Декабрь' => 'Декабрь',
+                                        ],
+                                        [
+                                            'class' => 'nselect-1',
+                                            '1' => ['Selected' => true],
+                                        ]
+                                    )
+                                    ->label(false); ?>
+                            </div>
 
-            <div id="more" class="row mb24" style="display:none">
-                <div class="col-lg-2 col-md-3 dflex-acenter">
-                    <div class="paragraph">Начало работы</div>
+                            <?= $form->field(
+                                $model,
+                                'year',
+                                [
+                                    'options' => ['class' => 'citizenship-select w100']
+                                ]
+                            )->textInput(
+                                [
+                                    'type' => 'number',
+                                    'placeholder' => '2006',
+                                    'min' => 1900,
+                                    'max' => 2021,
+                                    'class' => 'dor-input w-100'
+                                ]
+                            )
+                                ->label(false); ?>
+                        </div>
+                    </div>
                 </div>
-                <?= $form->field($model, 'last_work')->textInput(['class' => 'form-control-lg'])
-                    ->label('Последнее место работы', ['class' => 'col-2']); ?>
-            </div>
-            <div class="row mb32">
-                <div class="col-12">
-                    <div class="heading">Расскажите о себе</div>
-                </div>
-            </div>
-            <div class="row mb64 mobile-mb32">
-                <div class="col-lg-2 col-md-3">
-                    <div class="paragraph">О себе</div>
+                <div class="row mb8">
+                    <div class="col-lg-2 col-md-3 dflex-acenter">
+                        <div class="paragraph">Окончание работы</div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-11">
+                        <div class="d-flex justify-content-between">
+                            <div class="citizenship-select w100 mr16">
+                                <?= $form->field($model, 'month')
+                                    ->dropDownList(
+                                        [
+                                            'Январь' => 'Январь',
+                                            'Февраль' => 'Февраль',
+                                            'Март' => 'Март',
+                                            'Апрель' => 'Апрель',
+                                            'Май' => 'Май',
+                                            'Июнь' => 'Июнь',
+                                            'Июль' => 'Июль',
+                                            'Август' => 'Август',
+                                            'Сентябрь' => 'Сентябрь',
+                                            'Октябрь' => 'Октябрь',
+                                            'Ноябрь' => 'Ноябрь',
+                                            'Декабрь' => 'Декабрь',
+                                        ],
+                                        [
+                                            'class' => 'nselect-1',
+                                            '1' => ['Selected' => true],
+                                        ]
+                                    )
+                                    ->label(false); ?>
+                            </div>
+                            <?= $form->field(
+                                $model,
+                                'year',
+                                [
+                                    'options' => ['class' => 'citizenship-select w100']
+                                ]
+                            )->textInput(
+                                [
+                                    'type' => 'number',
+                                    'placeholder' => '2006',
+                                    'min' => 1900,
+                                    'max' => 2021,
+                                    'class' => 'dor-input w-100'
+                                ]
+                            )
+                                ->label(false); ?>
+                        </div>
+                    </div>
                 </div>
                 <?= $form->field(
                     $model,
-                    'about',
-                    ['options' => ['class' => 'col-lg-5 col-md-7 col-12']]
-                )->textarea(['class' => 'dor-input w100 h176 mb8'])
+                    'organization',
+                    [
+                        'options' => ['class' => 'row mb16'],
+                        'template' => '<div class="col-lg-2 col-md-3 dflex-acenter">
+                                        <div class="paragraph">Организация</div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-11"> {input} {error} </div>'
+                    ]
+                )->textInput(['class' => 'dor-input w100'])
                     ->label(false); ?>
             </div>
-            <div class="row mb128 mobile-mb64">
-                <div class="col-lg-2 col-md-3">
-                </div>
-                <div class="col-lg-10 col-md-9">
-                    <?= Html::submitButton(
-                        'Добавить резюме',
-                        ['class' => 'orange-btn link-orange-btn']
-                    ) ?>
-                </div>
+        <div class="row mb32">
+            <div class="col-12">
+                <div class="heading">Расскажите о себе</div>
             </div>
-            <?php
-            ActiveForm::end(); ?>
         </div>
+        <div class="row mb64 mobile-mb32">
+            <div class="col-lg-2 col-md-3">
+                <div class="paragraph">О себе</div>
+            </div>
+            <?= $form->field(
+                $model,
+                'about',
+                ['options' => ['class' => 'col-lg-5 col-md-7 col-12']]
+            )->textarea(['class' => 'dor-input w100 h176 mb8'])
+                ->label(false); ?>
+        </div>
+        <div class="row mb128 mobile-mb64">
+            <div class="col-lg-2 col-md-3">
+            </div>
+            <div class="col-lg-10 col-md-9">
+                <?= Html::submitButton(
+                    'Добавить резюме',
+                    ['class' => 'orange-btn link-orange-btn']
+                ) ?>
+            </div>
+        </div>
+        <?php
+        ActiveForm::end(); ?>
     </div>
+</div>
 </div>
 
 <script>

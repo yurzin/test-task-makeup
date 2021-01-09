@@ -46,4 +46,9 @@ class Resume extends ActiveRecord
         return $this->hasOne(Specialization::class, ['id' => 'specialization_id']);
     }
 
+    public function getOrganization()
+    {
+        return $this->hasOne(Organization::class, ['resume_id' => 'id']);
+    }
+
 }

@@ -12,28 +12,9 @@ class AddResume extends ActiveRecord
     }
 
     public $imageFile;
-
-    public function attributeLabels()
-    {
-        return [
-            'last_name' => 'Фамилия',
-            'name' => 'Имя',
-            'patronymic' => 'Отчество',
-            'gender' => 'Пол',
-            'birth_date' => 'Дата рождения',
-            'city' => 'Город',
-            'phone' => 'Телефон',
-            'email' => 'e-mail',
-            'specialization' => 'Специализация',
-            'experience' => 'Опыт работы',
-            'employment' => 'Занятость',
-            'schedule' => 'График работы',
-            'salary' => 'Зарплата',
-            'last_work' => 'Последнее место работы',
-            'photo' => 'Путь до файла',
-            'about' => 'О себе'
-        ];
-    }
+    public $month;
+    public $year;
+    public $organization;
 
     public function rules()
     {
@@ -50,12 +31,16 @@ class AddResume extends ActiveRecord
                     'specialization_id',
                     'experience',
                     'salary',
-                    'employment',
-                    'schedule',
                     'photo',
                     'last_work',
-                ], 'string'
+                    'year',
+                    'month',
+                    'organization'
+                ],
+                'string'
             ],
+            [['employment'], 'safe'],
+            [['schedule'], 'safe'],
             ['email', 'email'],
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             ['about', 'string']

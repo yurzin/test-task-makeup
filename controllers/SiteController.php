@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Organization;
 use Yii;
 use \yii\data\Sort;
 use yii\data\Pagination;
@@ -100,19 +101,26 @@ class SiteController extends Controller
 
     public function actionResume()
     {
-        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'city');
+        $modelAddResume = new AddResume();
+        $modelOrganization = new Organization();
 
+        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'city');
         $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
 
-        $model = new AddResume();
+        if ($modelAddResume->load(Yii::$app->request->post())) {
+            $modelAddResume->schedule = implode(",", $modelAddResume->schedule);
+            $modelAddResume->employment = implode(",", $modelAddResume->employment);
 
-        $model->gender = 1;
+            $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
+            $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
+            $modelAddResume->photo = $path;
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $path = '../../images/' . $model->imageFile->baseName . '.' . $model->imageFile->extension;
-            $model->photo = $path;
-            if ($model->save() && $model->upload()) {
+            if ($modelAddResume->save() && $modelAddResume->upload()) {
+                $modelOrganization->resume_id = $modelAddResume->id;
+                $modelOrganization->month = $modelAddResume->month;
+                $modelOrganization->year = $modelAddResume->year;
+                $modelOrganization->organization = $modelAddResume->organization;
+                $modelOrganization->save();
                 Yii::$app->session->setFlash(
                     'success',
                     true
@@ -125,6 +133,14 @@ class SiteController extends Controller
                 );
             }
         }
-        return $this->render('resume', compact('model', 'city', 'specialization', 'path'));
+        return $this->render(
+            'resume',
+            [
+                'model' => $modelAddResume,
+                'city' => $city,
+                'specialization' => $specialization,
+                'path' => $path
+            ]
+        );
     }
 }

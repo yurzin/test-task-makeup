@@ -3,6 +3,7 @@
 
 /* @var $city */
 /* @var $salary */
+
 /* @var $specialization */
 
 use app\models\FormFilter;
@@ -83,7 +84,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
         <div class="paragraph cadet-blue">Опыт работы</div>
         <div class="profile-info">
             <div class="form-check d-flex">
-                <?= $form->field($model, 'experience', ['options' => ['tag' => false ]])->checkboxList(
+                <?= $form->field($model, 'experience', ['options' => ['tag' => false]])->checkboxList(
                     [1 => 'Без опыта', 2 => 'От 1 года до 3 лет', 3 => 'От 3 лет до 6 лет', 4 => 'Более 6 лет'],
                     [
                         'item' => function ($index, $label, $name, $checked, $value) {
@@ -91,7 +92,8 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                             $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
                             return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='experience' value=$value id=$inputId $checked>"
                                 . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
-                        }, ['class' => 'profile-info']
+                        },
+                        ['class' => 'profile-info']
                     ]
                 )
                     ->label(false); ?>
@@ -104,7 +106,13 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
             <div class="form-check d-flex">
                 <?= $form->field($model, 'employment', ['options' => ['tag' => false]])
                     ->checkboxList(
-                        ['Полная занятость', 'Частичная занятость', 'Проектная работа', 'Стажировка', 'Волонтёрство'],
+                        [
+                            1 => 'Полная занятость',
+                            2 => 'Частичная занятость',
+                            3 => 'Проектная работа',
+                            4 => 'Стажировка',
+                            5 => 'Волонтёрство'
+                        ],
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checkedLabel = $checked ? 'checked' : '';
@@ -122,22 +130,30 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">График работы</div>
         <div class="profile-info">
-            <?= $form->field($model, 'schedule', ['options' => ['tag' => false]])
-                ->checkboxList(
-                    ['Полный день', 'Сменный график', 'Вахтовый метод', 'Гибкий график', 'Удалённая работа'],
-                    [
-                        'item' => function ($index, $label, $name, $checked, $value) {
-                            $checkedLabel = $checked ? 'checked' : '';
-                            $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 10);
-                            return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='schedule' value=$value id=$inputId $checkedLabel>"
-                                . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
-                        },
-                        ['class' => 'profile-info']
-                    ]
-                )->label(false); ?>
+            <div class="form-check d-flex">
+
+                <?= $form->field($model, 'schedule', ['options' => ['tag' => false]])
+                    ->checkboxList(
+                        [
+                            1 => 'Полный день',
+                            2 => 'Сменный график',
+                            3 => 'Вахтовый метод',
+                            4 => 'Гибкий график',
+                            5 => 'Удалённая работа'
+                        ],
+                        [
+                            'item' => function ($index, $label, $name, $checked, $value) {
+                                $checkedLabel = $checked ? 'checked' : '';
+                                $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 10);
+                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='schedule' value=$value id=$inputId $checkedLabel>"
+                                    . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
+                            },
+                            ['class' => 'profile-info']
+                        ]
+                    )->label(false); ?>
+            </div>
         </div>
     </div>
-
     <div class="vakancy-page-filter-block__row vakancy-page-filter-block__show-vakancy-btns mb24 d-flex flex-wrap align-items-center mobile-jus-cont-center">
         <?= Html::submitButton(
             'Показать вакансии',

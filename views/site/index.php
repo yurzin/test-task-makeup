@@ -74,10 +74,7 @@ $this->title = 'Список резюме';
                     </div>
                 </div>
 
-                <?php
-                Pjax::begin();
-
-                foreach ($resume as $item) : ?>
+                <?php foreach ($resume as $item) : ?>
                     <div onclick="location.href='/view-resume/<?= $item->id ?>'"
                          class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16"
                          style="cursor: pointer">
@@ -103,7 +100,7 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-middle">
                             <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32"><?= $item->last_work ?></p>
+                            <p class="paragraph mb16 mobile-mb32"><?= $item['organization']['organization'] ?></p>
                         </div>
                     </div>
                 <?php
@@ -118,7 +115,6 @@ $this->title = 'Список резюме';
                         'options' => ['class' => 'dor-pagination mb128'],
                     ]
                 );
-                Pjax::end();
                 ?>
             </div>
             <div class="col-lg-3 desctop-992-pl-16 d-flex flex-column vakancy-page-filter-block vakancy-page-filter-block-dnone">

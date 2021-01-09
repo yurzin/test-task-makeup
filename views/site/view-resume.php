@@ -98,7 +98,7 @@ $this->title = 'Резюме ' . $resume->name;
                                             <div class="mini-paragraph">7 лет 1 месяц</div>
                                         </div>
                                         <div class="col-md-8">
-                                            <div class="paragraph tbold mb8">Программные системы Атлансис</div>
+                                            <div class="paragraph tbold mb8"><?= $resume['organization']['organization']?></div>
                                             <div class="paragraph tbold mb8">Директор по стратегическому развитию
                                             </div>
                                             <div class="paragraph">Lorem ipsum dolor sit amet, consectetur
