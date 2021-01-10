@@ -10,6 +10,8 @@ $this->title = 'Список найденых резюме';
 
 $totalCount = $dataProvider->getTotalCount();
 
+\yii\helpers\VarDumper::dump($dataProvider, 3, true);
+
 if (!empty($_GET)) {
     $new_get = array_filter($_GET);
     if (count($new_get) < count($_GET)) {

@@ -38,9 +38,19 @@ class FormFilter extends Model
     {
         return [
             [
-                ['city_id', 'salary', 'specialization', 'ageFrom', 'ageTo', 'experience', 'employment', 'schedule'],
+                [
+                    'city_id',
+                    'salary',
+                    'specialization',
+                    'ageFrom',
+                    'ageTo',
+                    'schedule'
+                ],
                 'string'
             ],
+            [['experience'], 'safe'],
+            [['employment'], 'safe'],
+            [['schedule'], 'safe']
         ];
     }
 }

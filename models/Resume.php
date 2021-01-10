@@ -48,7 +48,13 @@ class Resume extends ActiveRecord
 
     public function getOrganization()
     {
-        return $this->hasOne(Organization::class, ['resume_id' => 'id']);
+        return $this->hasOne(Organization::class, ['resume_id' => 'id'])
+            ->select(
+                [
+                    '{{organization}}.*',
+                    '([[end_year]] - [[start_year]]) AS experience'
+                ]
+            );
     }
 
 }

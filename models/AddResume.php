@@ -12,9 +12,13 @@ class AddResume extends ActiveRecord
     }
 
     public $imageFile;
-    public $month;
-    public $year;
+    public $start_month;
+    public $start_year;
+    public $end_month;
+    public $end_year;
     public $organization;
+    public $position;
+    public $duties;
 
     public function rules()
     {
@@ -32,9 +36,12 @@ class AddResume extends ActiveRecord
                     'experience',
                     'salary',
                     'photo',
-                    'last_work',
-                    'year',
-                    'month',
+                    'start_year',
+                    'start_month',
+                    'end_year',
+                    'end_month',
+                    'position',
+                    'duties',
                     'organization'
                 ],
                 'string'

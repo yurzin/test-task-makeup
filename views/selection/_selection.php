@@ -28,6 +28,6 @@
         <p class="paragraph tbold mobile-off">Последнее место работы</p>
     </div>
     <div class="company-list-search__block-middle">
-        <p class="paragraph mb16 mobile-mb32"><?= $model->last_work ?></p>
+        <p class="paragraph mb16 mobile-mb32"><?= $model->organization->organization ?></p>
     </div>
 </div>

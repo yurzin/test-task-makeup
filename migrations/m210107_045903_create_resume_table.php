@@ -31,8 +31,7 @@ class m210107_045903_create_resume_table extends Migration
                 'employment' => $this->string(100),
                 'schedule' => $this->string(100),
                 'experience' => $this->string(100),
-                'last_work' => $this->string(100),
-                'about' => $this->string(255)
+                'about' => $this->text()
             ]
         );
 

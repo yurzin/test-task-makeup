@@ -9,8 +9,8 @@ class SelectionResume extends Resume
 {
     public $ageFrom;
     public $ageTo;
-    public $age;
-    public $experience;
+//    public $age;
+//    public $experience;
 
     public static function tableName()
     {
@@ -28,11 +28,15 @@ class SelectionResume extends Resume
             ['city_id', 'integer'],
             ['gender', 'string'],
             ['specialization_id', 'integer'],
-            ['experience', 'string'],
-            ['employment', 'string'],
+/*            ['experience', 'string'],
+            ['schedule', 'string'],
+            ['employment', 'string'],*/
             ['salary', 'integer'],
             ['ageFrom', 'integer'],
-            ['ageTo', 'integer']
+            ['ageTo', 'integer'],
+            [['experience'], 'safe'],
+            [['employment'], 'safe'],
+            [['schedule'], 'safe']
         ];
     }
 
@@ -60,8 +64,9 @@ class SelectionResume extends Resume
         $query->andFilterWhere(['city_id' => $this->city_id]);
         $query->andFilterWhere(['salary' => $this->salary]);
         $query->andFilterWhere(['gender' => $this->gender]);
-        $query->andFilterWhere(['experience' => $this->experience]);
-        $query->andFilterWhere(['employment' => $this->employment]);
+        $query->andFilterWhere(['experience' => implode(",", $this->experience)]);
+        $query->andFilterWhere(['schedule' =>  $this->schedule]);
+        $query->andFilterWhere(['employment' => implode(",", $this->employment)]);
         $query->andFilterWhere(['specialization_id' => $this->specialization]);
         $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageFrom]);
         $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageTo]);

@@ -89,9 +89,9 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                     [
                         'item' => function ($index, $label, $name, $checked, $value) {
                             $checked = $checked ? 'checked' : '';
-                            $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
-                            return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='experience' value=$value id=$inputId $checked>"
-                                . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
+                            $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
+                            return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$id $checked>"
+                                . "<label class='form-check-label' for=$id></label>" . "<label class='profile-info__check-text' for=$id>$label</label></div>";
                         },
                         ['class' => 'profile-info']
                     ]
@@ -117,7 +117,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checkedLabel = $checked ? 'checked' : '';
                                 $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 5);
-                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='employment' value=$value id=$inputId $checkedLabel>"
+                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$inputId $checkedLabel>"
                                     . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
                             },
                             ['class' => 'profile-info']
@@ -143,10 +143,10 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                         ],
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
-                                $checkedLabel = $checked ? 'checked' : '';
-                                $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 10);
-                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name='schedule' value=$value id=$inputId $checkedLabel>"
-                                    . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
+                                $checked = $checked ? 'checked' : '';
+                                $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 10);
+                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$id $checked>"
+                                    . "<label class='form-check-label' for=$id></label>" . "<label class='profile-info__check-text' for=$id>$label</label></div>";
                             },
                             ['class' => 'profile-info']
                         ]

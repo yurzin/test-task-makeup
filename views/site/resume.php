@@ -340,7 +340,7 @@ endif; ?>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="d-flex justify-content-between">
                             <div class="citizenship-select w100 mr16">
-                                <?= $form->field($model, 'month')
+                                <?= $form->field($model, 'start_month')
                                     ->dropDownList(
                                         [
                                             'Январь' => 'Январь',
@@ -366,7 +366,7 @@ endif; ?>
 
                             <?= $form->field(
                                 $model,
-                                'year',
+                                'start_year',
                                 [
                                     'options' => ['class' => 'citizenship-select w100']
                                 ]
@@ -390,7 +390,7 @@ endif; ?>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="d-flex justify-content-between">
                             <div class="citizenship-select w100 mr16">
-                                <?= $form->field($model, 'month')
+                                <?= $form->field($model, 'end_month')
                                     ->dropDownList(
                                         [
                                             'Январь' => 'Январь',
@@ -415,7 +415,7 @@ endif; ?>
                             </div>
                             <?= $form->field(
                                 $model,
-                                'year',
+                                'end_year',
                                 [
                                     'options' => ['class' => 'citizenship-select w100']
                                 ]
@@ -432,6 +432,22 @@ endif; ?>
                         </div>
                     </div>
                 </div>
+                <div class="row mb32">
+                    <div class="col-lg-2 col-md-3">
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-11">
+                        <div class="profile-info">
+                            <div class="form-check d-flex">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck111">
+                                <label class="form-check-label" for="exampleCheck111"></label>
+                                <label for="exampleCheck111"
+                                       class="profile-info__check-text job-resolution-checkbox">По настоящее
+                                    время</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <?= $form->field(
                     $model,
                     'organization',
@@ -444,6 +460,31 @@ endif; ?>
                     ]
                 )->textInput(['class' => 'dor-input w100'])
                     ->label(false); ?>
+
+                <?= $form->field(
+                    $model,
+                    'position',
+                    [
+                        'options' => ['class' => 'row mb16'],
+                        'template' => '<div class="col-lg-2 col-md-3 dflex-acenter">
+                                        <div class="paragraph">Должность</div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-11"> {input} {error} </div>'
+                    ]
+                )->textInput(['class' => 'dor-input w100'])
+                    ->label(false); ?>
+                <div class="row mb16">
+                    <div class="col-lg-2 col-md-3">
+                        <div class="paragraph">Обязанности, функции, достижения</div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                            <textarea class="dor-input w100 h96 mb8"
+                                      placeholder="Расскажите о своих обязанностях, функциях и достижениях"></textarea>
+                        <div><a href="#">Удалить место работы</a></div>
+                        <div><a href="#">+ Добавить место работы</a></div>
+                    </div>
+                </div>
+
             </div>
         <div class="row mb32">
             <div class="col-12">

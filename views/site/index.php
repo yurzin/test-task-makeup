@@ -12,8 +12,8 @@
 use \app\components\SidebarWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\widgets\LinkPager;
-use yii\widgets\Pjax;
 
 $this->title = 'Список резюме';
 
@@ -88,13 +88,13 @@ $this->title = 'Список резюме';
                             <h3 class="mini-title mobile-off"><?= $item['specialization']['specialization'] ?></h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
-                                <span class="mr16 paragraph">Опыт работы <?= $item->experience ?></span>
+                                <span class="mr16 paragraph"> <?php  echo $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . $item['organization']['experience'] ?> лет</span>
                                 <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                         ['n' => $item->age],
                                         'ru_RU'
                                     ); ?></span>
-                                <span class="mr16 paragraph"><?= $item['city']['city']?></span>
+                                <span class="mr16 paragraph"><?= $item['city']['city'] ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>

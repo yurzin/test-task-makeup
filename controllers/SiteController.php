@@ -117,9 +117,13 @@ class SiteController extends Controller
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
                 $modelOrganization->resume_id = $modelAddResume->id;
-                $modelOrganization->month = $modelAddResume->month;
-                $modelOrganization->year = $modelAddResume->year;
+                $modelOrganization->start_month = $modelAddResume->start_month;
+                $modelOrganization->start_year = $modelAddResume->start_year;
+                $modelOrganization->end_month = $modelAddResume->end_month;
+                $modelOrganization->end_year = $modelAddResume->end_year;
                 $modelOrganization->organization = $modelAddResume->organization;
+                $modelOrganization->position = $modelAddResume->position;
+                $modelOrganization->duties = $modelAddResume->duties;
                 $modelOrganization->save();
                 Yii::$app->session->setFlash(
                     'success',
