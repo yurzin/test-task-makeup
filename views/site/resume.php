@@ -115,7 +115,7 @@ endif; ?>
                                         <div class="col-lg-3 col-md-4 col-11"><div class="datepicker-wrap input-group date"> {input} {error}</div></div>'
                 ]
             )->textInput(
-                ['type' => 'date', 'class' => 'dor-input dpicker datepicker-input']
+                ['type' => 'date', 'class' => 'dor-input']
             )->label(false); ?>
             <div class="row mb16">
                 <div class="col-lg-2 col-md-3 dflex-acenter">

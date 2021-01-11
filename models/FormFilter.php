@@ -15,7 +15,7 @@ class FormFilter extends Model
     public $city_id;
     public $ageFrom;
     public $ageTo;
-    public $specialization;
+    public $specialization_id;
     public $employment;
     public $schedule;
     public $experience;
@@ -25,7 +25,7 @@ class FormFilter extends Model
         return [
             'city_id' => 'Город',
             'salary' => 'Зарплата',
-            'specialization' => 'Специализация',
+            'specialization_id' => 'Специализация',
             'employment' => 'Тип занятости',
             'experience' => 'Опыт работы',
             'schedule' => 'График работы',
@@ -41,7 +41,7 @@ class FormFilter extends Model
                 [
                     'city_id',
                     'salary',
-                    'specialization',
+                    'specialization_id',
                     'ageFrom',
                     'ageTo',
                 ],

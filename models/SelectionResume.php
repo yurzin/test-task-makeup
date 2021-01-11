@@ -59,10 +59,10 @@ class SelectionResume extends Resume
         $query->andFilterWhere(['city_id' => $this->city_id]);
         $query->andFilterWhere(['salary' => $this->salary]);
         $query->andFilterWhere(['gender' => $this->gender]);
+        $query->andFilterWhere(['specialization_id' => $this->specialization_id]);
         $query->andFilterWhere(['like', 'experience', is_array($this->experience) ? implode(",", $this->experience) : $this->experience]);
         $query->andFilterWhere(['like', 'schedule', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
         $query->andFilterWhere(['like', 'employment', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
-        $query->andFilterWhere(['specialization_id' => $this->specialization]);
         $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageFrom]);
         $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageTo]);
 

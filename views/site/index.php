@@ -12,7 +12,6 @@
 use \app\components\SidebarWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
 use yii\widgets\LinkPager;
 
 $this->title = 'Список резюме';
@@ -104,7 +103,7 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-middle">
                             <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->organization ?></p>
+                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->organization != '' ? $item->organization->organization : 'Тунеядец' ?></p>
                         </div>
                     </div>
                 <?php

@@ -3,7 +3,6 @@
 
 /* @var $city */
 /* @var $salary */
-
 /* @var $specialization */
 
 use app\models\FormFilter;
@@ -53,7 +52,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Специализация</div>
         <div class="citizenship-select">
-            <?= $form->field($model, 'specialization')->dropDownList(
+            <?= $form->field($model, 'specialization_id')->dropDownList(
                 $specialization,
                 [
                     'prompt' => 'Выберите специализацию',
