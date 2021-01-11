@@ -44,7 +44,6 @@ class FormFilter extends Model
                     'specialization',
                     'ageFrom',
                     'ageTo',
-                    'schedule'
                 ],
                 'string'
             ],

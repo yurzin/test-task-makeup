@@ -37,10 +37,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                 $city,
                 [
                     'prompt' => 'Выберите город',
-                    'label' => false,
                     'class' => 'nselect-1',
-                    '0' => ['Selected' => true],
-                    ['data-val' => 'label'],
                 ]
             )->label(false); ?>
         </div>
@@ -49,7 +46,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
         <div class="paragraph cadet-blue">Зарплата</div>
         <div class="citizenship-select">
             <?= $form->field($model, 'salary', ['options' => ['tag' => false]])->textInput(
-                ['value' => $salary, 'class' => 'dor-input w100'/*, 'onchange' => 'this.form.submit()'*/]
+                ['value' => $salary, 'class' => 'dor-input w100']
             )->label(false); ?>
         </div>
     </div>
@@ -61,9 +58,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                 [
                     'prompt' => 'Выберите специализацию',
                     'label' => false,
-                    'class' => 'nselect-1',
-                    '0' => ['Selected' => true],
-                    ['data-val' => 'label'],
+                    'class' => 'nselect-1'
                 ]
             )->label(false);
             ?>
@@ -73,10 +68,10 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
         <div class="paragraph cadet-blue">Возраст</div>
         <div class="d-flex">
             <?= $form->field($model, 'ageFrom', ['options' => ['tag' => false]])->textInput(
-                ['class' => 'dor-input w100', 'placeholder' => 'От', /*'onchange' => 'this.form.submit()'*/]
+                ['class' => 'dor-input w100', 'placeholder' => 'От']
             )->label(false); ?>
             <?= $form->field($model, 'ageTo', ['errorOptions' => ['tag' => false]])->textInput(
-                ['class' => 'dor-input w100', 'placeholder' => 'До', /*'onchange' => 'this.form.submit()'*/]
+                ['class' => 'dor-input w100', 'placeholder' => 'До']
             )->label(false); ?>
         </div>
     </div>
@@ -115,10 +110,10 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
                         ],
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
-                                $checkedLabel = $checked ? 'checked' : '';
-                                $inputId = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 5);
-                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$inputId $checkedLabel>"
-                                    . "<label class='form-check-label' for=$inputId></label>" . "<label class='profile-info__check-text' for=$inputId>$label</label></div>";
+                                $checked = $checked ? 'checked' : '';
+                                $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 5);
+                                return "<div class='form-check d-flex'><input type='checkbox' class='form-check-input' name=$name value=$value id=$id $checked>"
+                                    . "<label class='form-check-label' for=$id></label>" . "<label class='profile-info__check-text' for=$id>$label</label></div>";
                             },
                             ['class' => 'profile-info']
                         ]
@@ -131,7 +126,6 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
         <div class="paragraph cadet-blue">График работы</div>
         <div class="profile-info">
             <div class="form-check d-flex">
-
                 <?= $form->field($model, 'schedule', ['options' => ['tag' => false]])
                     ->checkboxList(
                         [

@@ -28,11 +28,11 @@ $this->title = 'Резюме ' . $resume->last_name;
                     </div>
                     <div class="paragraph-lead mb16">
                         <span class="mr24"><?= $resume->salary ?> ₽</span>
-                        <span>Опыт работы  <?= Yii::$app->i18n->format(
-                                '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                ['n' => $resume->organization->experience],
-                                'ru_RU'
-                            ) ?></span>
+                        <span> <?= $resume->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
+                                    '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
+                                    ['n' => $resume->organization->experience],
+                                    'ru_RU'
+                                ) ?> </span>
                     </div>
                     <div class="profile-info company-profile-info resume-view__info-blick">
                         <div class="profile-info__block company-profile-info__block mb8">
@@ -68,7 +68,7 @@ $this->title = 'Резюме ' . $resume->last_name;
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Город проживания
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume['city']['city'] ?></div>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->city->city ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">
@@ -94,14 +94,19 @@ $this->title = 'Резюме ' . $resume->last_name;
                             <div class="row">
                                 <div class="col-lg-10">
                                     <div class="row mb16">
-                                        <div class="col-lg-12"><h3 class="heading mb16">Опыт работы <?= Yii::$app->i18n->format(
+                                        <div class="col-lg-12"><h3
+                                                    class="heading mb16"> <?= $resume->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
+                                                        '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
+                                                        ['n' => $resume->organization->experience],
+                                                        'ru_RU'
+                                                    ) ?></h3></div>
+                                        <div class="col-md-4 mb16">
+                                            <div class="paragraph tbold mb8"><?= $resume->organization->start_month ?> <?= $resume->organization->start_year ?></div>
+                                            <div class="mini-paragraph"> <?= Yii::$app->i18n->format(
                                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                                     ['n' => $resume->organization->experience],
                                                     'ru_RU'
-                                                ) ?></h3></div>
-                                        <div class="col-md-4 mb16">
-                                            <div class="paragraph tbold mb8">Апрель 2013 — по настоящее время</div>
-                                            <div class="mini-paragraph">7 лет 1 месяц</div>
+                                                ) ?></div>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="paragraph tbold mb8"><?= $resume->organization->organization ?></div>

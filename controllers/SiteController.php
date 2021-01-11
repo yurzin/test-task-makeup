@@ -78,7 +78,15 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = Resume::find()->orwhere(['like', 'last_name', $search])->orwhere(['like', 'last_work', $search]);
+        $resume = Resume::getAllResume()
+            ->joinWith(['specialization', 'specialization'], true)
+            ->joinWith(['organization', 'organization'], true)
+            ->joinWith(['city', 'city'], true)
+            ->orwhere(['like', 'last_name', $search])
+            ->orwhere(['like', 'organization', $search])
+            ->orwhere(['like', 'city', $search])
+            ->orwhere(['like', 'specialization', $search]);
+
 
         $count = $resume->count();
 
