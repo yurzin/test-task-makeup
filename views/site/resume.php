@@ -5,6 +5,9 @@
 
 /* @var $specialization */
 
+use app\models\Employment;
+use app\models\Gender;
+use app\models\Schedule;
 use yii\helpers\Html;
 use \yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
@@ -122,14 +125,15 @@ endif; ?>
                     <div class="paragraph">Пол</div>
                 </div>
                 <?php
-                $model->gender = 'male';
+                $model->gender = 1;
+
                 echo $form->field(
                     $model,
                     'gender',
                     ['options' => ['tag' => 'ul', 'class' => 'card-ul-radio profile-radio-list']]
                 )
                     ->radioList(
-                        ['male' => 'Мужщина', 'female' => 'Женщина'],
+                       Gender::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
@@ -138,7 +142,8 @@ endif; ?>
                             },
                             ['class' => 'col-lg-3 col-md-4 col-11']
                         ]
-                    )->label(false); ?>
+                    )->label(false);
+                ?>
             </div>
             <?= $form->field(
                 $model,
@@ -255,13 +260,7 @@ endif; ?>
                         'employment',
                         ['options' => ['class' => 'profile-info']]
                     )->checkboxList(
-                        [
-                            1 => 'Полная занятость',
-                            2 => 'Частичная занятость',
-                            3 => 'Проектная/Временная работа',
-                            4 => 'Волонтёрство',
-                            5 => 'Стажировка'
-                        ],
+                        Employment::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
@@ -285,13 +284,7 @@ endif; ?>
                         'schedule',
                         ['options' => ['class' => 'profile-info']]
                     )->checkboxList(
-                        [
-                            1 => 'Полный день',
-                            2 => 'Сменный график',
-                            3 => 'Гибкий график',
-                            4 => 'Удалённая работа',
-                            5 => 'Вахтовый метод'
-                        ],
+                        Schedule::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
@@ -486,36 +479,36 @@ endif; ?>
                 </div>
 
             </div>
-        <div class="row mb32">
-            <div class="col-12">
-                <div class="heading">Расскажите о себе</div>
+            <div class="row mb32">
+                <div class="col-12">
+                    <div class="heading">Расскажите о себе</div>
+                </div>
             </div>
+            <div class="row mb64 mobile-mb32">
+                <div class="col-lg-2 col-md-3">
+                    <div class="paragraph">О себе</div>
+                </div>
+                <?= $form->field(
+                    $model,
+                    'about',
+                    ['options' => ['class' => 'col-lg-5 col-md-7 col-12']]
+                )->textarea(['class' => 'dor-input w100 h176 mb8'])
+                    ->label(false); ?>
+            </div>
+            <div class="row mb128 mobile-mb64">
+                <div class="col-lg-2 col-md-3">
+                </div>
+                <div class="col-lg-10 col-md-9">
+                    <?= Html::submitButton(
+                        'Добавить резюме',
+                        ['class' => 'orange-btn link-orange-btn']
+                    ) ?>
+                </div>
+            </div>
+            <?php
+            ActiveForm::end(); ?>
         </div>
-        <div class="row mb64 mobile-mb32">
-            <div class="col-lg-2 col-md-3">
-                <div class="paragraph">О себе</div>
-            </div>
-            <?= $form->field(
-                $model,
-                'about',
-                ['options' => ['class' => 'col-lg-5 col-md-7 col-12']]
-            )->textarea(['class' => 'dor-input w100 h176 mb8'])
-                ->label(false); ?>
-        </div>
-        <div class="row mb128 mobile-mb64">
-            <div class="col-lg-2 col-md-3">
-            </div>
-            <div class="col-lg-10 col-md-9">
-                <?= Html::submitButton(
-                    'Добавить резюме',
-                    ['class' => 'orange-btn link-orange-btn']
-                ) ?>
-            </div>
-        </div>
-        <?php
-        ActiveForm::end(); ?>
     </div>
-</div>
 </div>
 
 <script>

@@ -3,6 +3,7 @@
 
 /* @var $city */
 /* @var $salary */
+
 /* @var $specialization */
 
 use app\models\FormFilter;
@@ -16,15 +17,16 @@ $model = new FormFilter();
 $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); ?>
 
     <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
+
         <?= Html::a('Все', ['/selection-resume', 'gender' => 'all'], ['class' => 'signin-modal__switch-btn']) ?>
         <?= Html::a(
             'Мужчины',
-            ['/selection-resume', 'gender' => 'male'],
+            ['/selection-resume', 'gender' => '1'],
             ['class' => 'signin-modal__switch-btn']
         ) ?>
         <?= Html::a(
             'Женщины',
-            ['/selection-resume', 'gender' => 'female'],
+            ['/selection-resume', 'gender' => '2'],
             ['class' => 'signin-modal__switch-btn', 'on']
         ) ?>
     </div>

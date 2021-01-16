@@ -22,7 +22,7 @@ class m210107_045903_create_resume_table extends Migration
                 'last_name' => $this->string(100),
                 'patronymic' => $this->string(100),
                 'birth_date' => $this->date(),
-                'gender' => $this->string(100),
+                'gender' => $this->tinyInteger(10),
                 'city_id' => $this->integer(100),
                 'email' => $this->string(100),
                 'phone' => $this->string(100),

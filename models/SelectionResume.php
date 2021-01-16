@@ -42,7 +42,7 @@ class SelectionResume extends Resume
 
     public function search($params)
     {
-        $query = self::getAllResume();
+        $query = self::getAll();
 
         $dataProvider = new ActiveDataProvider(
             [

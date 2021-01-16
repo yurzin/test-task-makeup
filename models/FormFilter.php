@@ -12,6 +12,7 @@ class FormFilter extends Model
     }
 
     public $salary;
+    public $gender;
     public $city_id;
     public $ageFrom;
     public $ageTo;

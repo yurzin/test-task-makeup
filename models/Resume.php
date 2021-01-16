@@ -12,7 +12,7 @@ class Resume extends ActiveRecord
 {
     public $age;
 
-    public static function getAllResume()
+    public static function getAll()
     {
         return self::find()
             ->select(
@@ -23,55 +23,7 @@ class Resume extends ActiveRecord
             );
     }
 
-    public function afterFind()
-    {
-        parent::afterFind();
-        $employment = [];
-        foreach (explode(",", $this->employment) as $key => $value) {
-            switch ($value) {
-                case 1:
-                    array_push($employment, "Полная занятость");
-                    break;
-                case 2:
-                    array_push($employment, "Частичная занятость");
-                    break;
-                case 3:
-                    array_push($employment, "Проектная работа");
-                    break;
-                case 4:
-                    array_push($employment, "Стажировка");
-                    break;
-                case 5:
-                    array_push($employment, "Волонтёрство");
-                    break;
-            }
-        }
-        $this->employment = implode(", ", $employment);
-
-        $schedule = [];
-        foreach (explode(",", $this->schedule) as $key => $value) {
-            switch ($value) {
-                case 1:
-                    array_push($schedule, "Полный день");
-                    break;
-                case 2:
-                    array_push($schedule, "Сменный график");
-                    break;
-                case 3:
-                    array_push($schedule, "Вахтовый метод");
-                    break;
-                case 4:
-                    array_push($schedule, "Гибкий график");
-                    break;
-                case 5:
-                    array_push($schedule, "Удалённая работа");
-                    break;
-            }
-        }
-        $this->schedule = implode(", ", $schedule);
-    }
-
-    public static function getOneResume($id)
+    public static function getOne($id)
     {
         return self::find()
             ->where(['id' => $id])

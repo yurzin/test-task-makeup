@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Employment;
 use app\models\Organization;
 use Yii;
 use \yii\data\Sort;
@@ -32,7 +33,7 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = Resume::getAllResume();
+        $resume = Resume::getAll();
         $count = $resume->count();
 
         $pagination = new Pagination(
@@ -78,14 +79,14 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = Resume::getAllResume()
+        $resume = Resume::getAll()
             ->joinWith(['specialization', 'specialization'], true)
             ->joinWith(['organization', 'organization'], true)
             ->joinWith(['city', 'city'], true)
-            ->orwhere(['like', 'last_name', $search])
-            ->orwhere(['like', 'organization', $search])
-            ->orwhere(['like', 'city', $search])
-            ->orwhere(['like', 'specialization', $search]);
+            ->andWhere(['like', 'last_name', $search])
+            ->andWhere(['like', 'organization', $search])
+            ->andWhere(['like', 'city', $search])
+            ->andWhere(['like', 'specialization', $search]);
 
 
         $count = $resume->count();
@@ -103,7 +104,8 @@ class SiteController extends Controller
 
     public function actionViewResume($id)
     {
-        $resume = Resume::getOneResume($id);
+        $resume = Resume::getOne($id);
+
         return $this->render('view-resume', compact('resume'));
     }
 
