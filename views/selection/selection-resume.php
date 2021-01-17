@@ -5,6 +5,7 @@
 use yii\widgets\ListView;
 
 /* @var $dataProvider */
+/* @var $viewModel */
 
 $this->title = 'Список найденых резюме';
 

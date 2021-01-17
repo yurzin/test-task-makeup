@@ -10,30 +10,15 @@ use yii\db\ActiveRecord;
  */
 class Resume extends ActiveRecord
 {
-    public $age;
 
     public static function getAll()
     {
-        return self::find()
-            ->select(
-                [
-                    '{{resume}}.*',
-                    'TIMESTAMPDIFF(YEAR, birth_date, curdate()) AS age'
-                ]
-            );
+        return self::find();
     }
 
     public static function getOne($id)
     {
-        return self::find()
-            ->where(['id' => $id])
-            ->select(
-                [
-                    '{{resume}}.*',
-                    'TIMESTAMPDIFF(YEAR, birth_date, curdate()) AS age'
-                ]
-            )
-            ->one();
+        return self::find()->where(['id' => $id])->one();
     }
 
     public function getCity()

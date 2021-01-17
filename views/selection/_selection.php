@@ -1,6 +1,10 @@
 <?php
 
-/* @var $selectionModel */
+/* @var $model */
+
+use app\viewmodels\Resume\ResumeViewModel;
+
+$viewModel = new ResumeViewModel();
 
 ?>
 
@@ -24,7 +28,7 @@
                     ) ?></span>
             <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                    ['n' => $model->age],
+                    ['n' => $viewModel->getAge($model->birth_date) ],
                     'ru_RU'
                 ); ?></span>
             <span class="mr16 paragraph"><?= $model->city->city ?></span>

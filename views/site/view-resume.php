@@ -1,22 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 
-use app\models\Employment;
-use app\models\Schedule;
-
 /* @var $resume */
+/* @var $viewModel */
 
 $this->title = 'Резюме ' . $resume->last_name;
-
-$employments = [];
-foreach (explode(',', $resume->employment) as $value) {
-    $employment[] = Employment::getLabel($value);
-}
-
-$schedules = [];
-foreach (explode(',', $resume->schedule) as $value) {
-    $schedule[] = Schedule::getLabel($value);
-}
 
 ?>
 
@@ -62,24 +50,20 @@ foreach (explode(',', $resume->schedule) as $value) {
                             <div class="profile-info__block-right company-profile-info__block-right">
                                 <?= Yii::$app->i18n->format(
                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                    ['n' => $resume->age],
+                                    ['n' => $viewModel->getAge($resume->birth_date)],
                                     'ru_RU'
                                 ); ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= implode(
-                                    ', ',
-                                    $employment
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $viewModel->getEmploymentsName(
                                 ); ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">График работы
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= implode(
-                                    ', ',
-                                    $schedule
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $viewModel->getSchedulesName(
                                 ); ?>
                             </div>
                         </div>

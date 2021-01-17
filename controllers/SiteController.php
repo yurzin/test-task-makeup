@@ -2,9 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Employment;
-use app\models\Organization;
 use Yii;
+use app\models\Organization;
 use \yii\data\Sort;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
@@ -14,11 +13,14 @@ use app\models\City;
 use app\models\Resume;
 use app\models\AddResume;
 use app\models\Specialization;
+use app\viewmodels\Resume\ResumeViewModel;
 
 class SiteController extends Controller
 {
     public function actionIndex()
     {
+        $viewModel = new ResumeViewModel();
+
         $sort = new Sort(
             [
                 'defaultOrder' => [
@@ -35,7 +37,6 @@ class SiteController extends Controller
 
         $resume = Resume::getAll();
         $count = $resume->count();
-
         $pagination = new Pagination(
             [
                 'defaultPageSize' => 4,
@@ -52,7 +53,7 @@ class SiteController extends Controller
 
         return $this->render(
             'index',
-            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization')
+            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization', 'viewModel')
         );
     }
 
@@ -105,8 +106,11 @@ class SiteController extends Controller
     public function actionViewResume($id)
     {
         $resume = Resume::getOne($id);
+        $viewModel = new ResumeViewModel();
+        $viewModel->employment = $resume['employment'];
+        $viewModel->schedule = $resume['schedule'];
 
-        return $this->render('view-resume', compact('resume'));
+        return $this->render('view-resume', compact('resume', 'viewModel'));
     }
 
     public function actionResume()

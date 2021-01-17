@@ -8,6 +8,7 @@
 /* @var $city */
 /* @var $specialization */
 /* @var $pagination */
+/* @var $viewModel */
 
 use \app\components\SidebarWidget;
 use yii\helpers\Html;
@@ -94,7 +95,7 @@ $this->title = 'Список резюме';
                                         ) ?></span>
                                 <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                        ['n' => $item->age],
+                                        ['n' => $viewModel->getAge($item->birth_date)],
                                         'ru_RU'
                                     ); ?></span>
                                 <span class="mr16 paragraph"><?= $item->city->city ?></span>

@@ -56,6 +56,7 @@ class SelectionResume extends Resume
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
+
         $query->andFilterWhere(['city_id' => $this->city_id]);
         $query->andFilterWhere(['salary' => $this->salary]);
         $query->andFilterWhere(['gender' => $this->gender]);
