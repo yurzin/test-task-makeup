@@ -13,7 +13,6 @@ use app\models\City;
 use app\models\Resume;
 use app\models\AddResume;
 use app\models\Specialization;
-use app\viewmodels\Resume\ResumeViewModel;
 
 class SiteController extends Controller
 {
@@ -104,10 +103,6 @@ class SiteController extends Controller
     public function actionViewResume($id)
     {
         $resume = Resume::getOne($id);
-//        $viewModel = new ResumeViewModel();
-//        $viewModel->employment = $resume['employment'];
-//        $viewModel->schedule = $resume['schedule'];
-
         return $this->render('view-resume', compact('resume'));
     }
 
