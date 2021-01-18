@@ -6,7 +6,9 @@
 
 /* @var $specialization */
 
+use app\models\Employments;
 use app\models\FormFilter;
+use app\models\Schedule;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -102,13 +104,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
             <div class="form-check d-flex">
                 <?= $form->field($model, 'employment', ['options' => ['tag' => false]])
                     ->checkboxList(
-                        [
-                            1 => 'Полная занятость',
-                            2 => 'Частичная занятость',
-                            3 => 'Проектная работа',
-                            4 => 'Стажировка',
-                            5 => 'Волонтёрство'
-                        ],
+                        Employments::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
@@ -129,13 +125,7 @@ $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); 
             <div class="form-check d-flex">
                 <?= $form->field($model, 'schedule', ['options' => ['tag' => false]])
                     ->checkboxList(
-                        [
-                            1 => 'Полный день',
-                            2 => 'Сменный график',
-                            3 => 'Вахтовый метод',
-                            4 => 'Гибкий график',
-                            5 => 'Удалённая работа'
-                        ],
+                        Schedule::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';

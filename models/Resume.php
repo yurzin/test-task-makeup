@@ -11,10 +11,10 @@ use yii\db\ActiveRecord;
 class Resume extends ActiveRecord
 {
 
-    public static function getAll()
+    /*public static function getAll()
     {
         return self::find();
-    }
+    }*/
 
     public static function getOne($id)
     {
@@ -40,6 +40,11 @@ class Resume extends ActiveRecord
                     '([[end_year]] - [[start_year]]) AS experience'
                 ]
             );
+    }
+
+    public function getEmployment()
+    {
+        return $this->hasOne(Employment::class, ['resume_id' => 'id']);
     }
 
 }

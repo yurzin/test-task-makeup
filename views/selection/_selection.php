@@ -31,7 +31,7 @@ $viewModel = new ResumeViewModel();
                     ['n' => $viewModel->getAge($model->birth_date) ],
                     'ru_RU'
                 ); ?></span>
-            <span class="mr16 paragraph"><?= $model->city->city ?></span>
+            <span class="mr16 paragraph"><?= $model->city->name ?></span>
         </div>
         <p class="paragraph tbold mobile-off">Последнее место работы</p>
     </div>

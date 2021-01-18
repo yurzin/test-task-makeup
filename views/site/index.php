@@ -6,19 +6,18 @@
 /* @var $count */
 /* @var $sort */
 /* @var $city */
-/* @var $specialization */
-/* @var $pagination */
 /* @var $viewModel */
+/* @var $pagination */
+/* @var $specialization */
 
-use \app\components\SidebarWidget;
-use app\viewmodels\Resume\ResumeViewModel;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
+use \app\components\SidebarWidget;
 
 $this->title = 'Список резюме';
 
-$viewModel = new ResumeViewModel();
+\yii\helpers\VarDumper::dump($viewModel, 3, true);
 
 ?>
 <div class="content">
@@ -98,10 +97,10 @@ $viewModel = new ResumeViewModel();
                                         ) ?></span>
                                 <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                        ['n' => $viewModel->getAge($model->birth_date) ],
+                                        ['n' => /*$viewModel->getAge()*/ 333],
                                         'ru_RU'
                                     ); ?></span>
-                                <span class="mr16 paragraph"><?= $item->city->city ?></span>
+                                <span class="mr16 paragraph"><?= $item->city->name ?></span>
                             </div>
                             <p class="paragraph tbold mobile-off">Последнее место работы</p>
                         </div>

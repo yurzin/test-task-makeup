@@ -1,14 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 
-use app\viewmodels\Resume\ResumeViewModel;
-
 /* @var $resume */
 /* @var $viewModel */
 
 $this->title = 'Резюме ' . $resume->last_name;
-
-$viewModel = new ResumeViewModel();
 
 ?>
 
@@ -54,7 +50,7 @@ $viewModel = new ResumeViewModel();
                             <div class="profile-info__block-right company-profile-info__block-right">
                                 <?= Yii::$app->i18n->format(
                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                    ['n' => $viewModel->getAge($resume->birth_date)],
+                                    ['n' => $viewModel->getAge()],
                                     'ru_RU'
                                 ); ?>
                             </div>
@@ -62,19 +58,19 @@ $viewModel = new ResumeViewModel();
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>
                             <div class="profile-info__block-right company-profile-info__block-right">
-                                <?= $viewModel->getEmploymentsName($resume->employment); ?></div>
+                                <?= $viewModel->getEmploymentName(); ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">График работы
                             </div>
                             <div class="profile-info__block-right company-profile-info__block-right">
-                                <?= $viewModel->getSchedulesName($resume->schedule); ?>
+                                <?= $viewModel->getScheduleName(); ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Город проживания
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->city->city ?></div>
+                            <div class="profile-info__block-right company-profile-info__block-right"><?= $resume->city->name ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">

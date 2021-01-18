@@ -5,7 +5,7 @@
 
 /* @var $specialization */
 
-use app\models\Employment;
+use app\models\Employments;
 use app\models\Gender;
 use app\models\Schedule;
 use yii\helpers\Html;
@@ -260,7 +260,7 @@ endif; ?>
                         'employment',
                         ['options' => ['class' => 'profile-info']]
                     )->checkboxList(
-                        Employment::listData(),
+                        Employments::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';

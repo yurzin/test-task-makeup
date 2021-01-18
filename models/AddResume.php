@@ -11,6 +11,7 @@ class AddResume extends ActiveRecord
         return 'resume';
     }
 
+    public $full_employment;
     public $imageFile;
     public $start_month;
     public $start_year;
@@ -35,11 +36,12 @@ class AddResume extends ActiveRecord
                     'specialization_id',
                     'salary',
                     'photo',
-                ],
-                'required'
+                ],'string'
+                //'required'
             ],
             [['experience'], 'safe'],
             [['employment'], 'safe'],
+            [['full_employment'], 'safe'],
             [['schedule'], 'safe'],
             ['email', 'email'],
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
@@ -97,8 +99,15 @@ class AddResume extends ActiveRecord
         return true;
     }
 
-    public
-    function upload()
+    public function setScheduleSerialize($value) {
+        $this->schedule = serialize($value);
+    }
+
+    public function setEmploymentSerialize($value) {
+        $this->employment = serialize($value);
+    }
+
+    public function upload()
     {
         if ($this->validate()) {
             $this->imageFile->saveAs('images/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);

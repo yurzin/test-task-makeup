@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Employment;
+use app\viewmodel\Resume\ResumeViewModel;
+use app\viewModel\ViewModel;
 use Yii;
 use app\models\Organization;
 use \yii\data\Sort;
@@ -18,6 +21,10 @@ class SiteController extends Controller
 {
     public function actionIndex()
     {
+        $resume = new Resume();
+
+        $viewModel = new ViewModel($resume);
+
         $sort = new Sort(
             [
                 'defaultOrder' => [
@@ -32,8 +39,7 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = Resume::getAll();
-        $count = $resume->count();
+        $count = $resume->find()->count();
         $pagination = new Pagination(
             [
                 'defaultPageSize' => 4,
@@ -42,15 +48,15 @@ class SiteController extends Controller
             ]
         );
 
-        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'city');
+        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
 
         $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
 
-        $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
+        $resume = $resume->find()->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
 
         return $this->render(
             'index',
-            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization')
+            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization', 'viewModel')
         );
     }
 
@@ -77,7 +83,9 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = Resume::getAll()
+        $resume = new Resume();
+
+        $resume->find()
             ->joinWith(['specialization', 'specialization'], true)
             ->joinWith(['organization', 'organization'], true)
             ->joinWith(['city', 'city'], true)
@@ -86,8 +94,7 @@ class SiteController extends Controller
             ->andWhere(['like', 'city', $search])
             ->andWhere(['like', 'specialization', $search]);
 
-
-        $count = $resume->count();
+        $count = $resume->find()->count();
 
         $pagination = new Pagination(
             [
@@ -96,33 +103,37 @@ class SiteController extends Controller
             ]
         );
 
-        $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
+        $resume = $resume->find()->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
         return $this->render('search', compact('resume', 'pagination', 'count', 'sort', 'city'));
     }
 
     public function actionViewResume($id)
     {
         $resume = Resume::getOne($id);
-        return $this->render('view-resume', compact('resume'));
+        $viewModel = new ResumeViewModel($resume);
+        return $this->render('view-resume', compact('resume', 'viewModel'));
     }
 
     public function actionResume()
     {
         $modelAddResume = new AddResume();
         $modelOrganization = new Organization();
+        $modelEmployment = new Employment();
 
-        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'city');
+        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
         $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
 
         if ($modelAddResume->load(Yii::$app->request->post())) {
-            $modelAddResume->schedule = implode(",", $modelAddResume->schedule);
-            $modelAddResume->employment = implode(",", $modelAddResume->employment);
-
+            $modelAddResume->setScheduleSerialize($modelAddResume->schedule);
             $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
             $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
             $modelAddResume->photo = $path;
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
+                $modelEmployment->resume_id = $modelAddResume->id;
+                $modelEmployment->full_employment = $modelAddResume->setEmploymentSerialize(
+                    $modelAddResume->employment
+                );
                 $modelOrganization->resume_id = $modelAddResume->id;
                 $modelOrganization->start_month = $modelAddResume->start_month;
                 $modelOrganization->start_year = $modelAddResume->start_year;
@@ -131,6 +142,7 @@ class SiteController extends Controller
                 $modelOrganization->organization = $modelAddResume->organization;
                 $modelOrganization->position = $modelAddResume->position;
                 $modelOrganization->duties = $modelAddResume->duties;
+                $modelEmployment->save();
                 $modelOrganization->save();
                 Yii::$app->session->setFlash(
                     'success',
