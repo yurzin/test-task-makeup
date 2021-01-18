@@ -1,10 +1,14 @@
 <?php
 /* @var $this yii\web\View */
 
+use app\viewmodels\Resume\ResumeViewModel;
+
 /* @var $resume */
 /* @var $viewModel */
 
 $this->title = 'Резюме ' . $resume->last_name;
+
+$viewModel = new ResumeViewModel();
 
 ?>
 
@@ -57,14 +61,14 @@ $this->title = 'Резюме ' . $resume->last_name;
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $viewModel->getEmploymentsName(
-                                ); ?></div>
+                            <div class="profile-info__block-right company-profile-info__block-right">
+                                <?= $viewModel->getEmploymentsName($resume->employment); ?></div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">
                             <div class="profile-info__block-left company-profile-info__block-left">График работы
                             </div>
-                            <div class="profile-info__block-right company-profile-info__block-right"><?= $viewModel->getSchedulesName(
-                                ); ?>
+                            <div class="profile-info__block-right company-profile-info__block-right">
+                                <?= $viewModel->getSchedulesName($resume->schedule); ?>
                             </div>
                         </div>
                         <div class="profile-info__block company-profile-info__block mb8">

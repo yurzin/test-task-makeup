@@ -8,20 +8,20 @@ use DateTime;
 
 class ResumeViewModel
 {
-    public function getEmploymentsName()
+    public function getEmploymentsName($employment)
     {
-        foreach (explode(',', $this->employment) as $value) {
-            $employment[] = Employment::getLabel($value);
+        foreach (explode(',', $employment) as $value) {
+            $employments[] = Employment::getLabel($value);
         }
-        echo implode(', ', $employment);
+        return implode(', ', $employments);
     }
 
-    public function getSchedulesName()
+    public function getSchedulesName($schedule)
     {
-        foreach (explode(',', $this->schedule) as $value) {
-            $schedule[] = Schedule::getLabel($value);
+        foreach (explode(',', $schedule) as $value) {
+            $schedules[] = Schedule::getLabel($value);
         }
-        echo implode(', ', $schedule);
+        return implode(', ', $schedules);
     }
 
     public function getAge($birthDate)

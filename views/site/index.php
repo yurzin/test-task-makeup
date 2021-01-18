@@ -11,11 +11,14 @@
 /* @var $viewModel */
 
 use \app\components\SidebarWidget;
+use app\viewmodels\Resume\ResumeViewModel;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'Список резюме';
+
+$viewModel = new ResumeViewModel();
 
 ?>
 <div class="content">
@@ -95,7 +98,7 @@ $this->title = 'Список резюме';
                                         ) ?></span>
                                 <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                        ['n' => $viewModel->getAge($item->birth_date)],
+                                        ['n' => $viewModel->getAge($model->birth_date) ],
                                         'ru_RU'
                                     ); ?></span>
                                 <span class="mr16 paragraph"><?= $item->city->city ?></span>

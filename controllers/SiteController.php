@@ -19,8 +19,6 @@ class SiteController extends Controller
 {
     public function actionIndex()
     {
-        $viewModel = new ResumeViewModel();
-
         $sort = new Sort(
             [
                 'defaultOrder' => [
@@ -53,7 +51,7 @@ class SiteController extends Controller
 
         return $this->render(
             'index',
-            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization', 'viewModel')
+            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization')
         );
     }
 
@@ -106,11 +104,11 @@ class SiteController extends Controller
     public function actionViewResume($id)
     {
         $resume = Resume::getOne($id);
-        $viewModel = new ResumeViewModel();
-        $viewModel->employment = $resume['employment'];
-        $viewModel->schedule = $resume['schedule'];
+//        $viewModel = new ResumeViewModel();
+//        $viewModel->employment = $resume['employment'];
+//        $viewModel->schedule = $resume['schedule'];
 
-        return $this->render('view-resume', compact('resume', 'viewModel'));
+        return $this->render('view-resume', compact('resume'));
     }
 
     public function actionResume()
