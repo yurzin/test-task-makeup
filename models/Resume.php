@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class Resume
@@ -11,10 +12,10 @@ use yii\db\ActiveRecord;
 class Resume extends ActiveRecord
 {
 
-    /*public static function getAll()
+    public static function getAll()
     {
         return self::find();
-    }*/
+    }
 
     public static function getOne($id)
     {

@@ -2,7 +2,6 @@
 
 /* @var $this yii\web\View */
 
-/* @var $resume */
 /* @var $count */
 /* @var $sort */
 /* @var $city */
@@ -16,8 +15,6 @@ use yii\widgets\LinkPager;
 use \app\components\SidebarWidget;
 
 $this->title = 'Список резюме';
-
-\yii\helpers\VarDumper::dump($viewModel, 3, true);
 
 ?>
 <div class="content">
@@ -76,7 +73,7 @@ $this->title = 'Список резюме';
                     </div>
                 </div>
 
-                <?php foreach ($resume as $item) : ?>
+                <?php foreach ($viewModel->resume as $item) : ?>
                     <div onclick="location.href='/view-resume/<?= $item->id ?>'"
                          class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16"
                          style="cursor: pointer">
@@ -97,7 +94,7 @@ $this->title = 'Список резюме';
                                         ) ?></span>
                                 <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                        ['n' => /*$viewModel->getAge()*/ 333],
+                                        ['n' => $viewModel->getAge($item->birth_date)],
                                         'ru_RU'
                                     ); ?></span>
                                 <span class="mr16 paragraph"><?= $item->city->name ?></span>

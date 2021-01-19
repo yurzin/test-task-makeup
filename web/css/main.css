@@ -1292,6 +1292,49 @@ input[type="file"] {
     justify-content: space-between;
 }
 
+#gender {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#gender > [type="radio"]:checked + label, [type="radio"]:not(:checked) + label  {
+    content: none !important;
+    background-image: none !important;
+    padding: 7px !important;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px !important;
+}
+
+#gender > [type="radio"]:checked + label:after, [type="radio"]:not(:checked) + label:after  {
+    content: none !important;
+    padding-left: 0 !important;
+}
+
+#gender > [type="radio"]:not(:checked) + label:before, [type="radio"]:checked + label:before  {
+    content: none !important;
+    padding-left: 0 !important;
+}
+
+#gender > [type="radio"]:checked + .gender {
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(76, 128, 166, 0.19);
+    border-radius: 4px;
+    font-weight: 600;
+    color: #262a36;
+}
+
+.gender:hover {
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(76, 128, 166, 0.19);
+    border-radius: 4px;
+    font-weight: 600;
+    color: #262a36;
+}
+
 .signin-modal__switch-btn {
     width: 50%;
     font-style: normal;

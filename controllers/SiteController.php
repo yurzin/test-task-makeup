@@ -21,9 +21,8 @@ class SiteController extends Controller
 {
     public function actionIndex()
     {
-        $resume = new Resume();
-
-        $viewModel = new ViewModel($resume);
+        $resume = Resume::getAll();
+        $count = $resume->count();
 
         $sort = new Sort(
             [
@@ -39,7 +38,6 @@ class SiteController extends Controller
             ]
         );
 
-        $count = $resume->find()->count();
         $pagination = new Pagination(
             [
                 'defaultPageSize' => 4,
@@ -51,12 +49,12 @@ class SiteController extends Controller
         $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
 
         $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
-
-        $resume = $resume->find()->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
+        $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
+        $viewModel = new ViewModel($resume);
 
         return $this->render(
             'index',
-            compact('resume', 'pagination', 'count', 'sort', 'city', 'specialization', 'viewModel')
+            compact('pagination', 'count', 'sort', 'city', 'specialization', 'viewModel')
         );
     }
 
@@ -109,9 +107,8 @@ class SiteController extends Controller
 
     public function actionViewResume($id)
     {
-        $resume = Resume::getOne($id);
-        $viewModel = new ResumeViewModel($resume);
-        return $this->render('view-resume', compact('resume', 'viewModel'));
+        $viewModel = new ResumeViewModel(Resume::getOne($id));
+        return $this->render('view-resume', compact('viewModel'));
     }
 
     public function actionResume()
@@ -125,15 +122,14 @@ class SiteController extends Controller
 
         if ($modelAddResume->load(Yii::$app->request->post())) {
             $modelAddResume->setScheduleSerialize($modelAddResume->schedule);
+            //$modelAddResume->setEmploymentSerialize($modelAddResume->employment);
             $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
             $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
             $modelAddResume->photo = $path;
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
                 $modelEmployment->resume_id = $modelAddResume->id;
-                $modelEmployment->full_employment = $modelAddResume->setEmploymentSerialize(
-                    $modelAddResume->employment
-                );
+                $modelEmployment->full_employment = $modelAddResume->setEmploymentSerialize($modelAddResume->employment);
                 $modelOrganization->resume_id = $modelAddResume->id;
                 $modelOrganization->start_month = $modelAddResume->start_month;
                 $modelOrganization->start_year = $modelAddResume->start_year;

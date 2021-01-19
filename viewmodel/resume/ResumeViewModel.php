@@ -8,7 +8,7 @@ use app\models\Employments;
 
 class ResumeViewModel
 {
-    private $resume;
+    public $resume;
 
     public function __construct($resume)
     {

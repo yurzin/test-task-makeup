@@ -12,7 +12,7 @@ class Employment extends ActiveRecord
         return $this->hasMany(Resume::class, ['id' => 'resume_id']);
     }
 
-    public function getEmployment()
+    /*public function getEmployment()
     {
         return unserialize($this->getAttribute('employment'));
     }
@@ -20,5 +20,5 @@ class Employment extends ActiveRecord
     public function setEmployment($value)
     {
         $this->setAttribute('employment', serialize($value));
-    }
+    }*/
 }

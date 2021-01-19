@@ -8,6 +8,7 @@
 
 use app\models\Employments;
 use app\models\FormFilter;
+use app\models\Gender;
 use app\models\Schedule;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -18,20 +19,24 @@ $model = new FormFilter();
 <?php
 $form = ActiveForm::begin(['action' => 'selection-resume', 'method' => 'get']); ?>
 
-    <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
-
-        <?= Html::a('Все', ['/selection-resume', 'gender' => 'all'], ['class' => 'signin-modal__switch-btn']) ?>
-        <?= Html::a(
-            'Мужчины',
-            ['/selection-resume', 'gender' => '1'],
-            ['class' => 'signin-modal__switch-btn']
-        ) ?>
-        <?= Html::a(
-            'Женщины',
-            ['/selection-resume', 'gender' => '2'],
-            ['class' => 'signin-modal__switch-btn', 'on']
-        ) ?>
-    </div>
+<?php
+$model->gender = '0';
+echo $form->field(
+    $model,
+    'gender',
+    ['options' => ['tag' => 'div', 'class' => "signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16 d-flex justify-content-center"]]
+)
+    ->radioList(
+        [0 => 'Все', 1 => 'Мужчины', 2 => 'Женщины'],
+        [
+            'item' => function ($index, $label, $name, $checked, $value) {
+                $checked = $checked ? 'checked' : '';
+                $id = str_replace(['[', ']'], ['', ''], 'gender') . intval($index + 1);
+                return "<input id=$id type='radio' class='signin-modal__switch-btn' name=$name value=$value $checked> <label class='gender' for=$id>$label</label>";
+            }
+        ]
+    )->label(false);
+?>
 
     <div class="vakancy-page-filter-block__row mb1">
         <div class="paragraph cadet-blue">Город</div>
