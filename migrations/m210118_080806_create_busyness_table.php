@@ -16,7 +16,7 @@ class m210118_080806_create_busyness_table extends Migration
             'id' => $this->primaryKey(),
             'resume_id' => $this->integer(100),
             'full_employment' => $this->tinyInteger(),
-            'part-time_employment' => $this->tinyInteger(),
+            'part_time_employment' => $this->tinyInteger(),
             'project_work' => $this->tinyInteger(),
             'internship' => $this->tinyInteger(),
             'volunteering' => $this->tinyInteger(),

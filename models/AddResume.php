@@ -11,7 +11,7 @@ class AddResume extends ActiveRecord
         return 'resume';
     }
 
-    public $full_employment;
+    public $employment;
     public $imageFile;
     public $start_month;
     public $start_year;

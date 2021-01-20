@@ -122,13 +122,15 @@ class SiteController extends Controller
 
         if ($modelAddResume->load(Yii::$app->request->post())) {
             $modelAddResume->setScheduleSerialize($modelAddResume->schedule);
-//            $modelAddResume->setEmploymentSerialize($modelAddResume->employment);
             $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
             $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
             $modelAddResume->photo = $path;
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
-                $modelBusyness->resume_id = $modelAddResume->id;
+                $modelBusyness->link('resume', $modelAddResume, 'id');
+
+                //$modelBusyness->resume_id = $modelAddResume->id;
+
                 $modelBusyness->full_employment = $modelAddResume->employment[0];
                 $modelBusyness->part_time_employment = $modelAddResume->employment[1];
                 $modelBusyness->project_work = $modelAddResume->employment[2];
