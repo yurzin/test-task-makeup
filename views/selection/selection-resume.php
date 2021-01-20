@@ -30,8 +30,9 @@ if (!empty($_GET)) {
         echo ListView::widget(
             [
                 'dataProvider' => $dataProvider,
+                'viewParams'=>['viewModel' => $viewModel],
                 'options' => [
-                    'tag' => false,
+                    'tag' => false
                 ],
                 'layout' => "{items}\n{pager}",
                 'itemView' => '_selection',

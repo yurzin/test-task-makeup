@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Employment;
+use app\models\Busyness;
 use app\viewmodel\Resume\ResumeViewModel;
 use app\viewModel\ViewModel;
 use Yii;
@@ -48,7 +48,7 @@ class SiteController extends Controller
 
         $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
 
-        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
+        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'name');
         $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
         $viewModel = new ViewModel($resume);
 
@@ -115,30 +115,34 @@ class SiteController extends Controller
     {
         $modelAddResume = new AddResume();
         $modelOrganization = new Organization();
-        $modelEmployment = new Employment();
+        $modelBusyness = new Busyness();
 
         $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
-        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'specialization');
+        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'name');
 
         if ($modelAddResume->load(Yii::$app->request->post())) {
             $modelAddResume->setScheduleSerialize($modelAddResume->schedule);
-            //$modelAddResume->setEmploymentSerialize($modelAddResume->employment);
+//            $modelAddResume->setEmploymentSerialize($modelAddResume->employment);
             $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
             $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
             $modelAddResume->photo = $path;
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
-                $modelEmployment->resume_id = $modelAddResume->id;
-                $modelEmployment->full_employment = $modelAddResume->setEmploymentSerialize($modelAddResume->employment);
+                $modelBusyness->resume_id = $modelAddResume->id;
+                $modelBusyness->full_employment = $modelAddResume->employment[0];
+                $modelBusyness->part_time_employment = $modelAddResume->employment[1];
+                $modelBusyness->project_work = $modelAddResume->employment[2];
+                $modelBusyness->internship = $modelAddResume->employment[3];
+                $modelBusyness->volunteering = $modelAddResume->employment[4];
                 $modelOrganization->resume_id = $modelAddResume->id;
                 $modelOrganization->start_month = $modelAddResume->start_month;
                 $modelOrganization->start_year = $modelAddResume->start_year;
                 $modelOrganization->end_month = $modelAddResume->end_month;
                 $modelOrganization->end_year = $modelAddResume->end_year;
-                $modelOrganization->organization = $modelAddResume->organization;
+                $modelOrganization->name = $modelAddResume->organization;
                 $modelOrganization->position = $modelAddResume->position;
                 $modelOrganization->duties = $modelAddResume->duties;
-                $modelEmployment->save();
+                $modelBusyness->save();
                 $modelOrganization->save();
                 Yii::$app->session->setFlash(
                     'success',

@@ -1,10 +1,7 @@
 <?php
 
 /* @var $model */
-
-use app\viewmodels\Resume\ResumeViewModel;
-
-$viewModel = new ResumeViewModel();
+/* @var $viewModel */
 
 ?>
 
@@ -18,7 +15,7 @@ $viewModel = new ResumeViewModel();
     </div>
     <div class="company-list-search__block-right">
         <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= $model->date ?></div>
-        <h3 class="mini-title mobile-off"><?= $model->specialization->specialization ?></h3>
+        <h3 class="mini-title mobile-off"><?= $model->specialization->name ?></h3>
         <div class="d-flex align-items-center flex-wrap mb8">
             <span class="mr16 paragraph"><?= $model->salary ?> ₽ </span>
             <span class="mr16 paragraph"><?= $model->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
@@ -28,7 +25,7 @@ $viewModel = new ResumeViewModel();
                     ) ?></span>
             <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                    ['n' => $viewModel->getAge($model->birth_date) ],
+                    ['n' => $viewModel->getAge($model->birth_date)],
                     'ru_RU'
                 ); ?></span>
             <span class="mr16 paragraph"><?= $model->city->name ?></span>
@@ -36,6 +33,6 @@ $viewModel = new ResumeViewModel();
         <p class="paragraph tbold mobile-off">Последнее место работы</p>
     </div>
     <div class="company-list-search__block-middle">
-        <p class="paragraph mb16 mobile-mb32"><?= $model->organization->organization != '' ? $model->organization->organization : 'Тунеядец' ?></p>
+        <p class="paragraph mb16 mobile-mb32"><?= $model->organization->name != '' ? $model->organization->name : 'Тунеядец' ?></p>
     </div>
 </div>

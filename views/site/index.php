@@ -9,6 +9,7 @@
 /* @var $pagination */
 /* @var $specialization */
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
@@ -23,7 +24,7 @@ $this->title = 'Список резюме';
             <div class="container">
                 <div class="header-search__wrap">
                     <?php
-                    echo Html::beginForm(Url::toRoute('/search'), 'get', ['class' => 'header-search__form']); ?>
+                    echo Html::beginForm(Url::toRoute('/selection-resume'), 'get', ['class' => 'header-search__form']); ?>
                     <?php
                     echo Html::a(
                         Html::img('../../images/dark-search.svg', ['class' => 'dark-search-icon header-search__icon'])
@@ -84,7 +85,7 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-right">
                             <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= $item->date ?></div>
-                            <h3 class="mini-title mobile-off"><?= $item->specialization->specialization ?></h3>
+                            <h3 class="mini-title mobile-off"><?= $item->specialization->name ?></h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph"> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
@@ -103,7 +104,7 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-middle">
                             <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->organization != '' ? $item->organization->organization : 'Тунеядец' ?></p>
+                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->name != '' ? $item->organization->name : 'Тунеядец' ?></p>
                         </div>
                     </div>
                 <?php

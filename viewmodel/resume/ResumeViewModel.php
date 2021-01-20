@@ -5,6 +5,7 @@ namespace app\viewModel\Resume;
 use DateTime;
 use app\models\Schedule;
 use app\models\Employments;
+use yii\helpers\ArrayHelper;
 
 class ResumeViewModel
 {
@@ -17,8 +18,10 @@ class ResumeViewModel
 
     public function getEmploymentName()
     {
-        foreach (explode(',', $this->resume->employment) as $value) {
-            $employment[] = Employments::getLabel($value);
+        foreach ($this->resume->busyness as $value) {
+            if ($value > 0) {
+                $employment[] = Employments::getLabel($value);
+            }
         }
         return implode(', ', $employment);
     }

@@ -3,7 +3,6 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
  * Class Resume
@@ -43,9 +42,11 @@ class Resume extends ActiveRecord
             );
     }
 
-    public function getEmployment()
+    public function getBusyness()
     {
-        return $this->hasOne(Employment::class, ['resume_id' => 'id']);
+        return $this->hasOne(Busyness::class, ['resume_id' => 'id'])
+            ->select(['full_employment', 'part_time_employment', 'project_work', 'internship', 'volunteering'])
+            ->asArray();
     }
 
 }

@@ -7,7 +7,6 @@ $item = $viewModel->resume;
 
 $this->title = 'Резюме ' . $item->last_name;
 
-
 ?>
 
 <div class="main-wrapper">
@@ -26,7 +25,7 @@ $this->title = 'Резюме ' . $item->last_name;
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
-                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $item->specialization->specialization ?>
+                    <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= $item->specialization->name ?>
                     </div>
                     <div class="paragraph-lead mb16">
                         <span class="mr24"><?= $item->salary ?> ₽</span>
@@ -113,7 +112,7 @@ $this->title = 'Резюме ' . $item->last_name;
                                                 ) ?></div>
                                         </div>
                                         <div class="col-md-8">
-                                            <div class="paragraph tbold mb8"><?= $item->organization->organization ?></div>
+                                            <div class="paragraph tbold mb8"><?= $item->organization->name ?></div>
                                             <div class="paragraph tbold mb8"><?= $item->organization->position ?>
                                             </div>
                                             <div class="paragraph"><?= $item->organization->duties ?>

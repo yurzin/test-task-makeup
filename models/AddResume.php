@@ -104,7 +104,7 @@ class AddResume extends ActiveRecord
     }
 
     public function setEmploymentSerialize($value) {
-        $this->employment = serialize($value);
+        $this->employment = implode(', ' , $value);
     }
 
     public function upload()

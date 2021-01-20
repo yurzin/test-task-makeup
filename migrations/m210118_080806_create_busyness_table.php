@@ -5,14 +5,14 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%employment}}`.
  */
-class m210118_080806_create_employment_table extends Migration
+class m210118_080806_create_busyness_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%employment}}', [
+        $this->createTable('{{%busyness}}', [
             'id' => $this->primaryKey(),
             'resume_id' => $this->integer(100),
             'full_employment' => $this->tinyInteger(),
@@ -23,13 +23,13 @@ class m210118_080806_create_employment_table extends Migration
         ]);
 
         $this->createIndex(
-            'idx-employment-resume_id',
+            'idx-busyness-resume_id',
             'employment',
             'id'
         );
 
         $this->addForeignKey(
-            'fk-employment-resume_id',
+            'fk-busyness-resume_id',
             'employment',
             'resume_id',
             'resume',
@@ -43,6 +43,6 @@ class m210118_080806_create_employment_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%employment}}');
+        $this->dropTable('{{%busyness}}');
     }
 }
