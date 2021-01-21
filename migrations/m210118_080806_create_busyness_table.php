@@ -24,13 +24,13 @@ class m210118_080806_create_busyness_table extends Migration
 
         $this->createIndex(
             'idx-busyness-resume_id',
-            'employment',
+            'busyness',
             'id'
         );
 
         $this->addForeignKey(
             'fk-busyness-resume_id',
-            'employment',
+            'busyness',
             'resume_id',
             'resume',
             'id',

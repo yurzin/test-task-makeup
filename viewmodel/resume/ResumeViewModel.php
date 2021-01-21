@@ -28,8 +28,10 @@ class ResumeViewModel
 
     public function getScheduleName()
     {
-        foreach (explode(',', $this->resume->schedule) as $value) {
-            $schedule[] = Schedule::getLabel($value);
+        foreach ($this->resume->timetable as $value) {
+            if ($value > 0) {
+                $schedule[] = Schedule::getLabel($value);
+            }
         }
         return implode(', ', $schedule);
     }

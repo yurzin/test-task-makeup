@@ -2,10 +2,11 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Busyness;
+use app\models\Timetable;
 use app\viewmodel\Resume\ResumeViewModel;
 use app\viewModel\ViewModel;
-use Yii;
 use app\models\Organization;
 use \yii\data\Sort;
 use yii\data\Pagination;
@@ -116,26 +117,35 @@ class SiteController extends Controller
         $modelAddResume = new AddResume();
         $modelOrganization = new Organization();
         $modelBusyness = new Busyness();
+        $modelTimetable = new Timetable();
 
         $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
         $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'name');
 
         if ($modelAddResume->load(Yii::$app->request->post())) {
-            $modelAddResume->setScheduleSerialize($modelAddResume->schedule);
+
             $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
             $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
             $modelAddResume->photo = $path;
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
-                $modelBusyness->link('resume', $modelAddResume, 'id');
 
-                //$modelBusyness->resume_id = $modelAddResume->id;
+                $modelBusyness->link('resume', $modelAddResume, 'id');
 
                 $modelBusyness->full_employment = $modelAddResume->employment[0];
                 $modelBusyness->part_time_employment = $modelAddResume->employment[1];
                 $modelBusyness->project_work = $modelAddResume->employment[2];
                 $modelBusyness->internship = $modelAddResume->employment[3];
                 $modelBusyness->volunteering = $modelAddResume->employment[4];
+
+                $modelTimetable->link('resume', $modelAddResume, 'id');
+
+                $modelTimetable->full_day = $modelAddResume->schedule[0];
+                $modelTimetable->shift_work = $modelAddResume->schedule[1];
+                $modelTimetable->flexible_work = $modelAddResume->schedule[2];
+                $modelTimetable->remote_work = $modelAddResume->schedule[3];
+                $modelTimetable->shift_method = $modelAddResume->schedule[4];
+
                 $modelOrganization->resume_id = $modelAddResume->id;
                 $modelOrganization->start_month = $modelAddResume->start_month;
                 $modelOrganization->start_year = $modelAddResume->start_year;
@@ -144,6 +154,8 @@ class SiteController extends Controller
                 $modelOrganization->name = $modelAddResume->organization;
                 $modelOrganization->position = $modelAddResume->position;
                 $modelOrganization->duties = $modelAddResume->duties;
+
+                $modelTimetable->save();
                 $modelBusyness->save();
                 $modelOrganization->save();
                 Yii::$app->session->setFlash(

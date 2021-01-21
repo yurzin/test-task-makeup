@@ -9,6 +9,8 @@ class SelectionResume extends Resume
 {
     public $ageFrom;
     public $ageTo;
+    public $employment;
+    public $schedule;
 
     public static function tableName()
     {
@@ -63,7 +65,7 @@ class SelectionResume extends Resume
         $query->andFilterWhere(['specialization_id' => $this->specialization_id]);
         $query->andFilterWhere(['like', 'experience', is_array($this->experience) ? implode(",", $this->experience) : $this->experience]);
         $query->andFilterWhere(['like', 'schedule', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
-        $query->andFilterWhere(['like', 'employment', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
+        $query->andFilterWhere(['like', 'employment', is_array($this->busyness) ? implode(",", $this->busyness) : $this->busyness]);
         $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageFrom]);
         $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageTo]);
 

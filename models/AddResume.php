@@ -12,6 +12,7 @@ class AddResume extends ActiveRecord
     }
 
     public $employment;
+    public $schedule;
     public $imageFile;
     public $start_month;
     public $start_year;
@@ -41,7 +42,6 @@ class AddResume extends ActiveRecord
             ],
             [['experience'], 'safe'],
             [['employment'], 'safe'],
-            [['full_employment'], 'safe'],
             [['schedule'], 'safe'],
             ['email', 'email'],
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
@@ -99,13 +99,13 @@ class AddResume extends ActiveRecord
         return true;
     }
 
-    public function setScheduleSerialize($value) {
+ /*   public function setScheduleSerialize($value) {
         $this->schedule = serialize($value);
     }
 
     public function setEmploymentSerialize($value) {
         $this->employment = implode(', ' , $value);
-    }
+    }*/
 
     public function upload()
     {

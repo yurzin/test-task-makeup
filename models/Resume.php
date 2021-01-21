@@ -49,4 +49,11 @@ class Resume extends ActiveRecord
             ->asArray();
     }
 
+    public function getTimetable()
+    {
+        return $this->hasOne(Timetable::class, ['resume_id' => 'id'])
+            ->select(['full_day', 'shift_work', 'flexible_work', 'remote_work', 'shift_method'])
+            ->asArray();
+    }
+
 }

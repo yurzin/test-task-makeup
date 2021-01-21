@@ -5,28 +5,26 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "organization".
+ * This is the model class for table "timetable".
  *
  * @property int $id
  * @property int|null $resume_id
- * @property string|null $name
- * @property string|null $start_month
- * @property int|null $start_year
- * @property string|null $end_month
- * @property int|null $end_year
- * @property string|null $position
- * @property string|null $duties
+ * @property int|null $full_day
+ * @property int|null $shift_work
+ * @property int|null $flexible_work
+ * @property int|null $remote_work
+ * @property int|null $shift_method
  *
  * @property Resume $resume
  */
-class Organization extends \yii\db\ActiveRecord
+class Timetable extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'organization';
+        return 'timetable';
     }
 
     /**
@@ -35,9 +33,7 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['resume_id', 'start_year', 'end_year'], 'integer'],
-            [['duties'], 'string'],
-            [['name', 'start_month', 'end_month', 'position'], 'string', 'max' => 100],
+            [['resume_id', 'full_day', 'shift_work', 'flexible_work', 'remote_work', 'shift_method'], 'integer'],
             [['resume_id'], 'exist', 'skipOnError' => true, 'targetClass' => Resume::class, 'targetAttribute' => ['resume_id' => 'id']],
         ];
     }
@@ -50,13 +46,11 @@ class Organization extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'resume_id' => 'Resume ID',
-            'name' => 'Name',
-            'start_month' => 'Start Month',
-            'start_year' => 'Start Year',
-            'end_month' => 'End Month',
-            'end_year' => 'End Year',
-            'position' => 'Position',
-            'duties' => 'Duties',
+            'full_day' => 'Full Day',
+            'shift_work' => 'Shift Work',
+            'flexible_work' => 'Flexible Work',
+            'remote_work' => 'Remote Work',
+            'shift_method' => 'Shift Method',
         ];
     }
 
