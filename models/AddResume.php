@@ -21,6 +21,7 @@ class AddResume extends ActiveRecord
     public $organization;
     public $position;
     public $duties;
+    public $experience;
 
     public function rules()
     {
@@ -105,7 +106,8 @@ class AddResume extends ActiveRecord
 
     public function setEmploymentSerialize($value) {
         $this->employment = implode(', ' , $value);
-    }*/
+    }
+ */
 
     public function upload()
     {

@@ -5,7 +5,6 @@ namespace app\viewModel\Resume;
 use DateTime;
 use app\models\Schedule;
 use app\models\Employments;
-use yii\helpers\ArrayHelper;
 
 class ResumeViewModel
 {

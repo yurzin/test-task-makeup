@@ -21,6 +21,8 @@ use Yii;
  */
 class Organization extends \yii\db\ActiveRecord
 {
+    public $experience;
+
     /**
      * {@inheritdoc}
      */
