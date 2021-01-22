@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Serialize;
 use Yii;
 use app\models\Busyness;
 use app\models\Timetable;

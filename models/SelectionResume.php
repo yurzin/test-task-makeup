@@ -2,8 +2,10 @@
 
 namespace app\models;
 
+use app\components\Serialize;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "resume".
@@ -70,17 +72,28 @@ class SelectionResume extends Resume
         $query->andFilterWhere(['specialization_id' => $this->specialization_id]);
         $query->andFilterWhere(['like', 'experience', is_array($this->experience) ? implode(",", $this->experience) : $this->experience]);
 
-        $query->andFilterWhere(['like', 'timetable.full_day', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
-        $query->andFilterWhere(['like', 'timetable.shift_work', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
-        $query->andFilterWhere(['like', 'timetable.flexible_work', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
-        $query->andFilterWhere(['like', 'timetable.remote_work', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
-        $query->andFilterWhere(['like', 'timetable.shift_method', is_array($this->schedule) ? implode(",", $this->schedule) : $this->schedule]);
+        if (is_array($this->schedule)) {
 
-        $query->andFilterWhere(['like', 'busyness.full_employment', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
-        $query->andFilterWhere(['like', 'busyness.part_time_employment', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
-        $query->andFilterWhere(['like', 'busyness.project_work', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
-        $query->andFilterWhere(['like', 'busyness.internship', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
-        $query->andFilterWhere(['like', 'busyness.volunteering', is_array($this->employment) ? implode(",", $this->employment) : $this->employment]);
+            $schedule = implode(" ", $this->schedule);
+
+            $query->andFilterWhere(['timetable.full_day' => $schedule]);
+            $query->orFilterWhere(['timetable.shift_work' => $schedule]);
+            $query->orFilterWhere(['timetable.flexible_work' => $schedule]);
+            $query->orFilterWhere(['timetable.remote_work' => $schedule]);
+            $query->orFilterWhere(['timetable.shift_method' => $schedule]);
+
+        }
+
+        if (is_array($this->employment)) {
+
+            $employment = implode(" ", $this->employment);
+
+            $query->andFilterWhere(['busyness.full_employment' => $employment]);
+            $query->orFilterWhere(['busyness.part_time_employment' => $employment]);
+            $query->orFilterWhere(['busyness.project_work' => $employment]);
+            $query->orFilterWhere(['busyness.internship' => $employment]);
+            $query->orFilterWhere(['busyness.volunteering' => $employment]);
+        }
 
         $query->andFilterWhere(['>=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageFrom]);
         $query->andFilterWhere(['<=', 'TIMESTAMPDIFF(YEAR, birth_date, curdate())', $this->ageTo]);

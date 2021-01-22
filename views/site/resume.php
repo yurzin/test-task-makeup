@@ -264,8 +264,9 @@ endif; ?>
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
+                                $employment = 'AddResume[employment][' . $index . ']';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
-                                return "<div class='form-check d-flex'><input class='form-check-input' name=$name value=$value id=$id $checked type='checkbox' >"
+                                return "<div class='form-check d-flex'><input class='form-check-input' name=$employment value=$value id=$id $checked type='checkbox' >"
                                     . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
                             }
                         ]
@@ -288,8 +289,9 @@ endif; ?>
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
+                                $schedule = 'AddResume[schedule][' . $index . ']';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 6);
-                                return "<div class='form-check d-flex'><input class='form-check-input' name=$name value=$value id=$id $checked type='checkbox' >"
+                                return "<div class='form-check d-flex'><input class='form-check-input' name=$schedule value=$value id=$id $checked type='checkbox' >"
                                     . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
                             }
                         ]

@@ -20,8 +20,6 @@ if (!empty($_GET)) {
     }
 }
 
-\yii\helpers\VarDumper::dump($_GET, 3, true);
-
 ?>
 <div class="row">
     <div class="col-lg-9 desctop-992-pr-16">

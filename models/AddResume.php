@@ -38,7 +38,7 @@ class AddResume extends ActiveRecord
                     'specialization_id',
                     'salary',
                     'photo',
-                ],'string'
+                ], 'string'
                 //'required'
             ],
             [['experience'], 'safe'],
@@ -99,15 +99,6 @@ class AddResume extends ActiveRecord
         }
         return true;
     }
-
- /*   public function setScheduleSerialize($value) {
-        $this->schedule = serialize($value);
-    }
-
-    public function setEmploymentSerialize($value) {
-        $this->employment = implode(', ' , $value);
-    }
- */
 
     public function upload()
     {
