@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\components\Serialize;
+use app\models\SearchModel;
 use Yii;
 use app\models\Busyness;
 use app\models\Timetable;
@@ -65,48 +65,6 @@ class SiteController extends Controller
         return $this->render('my-resume');
     }
 
-    public function actionSearch()
-    {
-        $search = Yii::$app->request->get('query');
-
-        $sort = new Sort(
-            [
-                'defaultOrder' => [
-                    'date' => SORT_DESC
-                ],
-                'attributes' => [
-                    'date',
-                    'salary'
-                ],
-                'sortParam' => 'type',
-                'route' => 'sort'
-            ]
-        );
-
-        $resume = new Resume();
-
-        $resume->find()
-            ->joinWith(['specialization', 'specialization'], true)
-            ->joinWith(['organization', 'organization'], true)
-            ->joinWith(['city', 'city'], true)
-            ->andWhere(['like', 'last_name', $search])
-            ->andWhere(['like', 'organization', $search])
-            ->andWhere(['like', 'city', $search])
-            ->andWhere(['like', 'specialization', $search]);
-
-        $count = $resume->find()->count();
-
-        $pagination = new Pagination(
-            [
-                'defaultPageSize' => 4,
-                'totalCount' => $count
-            ]
-        );
-
-        $resume = $resume->find()->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
-        return $this->render('search', compact('resume', 'pagination', 'count', 'sort', 'city'));
-    }
-
     public function actionViewResume($id)
     {
         $viewModel = new ResumeViewModel(Resume::getOne($id));
@@ -124,13 +82,11 @@ class SiteController extends Controller
         $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'name');
 
         if ($modelAddResume->load(Yii::$app->request->post())) {
-
             $modelAddResume->imageFile = UploadedFile::getInstance($modelAddResume, 'imageFile');
             $path = '../../images/' . $modelAddResume->imageFile->baseName . '.' . $modelAddResume->imageFile->extension;
             $modelAddResume->photo = $path;
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
-
                 $modelBusyness->link('resume', $modelAddResume, 'id');
 
                 $modelBusyness->full_employment = $modelAddResume->employment[0];
@@ -159,6 +115,7 @@ class SiteController extends Controller
                 $modelTimetable->save();
                 $modelBusyness->save();
                 $modelOrganization->save();
+
                 Yii::$app->session->setFlash(
                     'success',
                     true

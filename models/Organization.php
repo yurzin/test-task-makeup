@@ -37,7 +37,7 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['resume_id', 'start_year', 'end_year'], 'integer'],
+            [['resume_id', 'start_year', 'end_year', 'experience'], 'integer'],
             [['duties'], 'string'],
             [['name', 'start_month', 'end_month', 'position'], 'string', 'max' => 100],
             [['resume_id'], 'exist', 'skipOnError' => true, 'targetClass' => Resume::class, 'targetAttribute' => ['resume_id' => 'id']],

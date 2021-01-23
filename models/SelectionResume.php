@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use app\components\Serialize;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "resume".
@@ -14,6 +12,8 @@ use yii\helpers\VarDumper;
  * @property int|null $employment
  * @property int|null $ageFrom
  * @property int|null $ageTo
+ * @property int|null $salary
+ *
  */
 class SelectionResume extends Resume
 {

@@ -44,11 +44,11 @@ class Specialization extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Resumes]].
+     * Gets query for [[Resume]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getResumes()
+    public function getResume()
     {
         return $this->hasMany(Resume::class, ['specialization_id' => 'id']);
     }

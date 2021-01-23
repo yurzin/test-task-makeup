@@ -14,8 +14,8 @@ $this->title = 'Резюме ' . $item->last_name;
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="mt8 mb32"><a href="<?= Yii::$app->urlManager->createUrl('site/index') ?>"><img
-                                    src="/images/blue-left-arrow.svg" alt="arrow"> Резюме в Кемерово</a>
+                    <div class="mt8 mb32"><a href="<?= Yii::$app->urlManager->createUrl('site/index') ?>">
+                            <img src="/images/blue-left-arrow.svg" alt="arrow"> Резюме в Кемерово</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@ $this->title = 'Резюме ' . $item->last_name;
                         <span class="mr24"><?= $item->salary ?> ₽</span>
                         <span> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                    ['n' => $item->organization->experience],
+                                    ['n' => $viewModel->getExperience()],
                                     'ru_RU'
                                 ) ?> </span>
                     </div>

@@ -144,7 +144,7 @@ echo $form->field(
             </div>
         </div>
     </div>
-    <div class="vakancy-page-filter-block__row vakancy-page-filter-block__show-vakancy-btns mb24 d-flex flex-wrap align-items-center mobile-jus-cont-center">
+    <div class="vakancy-page-filter-block__row vakancy-page-filter-block__show-vakancy-btns mt-3 mb24 d-flex flex-wrap align-items-center mobile-jus-cont-center">
         <?= Html::submitButton(
             'Показать вакансии',
             ['class' => 'link-orange-btn orange-btn mr24 mobile-mb12', 'id' => 'my-button-handler']

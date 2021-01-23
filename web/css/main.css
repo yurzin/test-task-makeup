@@ -1303,7 +1303,7 @@ input[type="file"] {
 #gender > [type="radio"]:checked + label, [type="radio"]:not(:checked) + label  {
     content: none !important;
     background-image: none !important;
-    padding: 7px !important;
+    padding: 5px 13px 5px 13px !important;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -1328,12 +1328,8 @@ input[type="file"] {
     color: #262a36;
 }
 
-.gender:hover {
-    background: #ffffff;
-    box-shadow: 0px 4px 8px rgba(76, 128, 166, 0.19);
-    border-radius: 4px;
+#gender > .gender:hover {
     font-weight: 600;
-    color: #262a36;
 }
 
 .signin-modal__switch-btn {

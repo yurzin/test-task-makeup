@@ -41,4 +41,9 @@ class ResumeViewModel
         $interval = $today->diff(new DateTime($this->resume->birth_date));
         return $interval->y;
     }
+
+    public function getExperience()
+    {
+        return $this->resume->organization->end_year - $this->resume->organization->start_year;
+    }
 }

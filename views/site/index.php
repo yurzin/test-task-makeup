@@ -9,7 +9,6 @@
 /* @var $pagination */
 /* @var $specialization */
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
@@ -24,7 +23,7 @@ $this->title = 'Список резюме';
             <div class="container">
                 <div class="header-search__wrap">
                     <?php
-                    echo Html::beginForm(Url::toRoute('/selection-resume'), 'get', ['class' => 'header-search__form']); ?>
+                    echo Html::beginForm(Url::toRoute('/search-resume'), 'get', ['class' => 'header-search__form']); ?>
                     <?php
                     echo Html::a(
                         Html::img('../../images/dark-search.svg', ['class' => 'dark-search-icon header-search__icon'])
@@ -90,7 +89,7 @@ $this->title = 'Список резюме';
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
                                 <span class="mr16 paragraph"> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                                             '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                            ['n' => $item->organization->experience],
+                                            ['n' => $viewModel->getExperience($item->id)],
                                             'ru_RU'
                                         ) ?></span>
                                 <span class="mr16 paragraph"><?= Yii::$app->i18n->format(

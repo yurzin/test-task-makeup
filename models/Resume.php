@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "resume".
  *
@@ -115,13 +113,8 @@ class Resume extends \yii\db\ActiveRecord
      */
     public function getOrganization()
     {
-        return $this->hasMany(Organization::class, ['resume_id' => 'id'])
-            ->select(
-                [
-                    '{{organization}}.*',
-                    '([[end_year]] - [[start_year]]) AS experience'
-                ]
-            );
+        return $this->hasOne(Organization::class, ['resume_id' => 'id'])
+            ->select(['start_year', 'end_year']);
     }
 
     /**
