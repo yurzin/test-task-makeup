@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\SearchModel;
 use Yii;
 use app\models\Busyness;
 use app\models\Timetable;
@@ -48,15 +47,16 @@ class SiteController extends Controller
             ]
         );
 
-        $city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
-
-        $specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'name');
         $resume = $resume->offset($pagination->offset)->limit($pagination->limit)->orderBy($sort->orders)->all();
+
         $viewModel = new ViewModel($resume);
+
+        $viewModel->city = ArrayHelper::map(City::find()->asArray()->all(), 'id', 'name');
+        $viewModel->specialization = ArrayHelper::map(Specialization::find()->asArray()->all(), 'id', 'name');
 
         return $this->render(
             'index',
-            compact('pagination', 'count', 'sort', 'city', 'specialization', 'viewModel')
+            compact('pagination', 'count', 'sort', 'viewModel')
         );
     }
 

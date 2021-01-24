@@ -20,10 +20,10 @@
             <span class="mr16 paragraph"><?= $model->salary ?> ₽ </span>
             <span class="mr16 paragraph"><?= $model->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                        ['n' => $model->organization->experience],
+                        ['n' => $viewModel->getWorkExperience($model->organization)],
                         'ru_RU'
                     ) ?></span>
-            <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
+            <span class="mr16 paragraph">Возраст <?= Yii::$app->i18n->format(
                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                     ['n' => $viewModel->getAge($model->birth_date)],
                     'ru_RU'

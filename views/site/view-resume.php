@@ -100,14 +100,14 @@ $this->title = 'Резюме ' . $item->last_name;
                                         <div class="col-lg-12"><h3
                                                     class="heading mb16"> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                                        ['n' => $item->organization->experience],
+                                                        ['n' => $viewModel->getExperience()],
                                                         'ru_RU'
                                                     ) ?></h3></div>
                                         <div class="col-md-4 mb16">
                                             <div class="paragraph tbold mb8"><?= $item->organization->start_month ?> <?= $item->organization->start_year ?></div>
                                             <div class="mini-paragraph"> <?= Yii::$app->i18n->format(
                                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
-                                                    ['n' => $item->organization->experience],
+                                                    ['n' => $viewModel->getExperience()],
                                                     'ru_RU'
                                                 ) ?></div>
                                         </div>

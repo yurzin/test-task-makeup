@@ -21,7 +21,7 @@ $totalCount = $dataProvider->getTotalCount();
         echo ListView::widget(
             [
                 'dataProvider' => $dataProvider,
-                'viewParams'=>['viewModel' => $viewModel],
+                'viewParams'=> ['viewModel' => $viewModel],
                 'options' => [
                     'tag' => false
                 ],

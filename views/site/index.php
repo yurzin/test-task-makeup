@@ -4,10 +4,8 @@
 
 /* @var $count */
 /* @var $sort */
-/* @var $city */
 /* @var $viewModel */
 /* @var $pagination */
-/* @var $specialization */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -92,7 +90,7 @@ $this->title = 'Список резюме';
                                             ['n' => $viewModel->getExperience($item->id)],
                                             'ru_RU'
                                         ) ?></span>
-                                <span class="mr16 paragraph"><?= Yii::$app->i18n->format(
+                                <span class="mr16 paragraph">Возраст <?= Yii::$app->i18n->format(
                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                         ['n' => $viewModel->getAge($item->birth_date)],
                                         'ru_RU'
@@ -103,7 +101,7 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-middle">
                             <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->name != '' ? $item->organization->name : 'Тунеядец' ?></p>
+                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->name/* != '' ? $item->organization->name : 'Тунеядец'*/ ?></p>
                         </div>
                     </div>
                 <?php
@@ -125,7 +123,7 @@ $this->title = 'Список резюме';
                     <div class="heading">Фильтр</div>
                     <img class="cursor-p" src="../../images/big-cancel.svg" alt="cancel">
                 </div>
-                <?= SidebarWidget::widget(['city' => $city, 'specialization' => $specialization]) ?>
+                <?= SidebarWidget::widget(['city' => $viewModel->city, 'specialization' => $viewModel->specialization]) ?>
             </div>
         </div>
     </div>

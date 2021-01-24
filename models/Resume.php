@@ -113,8 +113,7 @@ class Resume extends \yii\db\ActiveRecord
      */
     public function getOrganization()
     {
-        return $this->hasOne(Organization::class, ['resume_id' => 'id'])
-            ->select(['start_year', 'end_year']);
+        return $this->hasOne(Organization::class, ['resume_id' => 'id']);
     }
 
     /**

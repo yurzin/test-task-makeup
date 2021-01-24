@@ -55,9 +55,7 @@ $config = [
                 'sort' => 'site/index',
                 'my-resume' => 'site/my-resume',
                 'view-resume/<id:\d+>' => 'site/view-resume',
-                'resume-list' => 'site/index',
-                //'search/view-resume/<id:\d+>' => 'site/view-resume',
-                //'search' => 'site/search',
+                'resume-list' => 'site/index'
             ],
         ],
     ],

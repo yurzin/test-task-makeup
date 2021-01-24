@@ -16,6 +16,7 @@ use Yii;
  * @property int|null $end_year
  * @property string|null $position
  * @property string|null $duties
+ * @property string|null $experience
  *
  * @property Resume $resume
  */
