@@ -4,8 +4,40 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * This is the model class for table "resume".
+ *
+ * @property int $id
+ * @property string|null $photo
+ * @property string|null $last_name
+ * @property string|null $name
+ * @property string|null $patronymic
+ * @property int|null $gender
+ * @property string|null $birth_date
+ * @property string $imageFile
+ * @property int|null $city_id
+ * @property int|null $specialization_id
+ * @property int|null $phone
+ * @property int|null $salary
+ * @property string|null $email
+ * @property int|null $employment
+ * @property int|null $schedule
+ * @property string|null $start_month
+ * @property string|null $end_month
+ * @property int|null $start_year
+ * @property int|null $end_year
+ * @property string|null $organization
+ * @property string|null $position
+ * @property string|null $duties
+ * @property int|null $experience
+ *
+ */
+
 class AddResume extends ActiveRecord
 {
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
         return 'resume';
@@ -21,8 +53,10 @@ class AddResume extends ActiveRecord
     public $organization;
     public $position;
     public $duties;
-    public $experience;
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
@@ -37,9 +71,13 @@ class AddResume extends ActiveRecord
                     'phone',
                     'specialization_id',
                     'salary',
+                    'email',
                     'photo',
-                ], 'string'
-                //'required'
+                    'schedule',
+                     'employment',
+                     'experience'
+                ],
+                'required'
             ],
             [['experience'], 'safe'],
             [['employment'], 'safe'],
@@ -72,6 +110,31 @@ class AddResume extends ActiveRecord
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'last_name' => 'Фамилия',
+            'name' => 'Имя',
+            'patronymic' => 'Отчество',
+            'gender' => 'Пол',
+            'birth_date' => 'Дата рождения',
+            'city_id' => 'Город',
+            'email' => 'Электронная почта',
+            'phone' => 'Телефон',
+            'specialization_id' => 'Специализация',
+            'employment' => 'Тип анятости',
+            'schedule' => 'График',
+            'salary' => 'Зарплата',
+            'experience' => 'Опыт'
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function beforeSave($insert)
     {
         if (!parent::beforeSave($insert)) {
@@ -83,23 +146,27 @@ class AddResume extends ActiveRecord
         } else {
             $experience = 1;
         }
+
         switch ($experience) {
             case ($experience > 0 and $experience < 1) :
-                $this->experience = 1;
-                break;
-            case ($experience > 1 and $experience < 3) :
                 $this->experience = 2;
                 break;
-            case ($experience > 3 and $experience < 6) :
+            case ($experience > 1 and $experience < 3) :
                 $this->experience = 3;
                 break;
-            case ($experience > 6) :
+            case ($experience > 3 and $experience < 6) :
                 $this->experience = 4;
+                break;
+            case ($experience > 6) :
+                $this->experience = 5;
                 break;
         }
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function upload()
     {
         if ($this->validate()) {

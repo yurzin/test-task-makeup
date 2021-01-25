@@ -105,7 +105,7 @@ $this->title = 'Резюме ' . $item->last_name;
                                                     ) ?></h3></div>
                                         <div class="col-md-4 mb16">
                                             <div class="paragraph tbold mb8"><?= $item->organization->start_month ?> <?= $item->organization->start_year ?></div>
-                                            <div class="mini-paragraph"> <?= Yii::$app->i18n->format(
+                                            <div class="mini-paragraph"> <?= $item->experience == 1 ? 'Безработная' : 'Опыт работы ' . Yii::$app->i18n->format(
                                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                                     ['n' => $viewModel->getExperience()],
                                                     'ru_RU'

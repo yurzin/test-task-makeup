@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 /**
  * SearchModel represents the model behind the search form of `app\models\Resume`.
  */
+
 class SearchModel extends Resume
 {
 

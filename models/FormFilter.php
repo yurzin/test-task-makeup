@@ -4,6 +4,19 @@ namespace app\models;
 
 use yii\base\Model;
 
+/**
+ * This is the model class for table "resume".
+ *
+ * @property int|null $salary
+ * @property int|null $gender
+ * @property int|null $city_id
+ * @property int|null $specialization_id
+ * @property int|null $experience
+ * @property int|null $ageFrom
+ * @property int|null $ageTo
+ *
+ */
+
 class FormFilter extends Model
 {
     public function formName()
@@ -46,7 +59,7 @@ class FormFilter extends Model
                     'ageFrom',
                     'ageTo',
                 ],
-                'string'
+                'integer'
             ],
             [['experience'], 'safe'],
             [['employment'], 'safe'],

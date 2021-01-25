@@ -15,6 +15,7 @@ use yii\data\ActiveDataProvider;
  * @property int|null $salary
  *
  */
+
 class SelectionResume extends Resume
 {
     public $ageFrom;

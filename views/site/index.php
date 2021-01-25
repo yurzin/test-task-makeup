@@ -101,7 +101,7 @@ $this->title = 'Список резюме';
                         </div>
                         <div class="company-list-search__block-middle">
                             <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->name/* != '' ? $item->organization->name : 'Тунеядец'*/ ?></p>
+                            <p class="paragraph mb16 mobile-mb32"><?= $item->organization->name != '' ? $item->organization->name : 'Тунеядец' ?></p>
                         </div>
                     </div>
                 <?php

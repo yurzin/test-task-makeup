@@ -1,8 +1,6 @@
 <?php
 /* @var $model */
-
 /* @var $city */
-
 /* @var $specialization */
 
 use app\models\Employments;
@@ -126,7 +124,6 @@ endif; ?>
                 </div>
                 <?php
                 $model->gender = 1;
-
                 echo $form->field(
                     $model,
                     'gender',
@@ -405,8 +402,7 @@ endif; ?>
                                             'class' => 'nselect-1',
                                             '1' => ['Selected' => true],
                                         ]
-                                    )
-                                    ->label(false); ?>
+                                    )->label(false); ?>
                             </div>
                             <?= $form->field(
                                 $model,
@@ -422,8 +418,7 @@ endif; ?>
                                     'max' => 2021,
                                     'class' => 'dor-input w-100'
                                 ]
-                            )
-                                ->label(false); ?>
+                            )->label(false); ?>
                         </div>
                     </div>
                 </div>
@@ -518,9 +513,6 @@ endif; ?>
         const selectedFile = document.getElementById('addresume-imagefile').files[0];
         document.getElementById('previewPhoto').src = URL.createObjectURL(selectedFile);
     }
-</script>
-
-<script>
     const toggleDiv = () => {
         const more = document.getElementById("more");
         if (more.style.display === "none") {

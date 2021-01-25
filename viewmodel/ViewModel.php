@@ -2,8 +2,20 @@
 
 namespace app\viewModel;
 
+use app\models\City;
+use app\models\Resume;
+use app\models\Specialization;
 use DateTime;
 use yii\helpers\ArrayHelper;
+
+/**
+ * This is the model class for table "resume".
+ *
+ * @property Resume $resume
+ * @property City $city
+ * @property Specialization $specialization
+ *
+ */
 
 class ViewModel
 {

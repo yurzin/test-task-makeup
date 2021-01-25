@@ -2,9 +2,19 @@
 
 namespace app\viewModel\Resume;
 
+use app\models\City;
+use app\models\Resume;
+use app\models\Specialization;
 use DateTime;
 use app\models\Schedule;
 use app\models\Employments;
+
+/**
+ * This is the model class for table "resume".
+ *
+ * @property Resume $resume
+ *
+ */
 
 class ResumeViewModel
 {

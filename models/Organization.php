@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "organization".
  *
@@ -20,6 +18,7 @@ use Yii;
  *
  * @property Resume $resume
  */
+
 class Organization extends \yii\db\ActiveRecord
 {
     public $experience;

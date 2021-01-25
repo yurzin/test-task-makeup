@@ -57,8 +57,20 @@ class Resume extends \yii\db\ActiveRecord
             [['gender', 'city_id', 'specialization_id', 'salary'], 'integer'],
             [['about'], 'string'],
             [['photo', 'name', 'last_name', 'patronymic', 'email', 'phone', 'experience'], 'string', 'max' => 100],
-            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
-            [['specialization_id'], 'exist', 'skipOnError' => true, 'targetClass' => Specialization::class, 'targetAttribute' => ['specialization_id' => 'id']],
+            [
+                ['city_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => City::class,
+                'targetAttribute' => ['city_id' => 'id']
+            ],
+            [
+                ['specialization_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Specialization::class,
+                'targetAttribute' => ['specialization_id' => 'id']
+            ],
         ];
     }
 

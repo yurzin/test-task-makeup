@@ -102,19 +102,23 @@ class SiteController extends Controller
                 $modelTimetable->flexible_work = $modelAddResume->schedule[2];
                 $modelTimetable->remote_work = $modelAddResume->schedule[3];
                 $modelTimetable->shift_method = $modelAddResume->schedule[4];
-
-                $modelOrganization->resume_id = $modelAddResume->id;
-                $modelOrganization->start_month = $modelAddResume->start_month;
-                $modelOrganization->start_year = $modelAddResume->start_year;
-                $modelOrganization->end_month = $modelAddResume->end_month;
-                $modelOrganization->end_year = $modelAddResume->end_year;
-                $modelOrganization->name = $modelAddResume->organization;
-                $modelOrganization->position = $modelAddResume->position;
-                $modelOrganization->duties = $modelAddResume->duties;
-
                 $modelTimetable->save();
                 $modelBusyness->save();
-                $modelOrganization->save();
+
+                if ($modelAddResume->experience > 1) {
+
+                    $modelOrganization->resume_id = $modelAddResume->id;
+                    $modelOrganization->start_month = $modelAddResume->start_month;
+                    $modelOrganization->start_year = $modelAddResume->start_year;
+                    $modelOrganization->end_month = $modelAddResume->end_month;
+                    $modelOrganization->end_year = $modelAddResume->end_year;
+                    $modelOrganization->name = $modelAddResume->organization;
+                    $modelOrganization->position = $modelAddResume->position;
+                    $modelOrganization->duties = $modelAddResume->duties;
+
+                    $modelOrganization->save();
+
+                }
 
                 Yii::$app->session->setFlash(
                     'success',
