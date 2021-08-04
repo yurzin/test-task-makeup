@@ -32,7 +32,6 @@ use yii\db\ActiveRecord;
  * @property int|null $experience
  *
  */
-
 class AddResume extends ActiveRecord
 {
     /**
@@ -74,8 +73,8 @@ class AddResume extends ActiveRecord
                     'email',
                     'photo',
                     'schedule',
-                     'employment',
-                     'experience'
+                    'employment',
+                    'experience'
                 ],
                 'required'
             ],
@@ -96,17 +95,16 @@ class AddResume extends ActiveRecord
                     'specialization_id',
                     'salary',
                     'photo',
-                    'start_year',
+                    'organization',
                     'start_month',
-                    'end_year',
                     'end_month',
                     'position',
                     'duties',
-                    'organization',
                     'about'
                 ],
                 'string'
-            ]
+            ],
+            [['start_year', 'end_year'], 'integer'],
         ];
     }
 
@@ -162,6 +160,11 @@ class AddResume extends ActiveRecord
                 break;
         }
         return true;
+    }
+
+    public function getExperienceAttribute()
+    {
+        return $this->start_year;
     }
 
     /**

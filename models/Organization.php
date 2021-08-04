@@ -14,7 +14,6 @@ namespace app\models;
  * @property int|null $end_year
  * @property string|null $position
  * @property string|null $duties
- * @property string|null $experience
  *
  * @property Resume $resume
  */
@@ -37,9 +36,8 @@ class Organization extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['resume_id', 'start_year', 'end_year', 'experience'], 'integer'],
-            [['duties'], 'string'],
-            [['name', 'start_month', 'end_month', 'position'], 'string', 'max' => 100],
+            [['resume_id', 'start_year', 'end_year'], 'integer'],
+            [['name', 'start_month', 'end_month', 'position', 'duties'], 'string', 'max' => 100],
             [['resume_id'], 'exist', 'skipOnError' => true, 'targetClass' => Resume::class, 'targetAttribute' => ['resume_id' => 'id']],
         ];
     }

@@ -465,7 +465,21 @@ endif; ?>
                     ]
                 )->textInput(['class' => 'dor-input w100'])
                     ->label(false); ?>
-                <div class="row mb16">
+
+                <?= $form->field(
+                    $model,
+                    'duties',
+                    [
+                        'options' => ['class' => 'row mb16'],
+                        'template' => '<div class="col-lg-2 col-md-3 dflex-acenter">
+                                        <div class="paragraph">Обязанности, функции, достижения</div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-11"> {input} {error} </div>'
+                    ]
+                )->textarea(['class' => 'dor-input w100  h96 mb8'])
+                    ->label(false); ?>
+
+                <!--<div class="row mb16">
                     <div class="col-lg-2 col-md-3">
                         <div class="paragraph">Обязанности, функции, достижения</div>
                     </div>
@@ -475,7 +489,7 @@ endif; ?>
                         <div><a href="#">Удалить место работы</a></div>
                         <div><a href="#">+ Добавить место работы</a></div>
                     </div>
-                </div>
+                </div>-->
 
             </div>
             <div class="row mb32">
@@ -517,10 +531,16 @@ endif; ?>
     }
     const toggleDiv = () => {
         const more = document.getElementById("more");
-        if (more.style.display === "none") {
+        const check = document.getElementById("test4");
+        if (check.checked === true && more.style.display === "none") {
             more.style.display = "block";
         } else {
             more.style.display = "none";
         }
+        /* (more.style.display === "none") {
+            more.style.display = "block";
+        } else {
+            more.style.display = "none";
+        }*/
     }
 </script>

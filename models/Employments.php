@@ -6,17 +6,17 @@ use yii2mod\enum\helpers\BaseEnum;
 
 class Employments extends BaseEnum
 {
-    const full_employment = 0;
-    const part_time_employment = 1;
-    const project_work = 2;
-    const internship = 3;
-    const volunteering = 4;
+    const FULL_EMPLOYMENT = 0;
+    const PART_TIME_EMPLOYMENT = 1;
+    const PROJECT_WORK = 2;
+    const INTERNSHIP = 3;
+    const VOLUNTEERING = 4;
 
     public static $list = [
-        self::full_employment => 'Полная занятость',
-        self::part_time_employment => 'Частичная занятость',
-        self::project_work => 'Проектная работа',
-        self::internship => 'Стажировка',
-        self::volunteering => 'Волонтёрство'
+        self::FULL_EMPLOYMENT => 'Полная занятость',
+        self::PART_TIME_EMPLOYMENT => 'Частичная занятость',
+        self::PROJECT_WORK => 'Проектная работа',
+        self::INTERNSHIP => 'Стажировка',
+        self::VOLUNTEERING => 'Волонтёрство'
     ];
 }
