@@ -6,17 +6,17 @@ use yii2mod\enum\helpers\BaseEnum;
 
 class Schedule extends BaseEnum
 {
-    const FULL = 1;
-    const SHIFT = 2;
-    const FLEXIBLE = 3;
-    const REMOTE = 4;
-    const WATCH = 5;
+    const full_day = 0;
+    const shift_work = 1;
+    const flexible_work = 2;
+    const remote_work = 3;
+    const shift_method = 4;
 
     protected static $list = [
-        self::FULL => 'Полный день',
-        self::SHIFT => 'Сменный график',
-        self::FLEXIBLE => 'Гибкий график',
-        self::REMOTE => 'Удалённая работа',
-        self::WATCH => 'Вахтовый метод'
+        self::full_day => 'Полный день',
+        self::shift_work => 'Сменный график',
+        self::flexible_work => 'Гибкий график',
+        self::remote_work => 'Удалённая работа',
+        self::shift_method => 'Вахтовый метод'
     ];
 }

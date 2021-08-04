@@ -18,6 +18,7 @@ use app\models\Resume;
 use app\models\AddResume;
 use app\models\Specialization;
 
+
 class SiteController extends Controller
 {
     public function actionIndex()
@@ -88,20 +89,32 @@ class SiteController extends Controller
 
             if ($modelAddResume->save() && $modelAddResume->upload()) {
                 $modelBusyness->link('resume', $modelAddResume, 'id');
+                foreach ($modelAddResume->employment as $key => $value) {
+                    $modelBusyness->$key = $value;
+                }
 
+               /*
                 $modelBusyness->full_employment = $modelAddResume->employment[0];
                 $modelBusyness->part_time_employment = $modelAddResume->employment[1];
                 $modelBusyness->project_work = $modelAddResume->employment[2];
                 $modelBusyness->internship = $modelAddResume->employment[3];
                 $modelBusyness->volunteering = $modelAddResume->employment[4];
+               */
 
                 $modelTimetable->link('resume', $modelAddResume, 'id');
 
+                foreach ($modelAddResume->schedule as $key => $value) {
+                    $modelTimetable->$key = $value;
+                }
+
+               /*
                 $modelTimetable->full_day = $modelAddResume->schedule[0];
                 $modelTimetable->shift_work = $modelAddResume->schedule[1];
                 $modelTimetable->flexible_work = $modelAddResume->schedule[2];
                 $modelTimetable->remote_work = $modelAddResume->schedule[3];
                 $modelTimetable->shift_method = $modelAddResume->schedule[4];
+               */
+
                 $modelTimetable->save();
                 $modelBusyness->save();
 

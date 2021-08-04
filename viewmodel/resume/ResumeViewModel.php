@@ -8,6 +8,7 @@ use app\models\Specialization;
 use DateTime;
 use app\models\Schedule;
 use app\models\Employments;
+use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * This is the model class for table "resume".
@@ -28,7 +29,7 @@ class ResumeViewModel
     public function getEmploymentName()
     {
         foreach ($this->resume->busyness as $value) {
-            if ($value > 0) {
+            if ($value != NULL) {
                 $employment[] = Employments::getLabel($value);
             }
         }
@@ -38,7 +39,7 @@ class ResumeViewModel
     public function getScheduleName()
     {
         foreach ($this->resume->timetable as $value) {
-            if ($value > 0) {
+            if ($value != NULL) {
                 $schedule[] = Schedule::getLabel($value);
             }
         }

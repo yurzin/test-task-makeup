@@ -125,7 +125,7 @@ class AddResume extends ActiveRecord
             'email' => 'Электронная почта',
             'phone' => 'Телефон',
             'specialization_id' => 'Специализация',
-            'employment' => 'Тип анятости',
+            'employment' => 'Тип занятости',
             'schedule' => 'График',
             'salary' => 'Зарплата',
             'experience' => 'Опыт'

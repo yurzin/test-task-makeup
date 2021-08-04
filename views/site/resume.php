@@ -251,7 +251,7 @@ endif; ?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-11">
                     <?php
-                    $model->employment = '1';
+                    $model->employment = '0';
                     echo $form->field(
                         $model,
                         'employment',
@@ -261,9 +261,10 @@ endif; ?>
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
-                                $employment = 'AddResume[employment][' . $index . ']';
+                                //$employment = 'AddResume[employment][' . $index . ']';
+                                $name = 'AddResume[employment][' . Employments::getConstantsByValue()[$index] . ']';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
-                                return "<div class='form-check d-flex'><input class='form-check-input' name=$employment value=$value id=$id $checked type='checkbox' >"
+                                return "<div class='form-check d-flex'><input class='form-check-input' value=$value id=$id $checked type='checkbox' name=$name  >"
                                     . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
                             }
                         ]
@@ -276,7 +277,7 @@ endif; ?>
                 </div>
                 <div class="col-lg-3 col-md-4 col-11">
                     <?php
-                    $model->schedule = '1';
+                    $model->schedule = '0';
                     echo $form->field(
                         $model,
                         'schedule',
@@ -286,9 +287,10 @@ endif; ?>
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
-                                $schedule = 'AddResume[schedule][' . $index . ']';
+                                //$schedule = 'AddResume[schedule][' . $index . ']';
+                                $name = 'AddResume[schedule][' . Schedule::getConstantsByValue()[$index] . ']';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 6);
-                                return "<div class='form-check d-flex'><input class='form-check-input' name=$schedule value=$value id=$id $checked type='checkbox' >"
+                                return "<div class='form-check d-flex'><input class='form-check-input' name=$name value=$value id=$id $checked type='checkbox' >"
                                     . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
                             }
                         ]

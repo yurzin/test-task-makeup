@@ -13,7 +13,6 @@ class MenuFilter extends Menu
 
     public $linkTemplate = '<a {class} href="{url}">{label}</a>';
 
-
     protected function renderItem($item)
     {
 
