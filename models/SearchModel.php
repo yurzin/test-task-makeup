@@ -31,7 +31,12 @@ class SearchModel extends Resume
     {
         $query = Resume::find();
 
-        $query->joinWith(['city', 'organization', 'specialization'], true);
+        $query->joinWith(['city', 'organization', 'specialization'], true, 'LEFT JOIN');
+
+        /*
+        $query->leftJoin('city', 'resume.city_id = city.id');
+        $query->leftJoin('organization', 'resume.id = organization.resume_id');
+        */
 
         $dataProvider = new ActiveDataProvider(
             [
@@ -48,7 +53,7 @@ class SearchModel extends Resume
             return $dataProvider;
         }
 
-        $query->andWhere(['like', 'resume.name', $params]);
+        $query->where(['like', 'resume.name', $params]);
         $query->orWhere(['like', 'resume.last_name', $params]);
         $query->orWhere(['like', 'resume.patronymic', $params]);
         $query->orWhere(['like', 'resume.about', $params]);

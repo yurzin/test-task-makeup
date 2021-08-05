@@ -108,19 +108,7 @@ class SiteController extends Controller
                 if ($modelAddResume->experience > 1) {
                     $modelOrganization->link('resume', $modelAddResume, 'id');
 
-                    var_dump($modelAddResume->getExperienceAttribute());
-die();
-                   $attribute = [
-                        'start_month' => $modelAddResume->start_month,
-                        'start_year' => $modelAddResume->start_year,
-                        'end_month' => $modelAddResume->end_month,
-                        'end_year' => $modelAddResume->end_year,
-                        'name' => $modelAddResume->organization,
-                        'position' => $modelAddResume->position,
-                        'duties' => $modelAddResume->duties
-                    ];
-
-                    $modelOrganization->attributes = $attribute;
+                    $modelOrganization->attributes = $modelAddResume->getExperienceAttribute();
 
                     $modelOrganization->save();
 
