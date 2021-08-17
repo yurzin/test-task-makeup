@@ -1,6 +1,7 @@
 <?php
 /* @var $model */
 /* @var $city */
+
 /* @var $specialization */
 
 use app\models\Employments;
@@ -9,6 +10,8 @@ use app\models\Schedule;
 use yii\helpers\Html;
 use \yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
+use app\widgets\myActiveForm;
+use \app\models\Experience;
 
 ?>
 
@@ -40,7 +43,9 @@ endif; ?>
         </div>
         <div class="col-12">
             <?php
-            $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+            $form = myActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
+            ?>
+
             <div class="row mb32">
                 <div class="col-lg-2 col-md-3 dflex-acenter">
                     <div class="paragraph">Фото</div>
@@ -130,7 +135,7 @@ endif; ?>
                     ['options' => ['tag' => 'ul', 'class' => 'card-ul-radio profile-radio-list']]
                 )
                     ->radioList(
-                       Gender::listData(),
+                        Gender::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
@@ -261,7 +266,6 @@ endif; ?>
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
-                                //$employment = 'AddResume[employment][' . $index . ']';
                                 $name = 'AddResume[employment][' . Employments::getConstantsByValue()[$index] . ']';
                                 $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 1);
                                 return "<div class='form-check d-flex'><input class='form-check-input' value=$value id=$id $checked type='checkbox' name=$name  >"
@@ -278,23 +282,8 @@ endif; ?>
                 <div class="col-lg-3 col-md-4 col-11">
                     <?php
                     $model->schedule = '0';
-                    echo $form->field(
-                        $model,
-                        'schedule',
-                        ['options' => ['class' => 'profile-info']]
-                    )->checkboxList(
-                        Schedule::listData(),
-                        [
-                            'item' => function ($index, $label, $name, $checked, $value) {
-                                $checked = $checked ? 'checked' : '';
-                                //$schedule = 'AddResume[schedule][' . $index . ']';
-                                $name = 'AddResume[schedule][' . Schedule::getConstantsByValue()[$index] . ']';
-                                $id = str_replace(['[', ']'], ['', ''], 'exampleCheck') . intval($index + 6);
-                                return "<div class='form-check d-flex'><input class='form-check-input' name=$name value=$value id=$id $checked type='checkbox' >"
-                                    . "<label class='form-check-label' for=$id></label>" . "<label for=$id class='profile-info__check-text job-resolution-checkbox'>$label</label></div>";
-                            }
-                        ]
-                    )->label(false); ?>
+                    echo $form->myFieldCheckbox($model, 'schedule');
+                    ?>
                 </div>
             </div>
 
@@ -308,14 +297,14 @@ endif; ?>
                     <div class="paragraph">Опыт работы</div>
                 </div>
                 <?php
-                $model->experience = '1';
+                $model->experience = '0';
                 echo $form->field(
                     $model,
                     'experience',
                     ['options' => ['tag' => 'ul', 'class' => 'card-ul-radio profile-radio-list']]
                 )
                     ->radioList(
-                        [1 => 'Нет опыта работы', 2 => 'Есть опыт работы'],
+                        Experience::listData(),
                         [
                             'item' => function ($index, $label, $name, $checked, $value) {
                                 $checked = $checked ? 'checked' : '';
@@ -519,7 +508,7 @@ endif; ?>
                 </div>
             </div>
             <?php
-            ActiveForm::end(); ?>
+            myActiveForm::end(); ?>
         </div>
     </div>
 </div>
@@ -537,10 +526,5 @@ endif; ?>
         } else {
             more.style.display = "none";
         }
-        /* (more.style.display === "none") {
-            more.style.display = "block";
-        } else {
-            more.style.display = "none";
-        }*/
     }
 </script>

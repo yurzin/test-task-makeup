@@ -30,6 +30,7 @@ use yii\db\ActiveRecord;
  * @property string|null $position
  * @property string|null $duties
  * @property int|null $experience
+ * @property int|null $work_experience
  *
  */
 class AddResume extends ActiveRecord
@@ -43,7 +44,7 @@ class AddResume extends ActiveRecord
     }
 
     public $employment;
-    public $schedule;
+    public $schedule = [];
     public $imageFile;
     public $start_month;
     public $start_year;
@@ -52,6 +53,7 @@ class AddResume extends ActiveRecord
     public $organization;
     public $position;
     public $duties;
+    public $experience;
 
     /**
      * {@inheritdoc}
@@ -78,9 +80,8 @@ class AddResume extends ActiveRecord
                 ],
                 'required'
             ],
-            [['experience'], 'safe'],
-            [['employment'], 'safe'],
-            [['schedule'], 'safe'],
+            [['schedule'], 'each', 'rule' => ['integer']],
+            [['employment'], 'each', 'rule' => ['integer']],
             ['email', 'email'],
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [
@@ -100,7 +101,8 @@ class AddResume extends ActiveRecord
                     'end_month',
                     'position',
                     'duties',
-                    'about'
+                    'about',
+                    'experience'
                 ],
                 'string'
             ],
@@ -140,23 +142,23 @@ class AddResume extends ActiveRecord
         }
 
         if ($this->end_year != '' and $this->start_year != '') {
-            $experience = $this->end_year - $this->start_year;
+            $work_experience = $this->end_year - $this->start_year;
         } else {
-            $experience = 1;
+            $work_experience = 1;
         }
 
-        switch ($experience) {
-            case ($experience > 0 and $experience < 1) :
-                $this->experience = 2;
+        switch ($work_experience) {
+            case ($work_experience > 0 and $work_experience < 1) :
+                $this->work_experience = 2;
                 break;
-            case ($experience > 1 and $experience < 3) :
-                $this->experience = 3;
+            case ($work_experience > 1 and $work_experience < 3) :
+                $this->work_experience = 3;
                 break;
-            case ($experience > 3 and $experience < 6) :
-                $this->experience = 4;
+            case ($work_experience > 3 and $work_experience < 6) :
+                $this->work_experience = 4;
                 break;
-            case ($experience > 6) :
-                $this->experience = 5;
+            case ($work_experience > 6) :
+                $this->work_experience = 5;
                 break;
         }
         return true;

@@ -18,7 +18,7 @@ namespace app\models;
  * @property string|null $phone
  * @property int|null $specialization_id
  * @property int|null $salary
- * @property string|null $experience
+ * @property string|null $work_experience
  * @property string|null $about
  *
  * @property Busyness[] $busyness
@@ -56,7 +56,7 @@ class Resume extends \yii\db\ActiveRecord
             [['date', 'birth_date'], 'safe'],
             [['gender', 'city_id', 'specialization_id', 'salary'], 'integer'],
             [['about'], 'string'],
-            [['photo', 'name', 'last_name', 'patronymic', 'email', 'phone', 'experience'], 'string', 'max' => 100],
+            [['photo', 'name', 'last_name', 'patronymic', 'email', 'phone', 'work_experience'], 'string', 'max' => 100],
             [
                 ['city_id'],
                 'exist',
@@ -93,7 +93,7 @@ class Resume extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'specialization_id' => 'Specialization ID',
             'salary' => 'Salary',
-            'experience' => 'Experience',
+            'work_experience' => 'Experience',
             'about' => 'About',
         ];
     }

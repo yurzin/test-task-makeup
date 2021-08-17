@@ -105,13 +105,10 @@ class SiteController extends Controller
                 $modelTimetable->save();
                 $modelBusyness->save();
 
-                if ($modelAddResume->experience > 1) {
+                if ($modelAddResume->experience == 1) {
                     $modelOrganization->link('resume', $modelAddResume, 'id');
-
                     $modelOrganization->attributes = $modelAddResume->getExperienceAttribute();
-
                     $modelOrganization->save();
-
                 }
 
                 Yii::$app->session->setFlash(

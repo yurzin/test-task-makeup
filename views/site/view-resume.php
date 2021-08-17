@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this yii\web\View */
 
@@ -29,7 +30,7 @@ $this->title = 'Резюме ' . $item->last_name;
                     </div>
                     <div class="paragraph-lead mb16">
                         <span class="mr24"><?= $item->salary ?> ₽</span>
-                        <span> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
+                        <span> <?= $item->work_experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                     ['n' => $viewModel->getExperience()],
                                     'ru_RU'
@@ -98,14 +99,14 @@ $this->title = 'Резюме ' . $item->last_name;
                                 <div class="col-lg-10">
                                     <div class="row mb16">
                                         <div class="col-lg-12"><h3
-                                                    class="heading mb16"> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
+                                                    class="heading mb16"> <?= $item->work_experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                                                         '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                                         ['n' => $viewModel->getExperience()],
                                                         'ru_RU'
                                                     ) ?></h3></div>
                                         <div class="col-md-4 mb16">
                                             <div class="paragraph tbold mb8"><?= $item->organization->start_month ?> <?= $item->organization->start_year ?></div>
-                                            <div class="mini-paragraph"> <?= $item->experience == 1 ? 'Безработная' : 'Опыт работы ' . Yii::$app->i18n->format(
+                                            <div class="mini-paragraph"> <?= $item->work_experience == 1 ? 'Безработная' : 'Опыт работы ' . Yii::$app->i18n->format(
                                                     '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                                     ['n' => $viewModel->getExperience()],
                                                     'ru_RU'

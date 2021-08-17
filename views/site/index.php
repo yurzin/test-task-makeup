@@ -85,7 +85,7 @@ $this->title = 'Список резюме';
                             <h3 class="mini-title mobile-off"><?= $item->specialization->name ?></h3>
                             <div class="d-flex align-items-center flex-wrap mb8 ">
                                 <span class="mr16 paragraph"><?= $item->salary ?> ₽</span>
-                                <span class="mr16 paragraph"> <?= $item->experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
+                                <span class="mr16 paragraph"> <?= $item->work_experience == 1 ? 'Нет опыта работы' : 'Опыт работы ' . Yii::$app->i18n->format(
                                             '{n, plural, one{# год} few{# года} many{# лет} other{# года}}',
                                             ['n' => $viewModel->getExperience($item->id)],
                                             'ru_RU'
